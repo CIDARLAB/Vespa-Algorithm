@@ -1,22 +1,23 @@
 import matplotlib.pyplot as plt
 import networkx as nx
 from networkx.drawing.nx_pydot import write_dot
+import os
 
 g_flow = nx.DiGraph()
 g_control = nx.DiGraph()
 
 flow_node_list = ["f1", "f2", "f3", "f4", "f5", "f6"]
 for i in range(17):
-    str = f"fo{i+1}"
-    flow_node_list.append(str)
+    ss = f"fo{i+1}"
+    flow_node_list.append(ss)
 
 control_node_list = []
 for i in range(10):
-    str = f"c{i+1}"
-    control_node_list.append(str)
+    ss = f"c{i+1}"
+    control_node_list.append(ss)
 for i in range(14):
-    str = f"v{i+1}"
-    control_node_list.append(str)
+    ss = f"v{i+1}"
+    control_node_list.append(ss)
 
 flow_edge_list = [("f1", "fo1", 2), ("fo1", "fo2", 2), ("fo2", "fo3", 2), ("fo3", "fo4", 2), ("fo4", "f6", 2),
                   ("fo1", "fo5", 2), ("fo3", "fo7", 2), ("fo4", "fo9", 2),
@@ -38,9 +39,13 @@ ValveLocation = [["v1", "fo5", "fo1"], ["v2", "fo5", "fo10"], ["v3", "fo10", "f1
 g_flow.add_nodes_from(flow_node_list)
 g_flow.add_weighted_edges_from(flow_edge_list)
 
-outpath1 = f"TestCaseFiles/lrb1_control.dot"
-outpath2 = f"TestCaseFiles/lrb1_flow.dot"
-outpath = f"TestCaseFiles/lrb1_ValveLocation.txt"
+folder_path = "../TestCaseFiles/lrb/"
+
+outpath1 = f"{folder_path}/lrb1_control.dot"
+outpath2 = f"{folder_path}/lrb1_flow.dot"
+outpath = f"{folder_path}/lrb1_ValveLocation.txt"
+if not os.path.exists(folder_path):
+    os.makedirs(folder_path)
 
 write_dot(g_control, outpath1)
 write_dot(g_flow, outpath2)
@@ -48,5 +53,3 @@ with open(outpath, 'w') as f:
     for i in ValveLocation:
         i = str(i).strip('[').strip(']').replace(',', '').replace('\'', '')+'\n'
         f.writelines(i)
-
-
