@@ -1,0 +1,5 @@
+v1 f4 f2
+v2 f1 f3
+co1 f3 f4
+co2 f1 f3
+co3 f3 f4

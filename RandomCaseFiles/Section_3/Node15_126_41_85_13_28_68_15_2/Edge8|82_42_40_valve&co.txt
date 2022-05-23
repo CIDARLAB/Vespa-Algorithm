@@ -1,0 +1,17 @@
+v1 fo3 f6
+v2 fo16 f9
+v3 fo21 f10
+v4 f4 fo22
+v5 f9 f6
+v6 f4 fo22
+v7 fo19 f7
+v8 fo13 f12
+v9 fo20 f2
+v10 fo11 fo22
+v11 f9 f6
+v12 fo3 f6
+v13 f6 fo27
+v14 fo19 f7
+v15 fo23 f8
+co1 f11 f8
+co2 fo11 fo22

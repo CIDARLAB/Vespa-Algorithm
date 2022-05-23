@@ -1,0 +1,4 @@
+v1 fo20 fo2
+v2 fo24 fo7
+v3 fo17 fo31
+v4 fo27 fo25

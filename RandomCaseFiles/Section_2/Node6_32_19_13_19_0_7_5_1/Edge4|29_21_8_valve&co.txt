@@ -1,0 +1,6 @@
+v1 f1 f15
+v2 f7 f8
+v3 f1 f15
+v4 f16 f17
+v5 f8 f5
+co1 f7 f8

@@ -1,0 +1,34 @@
+strict digraph  {
+f1;
+f2;
+f3;
+fo1;
+fo2;
+fo3;
+fo4;
+fo5;
+fo6;
+fo7;
+fo8;
+fo9;
+fo10;
+fo11;
+fo12;
+fo13;
+f1 -> fo3  [weight=2];
+f2 -> fo2  [weight=2];
+f3 -> f1  [weight=2];
+fo1 -> f2  [weight=2];
+fo2 -> f1  [weight=2];
+fo3 -> fo8  [weight=2];
+fo4 -> f1  [weight=2];
+fo5 -> fo12  [weight=2];
+fo6 -> fo8  [weight=2];
+fo7 -> f3  [weight=2];
+fo8 -> f3  [weight=2];
+fo9 -> fo13  [weight=2];
+fo10 -> fo6  [weight=2];
+fo11 -> fo7  [weight=2];
+fo12 -> fo13  [weight=2];
+fo13 -> fo3  [weight=2];
+}

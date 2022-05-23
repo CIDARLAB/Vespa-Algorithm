@@ -1,0 +1,14 @@
+strict digraph  {
+c1;
+c2;
+c3;
+c4;
+v1;
+co1;
+co2;
+co3;
+v1 -> c2  [weight=1];
+co1 -> c3  [weight=1];
+co2 -> c1  [weight=1];
+co3 -> c4  [weight=1];
+}

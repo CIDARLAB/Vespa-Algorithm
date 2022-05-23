@@ -1,0 +1,17 @@
+v1 f2 fo1
+v2 f1 f2
+v3 f1 f2
+v4 fo1 f1
+v5 fo1 f1
+v6 f1 f2
+v7 fo1 f1
+v8 f2 fo1
+v9 f1 f2
+v10 f2 fo1
+v11 f1 f2
+v12 f1 f2
+v13 f1 f2
+v14 f2 fo1
+v15 fo1 f1
+v16 f2 fo1
+v17 f1 f2

@@ -1,0 +1,29 @@
+strict digraph  {
+f1;
+f2;
+f3;
+f4;
+f5;
+f6;
+f7;
+f8;
+f9;
+fo1;
+f1 -> fo1  [weight=2];
+f2 -> f1  [weight=2];
+f3 -> fo1  [weight=2];
+f3 -> f2  [weight=2];
+f3 -> f6  [weight=2];
+f4 -> fo1  [weight=2];
+f4 -> f5  [weight=2];
+f5 -> f1  [weight=2];
+f5 -> f3  [weight=2];
+f5 -> f8  [weight=2];
+f5 -> fo1  [weight=2];
+f6 -> f9  [weight=2];
+f7 -> f6  [weight=2];
+f8 -> fo1  [weight=2];
+f9 -> fo1  [weight=2];
+fo1 -> f7  [weight=2];
+fo1 -> f2  [weight=2];
+}

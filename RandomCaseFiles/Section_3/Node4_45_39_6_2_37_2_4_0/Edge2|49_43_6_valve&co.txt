@@ -1,0 +1,4 @@
+v1 fo32 f2
+v2 fo5 fo26
+v3 fo18 f1
+v4 fo17 fo36

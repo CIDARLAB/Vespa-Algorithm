@@ -1,0 +1,5 @@
+v1 f145 fo10
+v2 f48 fo8
+v3 f43 fo6
+co1 f125 f130
+co2 f104 fo2

@@ -1,0 +1,15 @@
+v1 fo57 f3
+v2 fo126 f2
+v3 fo116 fo40
+v4 fo71 f11
+v5 fo71 f11
+v6 fo137 fo93
+v7 fo36 fo32
+v8 fo135 f11
+co1 fo137 fo93
+co2 fo59 fo143
+co3 fo148 f9
+co4 fo117 fo105
+co5 fo134 fo90
+co6 fo50 fo99
+co7 fo39 f9

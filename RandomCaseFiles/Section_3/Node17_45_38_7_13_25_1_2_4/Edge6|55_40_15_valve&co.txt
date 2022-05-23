@@ -1,0 +1,6 @@
+v1 f1 f5
+v2 f6 fo22
+co1 fo19 fo7
+co2 fo19 fo7
+co3 f2 fo16
+co4 f11 f13

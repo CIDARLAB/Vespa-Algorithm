@@ -1,0 +1,15 @@
+v1 f15 f2
+v2 f11 f16
+v3 f7 fo3
+v4 f4 f14
+v5 f14 f12
+v6 f1 fo1
+v7 fo3 f1
+v8 f8 f7
+v9 f10 fo2
+v10 fo1 f12
+v11 f12 fo2
+v12 f18 f14
+co1 f9 fo2
+co2 f20 f14
+co3 f9 f20

@@ -1,0 +1,11 @@
+strict digraph  {
+f1;
+f2;
+fo1;
+fo2;
+f1 -> fo2  [weight=2];
+f2 -> fo1  [weight=2];
+fo1 -> f1  [weight=2];
+fo2 -> f2  [weight=2];
+fo2 -> fo1  [weight=2];
+}

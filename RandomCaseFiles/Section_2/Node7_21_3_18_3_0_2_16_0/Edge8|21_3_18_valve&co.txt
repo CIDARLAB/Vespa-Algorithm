@@ -1,0 +1,16 @@
+v1 f2 f3
+v2 f3 f1
+v3 f1 f2
+v4 f3 f1
+v5 f2 f3
+v6 f3 f1
+v7 f1 f2
+v8 f2 f3
+v9 f1 f2
+v10 f3 f1
+v11 f1 f2
+v12 f2 f3
+v13 f2 f3
+v14 f3 f1
+v15 f3 f1
+v16 f1 f2
