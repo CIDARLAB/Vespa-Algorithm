@@ -33,6 +33,8 @@ ValveLocation = [["v1", "f1", "fo1"], ["v2", "f2", "fo4"], ["v3", "f3", "fo6"], 
 
 g_flow.add_nodes_from(flow_node_list)
 g_flow.add_weighted_edges_from(flow_edge_list)
+g_control.add_nodes_from(control_node_list)
+g_control.add_weighted_edges_from(control_edge_list)
 
 folder_path = "../TestCaseFiles/lrb/"
 
@@ -45,6 +47,6 @@ if not os.path.exists(folder_path):
 write_dot(g_control, outpath1)
 write_dot(g_flow, outpath2)
 with open(outpath, 'w') as f:
-    for s in ValveLocation:
-        s = str(s) + '\n'
-        f.writelines(s)
+    for i in ValveLocation:
+        i = str(i).strip('[').strip(']').replace(',', '').replace('\'', '')+'\n'
+        f.writelines(i)

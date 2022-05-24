@@ -40,7 +40,7 @@ control_edge_list = [("v1", "c1", 1), ("v2", "c8", 1), ("v3", "c1", 1), ("v4", "
 
 ValveLocation = [["v1", "f1", "fo1"], ["v2", "f1", "fo1"], ["v3", "f2", "fo2"], ["v4", "f2", "fo2"], ["v5", "f3", "fo4"],
                  ["v6", "f3", "fo4"], ["v7", "f4", "fo5"], ["v8", "f4", "fo5"], ["v9", "f5", "fo8"], ["v10", "fo6", "fo12"],
-                 ["v11", "fo6", "fo12"], ["v12", "fo13", "fo7"], ["v13", "fo13", "fo7"], ["v14", "fo9", "fo14"],
+                 ["v11", "fo6", "fo12"], ["v12", "fo13", "fo7"], ["v13", "fo13", "fo7"], ["v14", "fo10", "fo14"],
                  ["v15", "fo10", "fo14"], ["v16", "fo11", "fo15"], ["v17", "fo11", "fo15"], ["v18", "fo12", "f6"],
                  ["v19", "f6", "fo12"], ["v20", "fo13", "f7"], ["v21", "fo13", "f7"], ["v22", "f8", "fo14"],
                  ["v23", "f8", "fo14"], ["v24", "f9", "fo15"], ["v25", "fo9", "fo15"]
@@ -48,6 +48,8 @@ ValveLocation = [["v1", "f1", "fo1"], ["v2", "f1", "fo1"], ["v3", "f2", "fo2"], 
 
 g_flow.add_nodes_from(flow_node_list)
 g_flow.add_weighted_edges_from(flow_edge_list)
+g_control.add_nodes_from(control_node_list)
+g_control.add_weighted_edges_from(control_edge_list)
 
 folder_path = "../TestCaseFiles/lrb/"
 
@@ -62,5 +64,6 @@ write_dot(g_flow, outpath2)
 with open(outpath, 'w') as f:
     for i in ValveLocation:
         i = str(i).strip('[').strip(']').replace(',', '').replace('\'', '')+'\n'
+        f.writelines(i)
 
 

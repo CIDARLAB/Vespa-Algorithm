@@ -99,16 +99,28 @@ def Node_NG_Constraint_translater(d):
         nodes = di["Nodes"].copy()
         # create node group list and transfer the original constraint matrix to a new one which represent by node groups
         if di["Type"] == 2 and len(di["TruthTable"]) > 1:
-            if nodes[0] not in nodes_group_list:
+            flag = -1
+            for i in range(len(nodes_group_list)):
+                n = nodes_group_list[i]
+                if Counter(nodes[0]) == Counter(n):
+                    flag = 1
+                    break
+            if flag == -1:
                 nodes_group_list.append(nodes[0])
                 NodeGroupIndex = len(nodes_group_list) - 1
             else:
-                NodeGroupIndex = nodes_group_list.index(nodes[0])
-            if nodes[1] not in nodes_group_list:
+                NodeGroupIndex = flag
+            flag = -1
+            for i in range(len(nodes_group_list)):
+                n = nodes_group_list[i]
+                if Counter(nodes[1]) == Counter(n):
+                    flag = 1
+                    break
+            if flag == -1:
                 nodes_group_list.append(nodes[1])
                 NodeGroupIndex2 = len(nodes_group_list) - 1
             else:
-                NodeGroupIndex2 = nodes_group_list.index(nodes[1])
+                NodeGroupIndex2 = flag
             if NodeGroupIndex == NodeGroupIndex2:
                 return 1, [], []
             for ele in ConstraintGroupList:

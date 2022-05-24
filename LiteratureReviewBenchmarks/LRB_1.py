@@ -32,13 +32,14 @@ control_edge_list = [("v1", "c1", 1), ("v2", "c2", 1), ("v3", "c3", 1), ("v4", "
                      ("v6", "c4", 1), ("v7", "c6", 1), ("v8", "c4", 1), ("v9", "c7", 1), ("v10", "c7", 1),
                      ("v11", "c9", 1), ("v12", "c10", 1), ("v13", "c7", 1), ("v14", "c8", 1)]
 
-ValveLocation = [["v1", "fo5", "fo1"], ["v2", "fo5", "fo10"], ["v3", "fo10", "f15"], ["v4", "fo3", "fo7"], ["v5", "fo7", "fo12"],
+ValveLocation = [["v1", "fo5", "fo1"], ["v2", "fo5", "fo10"], ["v3", "fo10", "fo15"], ["v4", "fo3", "fo7"], ["v5", "fo7", "fo12"],
                  ["v6", "fo12", "fo16"], ["v7", "fo7", "fo8"], ["v8", "fo12", "fo13"], ["v9", "fo3", "fo4"], ["v10", "fo8", "fo9"],
                  ["v11", "fo13", "fo14"], ["v12", "fo16", "fo7"], ["v13", "fo4", "fo9"], ["v14", "fo9", "fo14"]]
 
 g_flow.add_nodes_from(flow_node_list)
 g_flow.add_weighted_edges_from(flow_edge_list)
-
+g_control.add_nodes_from(control_node_list)
+g_control.add_weighted_edges_from(control_edge_list)
 folder_path = "../TestCaseFiles/lrb/"
 
 outpath1 = f"{folder_path}/lrb1_control.dot"

@@ -9,35 +9,35 @@ import random
 pos = {}
 
 
-def naive_search(g):
+def naive_search(g, ur):
     # Naive searching algorithm
     start = time.time()
-    Naive_path = nx.single_source_shortest_path(g, source="f1")
+    Naive_path = nx.single_source_shortest_path(g, source=ur[0])
     end = time.time()
     NaiveTime = end - start
-    if "f2" not in Naive_path:
+    if ur[1] not in Naive_path:
         print("No such a path from f1 to f2 using Naive searching algorithm")
         return NaiveTime, [], -1
-    return NaiveTime, Naive_path["f2"], (len(Naive_path["f2"]) - 1) * 2
+    return NaiveTime, Naive_path[ur[1]], (len(Naive_path[ur[1]]) - 1) * 2
 
 
-def dijkstra_search(g):
+def dijkstra_search(g, ur):
     # Dijkstra searching algorithm
     start = time.time()
     try:
-        DijkstraLength, DijkstraPath = nx.single_source_dijkstra(g, source="f1")
+        DijkstraLength, DijkstraPath = nx.single_source_dijkstra(g, source=ur[0])
     except nx.NetworkXNoPath:
         end = time.time()
-        print("No such a path from f1 to f2 using Dijkstra searching algorithm")
+        print(f"No such a path from {ur[0]} to {ur[1]} using Dijkstra searching algorithm")
         return end - start, [], -1
 
-    if "f2" not in DijkstraLength:
-        print("No such a path from f1 to f2 using Dijkstra searching algorithm")
+    if ur[1] not in DijkstraLength:
+        print(f"No such a path from {ur[0]} to {ur[1]} using Dijkstra searching algorithm")
         end = time.time()
         return end - start, [], -1
     end = time.time()
     DijkstraTime = end - start
-    return DijkstraTime, DijkstraPath["f2"], DijkstraLength["f2"]
+    return DijkstraTime, DijkstraPath[ur[1]], DijkstraLength[ur[1]]
 
 
 def h_function(a, b):
@@ -46,18 +46,18 @@ def h_function(a, b):
     return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5
 
 
-def astar_search(g, position):
+def astar_search(g, position, ur):
     global pos
     pos = position
     start = time.time()
     try:
-        AstarPath = nx.astar_path(g, source="f1", target="f2", heuristic=h_function, weight="weight")
+        AstarPath = nx.astar_path(g, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
     except nx.NetworkXNoPath:
-        print("No such a path from f1 to f2 using A star searching algorithm")
+        print(f"No such a path from {ur[0]} to {ur[1]} using A star searching algorithm")
         end = time.time()
         return end - start, [], -1
     end = time.time()
-    AstarLength = nx.astar_path_length(g, source="f1", target="f2", heuristic=h_function, weight="weight")
+    AstarLength = nx.astar_path_length(g, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
     AstarTime = end - start
     return AstarTime, AstarPath, AstarLength
 
@@ -69,25 +69,32 @@ def BOCSGraphGenerator(table, nodes_group_list, vcofe, g):
     for row in table:
         g_bocs = g.copy()
         edge_remove_list = []
-        # cut the edges when there are valves onside be set to 0 in row
+        # cut the edges when there are valves onside be set to 0 in a row
         for i in range(len(row)):
             # 0 means that node group keep closed in this situation
             if row[i] == 0:
                 # all edges have control nodes in nodes_group_list[i] should be removed
-                nodes_vco = []
+
                 for n in nodes_group_list[i]:
                     if n[0] != 'c' or n[1] == 'o':
-                        nodes_vco.append(n)
                         edge = vcofe[n]
-                        edge_remove_list.append(edge)
+                        edgerepeatflag = 0
+                        for e in edge_remove_list:
+                            if Counter(e) == Counter(edge):
+                                edgerepeatflag = 1
+                                break
+                        if len(edge_remove_list) == 0 or edgerepeatflag == 0:
+                            edge_remove_list.append(edge)
+
         repeatflag = 0
         for e in edge_remove_listall:
             e1 = e.copy()
             e2 = edge_remove_list.copy()
             e3 = e1 + e2
-            l3 = len(e1)
+            l1 = len([list(t) for t in set(tuple(_) for _ in e1)])
+            l2 = len([list(t) for t in set(tuple(_) for _ in e2)])
             e4 = [list(t) for t in set(tuple(_) for _ in e3)]
-            if l3 == len(e4):
+            if l1 == len(e4) and l2 == len(e4):
                 repeatflag = 1
         if repeatflag == 1:
             continue
@@ -118,7 +125,7 @@ def enumerateBOCSgraphs(g, d, vcofe):
     return conflict, g_list
 
 
-def BOCS_search(g, g_c, position, ConstraintList, VCO2FEdictionary):
+def BOCS_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur):
     global pos
     pos = position
     flagFalseNegative = 0
@@ -141,7 +148,7 @@ def BOCS_search(g, g_c, position, ConstraintList, VCO2FEdictionary):
         g_list = random.sample(g_list, 50)
     for gb in g_list:
         try:
-            BOCSPath = nx.astar_path(gb, source="f1", target="f2", heuristic=h_function, weight="weight")
+            BOCSPath = nx.astar_path(gb, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
         except nx.NetworkXNoPath:
             BOCSPath = []
             continue
@@ -150,9 +157,9 @@ def BOCS_search(g, g_c, position, ConstraintList, VCO2FEdictionary):
             gb_min = gb
     end = time.time()
     if not BOCSPathMin:
-        # print("No such a path from f1 to f2 using BOCS searching algorithm")
+        # print(f"No such a path from {ur[0]} to {ur[1]} using BOCS searching algorithm")
         return end - start, [], -1, flagFalseNegative
-    BOCSLength = nx.astar_path_length(gb_min, source="f1", target="f2", heuristic=h_function, weight="weight")
+    BOCSLength = nx.astar_path_length(gb_min, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
     BOCSTime = end - start
     return BOCSTime, BOCSPathMin, BOCSLength, flagFalseNegative
 

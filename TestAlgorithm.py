@@ -144,7 +144,7 @@ if __name__ == '__main__':
     column = []
     for i in range(1, 5):
         Result_list_section = []
-        path = f"TestCaseFiles/Section_{i}"
+        path = f"RandomCaseFiles/Section_{i}"
         # Build a dictionary saved all edge info file names as value, keys are the nodes info
         AllDirInOneSection = getfileList(path)
         column = []
@@ -199,15 +199,16 @@ if __name__ == '__main__':
                 # Create a dictionary shows the flow edge on which each valve and other control component locates
                 VCO2FEdictionary, FE2VCOdictionary = locateValveAndCOonFE(valve_co_txt)
 
-                # Algorithm comparison
-                NaiveTime, NaivePath, NaiveLength = AlgorithmComparison.naive_search(g)
-                DijkstraTime, DijkstraPath, DijkstraLength = AlgorithmComparison.dijkstra_search(g)
-                AstarTime, AstarPath, AstarLength = AlgorithmComparison.astar_search(g, pos)
+                # Algorithm comparison, set ur as ['f1', 'f2']
+                ur = ['f1', 'f2']
+                NaiveTime, NaivePath, NaiveLength = AlgorithmComparison.naive_search(g, ur)
+                DijkstraTime, DijkstraPath, DijkstraLength = AlgorithmComparison.dijkstra_search(g, ur)
+                AstarTime, AstarPath, AstarLength = AlgorithmComparison.astar_search(g, pos, ur)
 
                 # Update the flow edge info after we get RandomConstraintList and use it in BOCS_search
                 g_BOCS = g.copy()
                 BOCSTime, BOCSPath, BOCSLength, flagFalseNegative = AlgorithmComparison.BOCS_search(g_BOCS, g_c, pos,
-                                                                                ConstraintList, VCO2FEdictionary)
+                                                                                ConstraintList, VCO2FEdictionary, ur)
 
                 # Find all valves and other control components which may be involved giving the searched path
                 NaiveVCOList = AlgorithmComparison.control_search(NaivePath, FE2VCOdictionary)
@@ -231,7 +232,7 @@ if __name__ == '__main__':
                 ConstraintList, NaiveControlNodeList, DijkstraControlNodeList, AstarControlNodeList, BOCSControlNodeList, g_c,
                                                                                      flagFalseNegative)
 
-                l_currentcase = ["f1 -> f2", Nr, Dr, Ar, Br, t1, t2, t3, t4, ConstraintList, NaiveControlNodeList,
+                l_currentcase = ["[[‘f1’, ‘f2’]]", Nr, Dr, Ar, Br, t1, t2, t3, t4, ConstraintList, NaiveControlNodeList,
                                  DijkstraControlNodeList, AstarControlNodeList, BOCSControlNodeList, nodeslist,
                                  NaivePath, DijkstraPath, AstarPath, BOCSPath, NaiveLength, DijkstraLength, AstarLength,
                                  BOCSLength, NaiveTime, DijkstraTime, AstarTime, BOCSTime]
