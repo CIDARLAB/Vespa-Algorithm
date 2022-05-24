@@ -22,4 +22,4 @@ v21 fo13 f7
 v22 f8 fo14
 v23 f8 fo14
 v24 f9 fo15
-v25 fo9 fo15
+v25 f9 fo15
