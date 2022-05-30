@@ -10,7 +10,6 @@ flow_node_list = []
 for i in range(9):
     ss = f"f{i+1}"
     flow_node_list.append(ss)
-
 for i in range(15):
     ss = f"fo{i+1}"
     flow_node_list.append(ss)
