@@ -38,8 +38,8 @@ plt.bar(c6, VeSpA100, color='#c82423', width=barWidth,
         edgecolor='grey', label='VeSpA100')
 
 # Adding Xticks
-plt.xlabel('Benchmarks', fontweight='bold', fontsize=15)
-plt.ylabel('Success Rate', fontweight='bold', fontsize=15)
+plt.xlabel('Benchmarks', fontweight='bold', fontsize=20)
+plt.ylabel('Success Rate', fontweight='bold', fontsize=20)
 plt.xticks([r + 3 * barWidth for r in range(len(Astar))],
            benchmarks)
 
