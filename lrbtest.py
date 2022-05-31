@@ -22,7 +22,7 @@ if __name__ == '__main__':
                           "BOCS path length", "Naive runtime", "Dijkstra runtime", "A* runtime", "BOCS runtime"]
     Result_list_cases = []
     column = []
-    for i in range(1, 4):
+    for i in range(1, 5):
         Result_list_section = []
         path = f"TestCaseFiles/lrb"
         control_graph_path = f"{path}/lrb{i}_control.dot"

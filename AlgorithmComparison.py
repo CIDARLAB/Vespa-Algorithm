@@ -3,7 +3,7 @@ import networkx as nx
 import os
 import matplotlib.pyplot as plt
 from ConstraintFunctions import NodeGroupConstraintMatrixgenerator, updateGraphByNGConstraint, NodeGroupTruthTableBuilder, \
-    Node_NG_Constraint_translater
+    Node_NG_Constraint_translater, findallConnectedNodes
 from collections import Counter
 import random
 pos = {}
@@ -137,15 +137,15 @@ def BOCS_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur):
     # generate all graphs satisfy the constraint type 2 as a list
     Conflict, g_list = enumerateBOCSgraphs(g, ConstraintMatrixNew, VCO2FEdictionary)
     if Conflict == 1:
-        print("Constraint conflict!")
+        print("Constraint conflict 2!", ConstraintList)
         end = time.time()
         return end - start, [], -2, -1
     BOCSPathMin = []
     gb_min = nx.Graph()
     # if the list is too big, we can randomly choose 1000 graphs from the big list to speedup the procedure
-    if len(g_list) > 50:
+    if len(g_list) > 100:
         flagFalseNegative = 1
-        g_list = random.sample(g_list, 50)
+        g_list = random.sample(g_list, 100)
     for gb in g_list:
         try:
             BOCSPath = nx.astar_path(gb, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
@@ -182,15 +182,12 @@ def control_search(path, dictionary):
 def findall_control_path(VCOList, g_c):
     ControlNodeList = VCOList.copy()
     ControlEdgeList = []
+    ControlNodeList = findallConnectedNodes(ControlNodeList, g_c.edges)
     for edge in g_c.edges:
         # find edges consists of nodes in VCOList
         if edge[0] in VCOList:
-            if edge[1] not in ControlNodeList:
-                ControlNodeList.append(edge[1])
             ControlEdgeList.append(edge)
         elif edge[1] in VCOList:
-            if edge[0] not in ControlNodeList:
-                ControlNodeList.append(edge[0])
             ControlEdgeList.append(edge)
     return ControlNodeList, ControlEdgeList
 

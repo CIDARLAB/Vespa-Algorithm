@@ -121,8 +121,6 @@ def Node_NG_Constraint_translater(d):
                 NodeGroupIndex2 = len(nodes_group_list) - 1
             else:
                 NodeGroupIndex2 = flag
-            if NodeGroupIndex == NodeGroupIndex2:
-                return 1, [], []
             for ele in ConstraintGroupList:
                 if Counter(ele) == Counter([NodeGroupIndex, NodeGroupIndex2]):
                     RepeatFlag = 1
