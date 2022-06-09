@@ -138,6 +138,7 @@ def createTruthTable(t, l, i, tab, cl):
         v = list(t.values())
         conflictgraphflag = 0
         for con in cl:
+            # protect the graph from having constraint conflict
             if v[con[0]] * v[con[1]] == 1:
                 conflictgraphflag = 1
                 break

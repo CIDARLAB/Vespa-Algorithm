@@ -1,0 +1,16 @@
+strict digraph  {
+c1;
+v1;
+v2;
+v3;
+v4;
+v5;
+v1 -> c1  [weight=1];
+v2 -> c1  [weight=1];
+v3 -> c1  [weight=1];
+v3 -> v2  [weight=1];
+v4 -> c1  [weight=1];
+v4 -> v1  [weight=1];
+v5 -> c1  [weight=1];
+v5 -> v4  [weight=1];
+}

@@ -1,0 +1,10 @@
+v1 f7 f9
+v2 f3 fo1
+v3 f8 f6
+v4 f4 fo1
+v5 f2 fo2
+v6 f4 f2
+co1 f10 f9
+co2 f10 f9
+co3 f7 f9
+co4 f9 f1

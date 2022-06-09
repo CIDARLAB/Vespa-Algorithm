@@ -1,0 +1,6 @@
+v1 f11 f4
+v2 f19 f16
+v3 f7 f6
+v4 f5 f8
+v5 f14 f11
+co1 f11 f4

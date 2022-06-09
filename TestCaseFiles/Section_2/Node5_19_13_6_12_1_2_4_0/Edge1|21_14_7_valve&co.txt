@@ -1,0 +1,4 @@
+v1 f7 fo1
+v2 f10 fo1
+v3 f8 f4
+v4 f1 f12
