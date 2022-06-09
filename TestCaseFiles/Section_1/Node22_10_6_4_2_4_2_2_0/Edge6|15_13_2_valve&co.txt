@@ -1,2 +1,0 @@
-v1 fo1 fo4
-v2 fo3 fo1

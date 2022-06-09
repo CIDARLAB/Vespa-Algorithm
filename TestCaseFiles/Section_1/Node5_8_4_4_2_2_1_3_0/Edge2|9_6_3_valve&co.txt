@@ -1,3 +1,0 @@
-v1 f1 f2
-v2 f1 f2
-v3 fo2 fo1
