@@ -89,9 +89,9 @@ g_control.add_weighted_edges_from(control_edge_list)
 
 folder_path = "../TestCaseFiles/lrb/"
 
-outpath1 = f"{folder_path}/lrb4_control.dot"
-outpath2 = f"{folder_path}/lrb4_flow.dot"
-outpath = f"{folder_path}/lrb4_ValveLocation.txt"
+outpath1 = f"{folder_path}/lrb5_control.dot"
+outpath2 = f"{folder_path}/lrb5_flow.dot"
+outpath = f"{folder_path}/lrb5_ValveLocation.txt"
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
