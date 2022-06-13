@@ -103,7 +103,7 @@ def Node_NG_Constraint_translater(d):
             for i in range(len(nodes_group_list)):
                 n = nodes_group_list[i]
                 if Counter(nodes[0]) == Counter(n):
-                    flag = 1
+                    flag = i
                     break
             if flag == -1:
                 nodes_group_list.append(nodes[0])
@@ -114,7 +114,7 @@ def Node_NG_Constraint_translater(d):
             for i in range(len(nodes_group_list)):
                 n = nodes_group_list[i]
                 if Counter(nodes[1]) == Counter(n):
-                    flag = 1
+                    flag = i
                     break
             if flag == -1:
                 nodes_group_list.append(nodes[1])

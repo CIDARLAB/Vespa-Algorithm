@@ -130,6 +130,7 @@ def BOCS_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur):
     pos = position
     flagFalseNegative = 0
     start = time.time()
+
     # Create a constraint dictionary list represents the constraint equation in matrix way
     Conflict, NGConstraintMatrix = NodeGroupConstraintMatrixgenerator(ConstraintList, g, g_c)
     # update graph with removing the edges in constraint type 1

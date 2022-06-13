@@ -145,5 +145,13 @@ fo29 -> fo37  [weight=2];
 fo30 -> fo38  [weight=2];
 fo30 -> fo31  [weight=2];
 fo31 -> fo39  [weight=2];
+fo32 -> fo44  [weight=2];
+fo33 -> fo45  [weight=2];
+fo34 -> fo46  [weight=2];
+fo35 -> fo47  [weight=2];
+fo36 -> fo48  [weight=2];
+fo37 -> fo49  [weight=2];
+fo38 -> fo50  [weight=2];
+fo39 -> fo51  [weight=2];
 fo40 -> fo18  [weight=2];
 }
