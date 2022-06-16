@@ -1,11 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
-benchmarks = ['Complexity <= 40', '40 < Complexity <= 100', '100 < Complexity <= 500', 'Complexity > 500', 'lrb1', 'lrb2', 'lrb3', 'lrb4']
-rate = [0.465, 0.425, 0.425, 0.39, 0.4, 0.6, 0.4, 0.8]
+benchmarks = ['Complexity <= 40', '40 < Complexity <= 100', '100 < Complexity <= 500', 'Complexity > 500', 'lrb1', 'lrb2', 'lrb3', 'lrb4', 'lrb5']
 
 # set width of bar
 barWidth = 0.1
-fig = plt.subplots(figsize=(25, 8))
+fig = plt.subplots(figsize=(30, 8))
 
 # set height of bar
 Naive = [0.465, 0.425, 0.425, 0.39, 0.4, 0.6, 0.4, 0.8]

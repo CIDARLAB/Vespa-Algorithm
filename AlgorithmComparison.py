@@ -63,11 +63,11 @@ def astar_search(g, position, ur):
 
 
 # One row in the table means one graph
-def BOCSGraphGenerator(table, nodes_group_list, vcofe, g):
+def VeSpAGraphGenerator(table, nodes_group_list, vcofe, g):
     g_list = []
     edge_remove_listall = []
     for row in table:
-        g_bocs = g.copy()
+        g_VeSpA = g.copy()
         edge_remove_list = []
         # cut the edges when there are valves onside be set to 0 in a row
         for i in range(len(row)):
@@ -99,10 +99,10 @@ def BOCSGraphGenerator(table, nodes_group_list, vcofe, g):
         if repeatflag == 1:
             continue
         for e in edge_remove_list:
-            for edge in g_bocs.edges():
+            for edge in g_VeSpA.edges():
                 if Counter(e) == Counter(edge):
-                    g_bocs.remove_edge(e[0], e[1])
-        g_list.append(g_bocs)
+                    g_VeSpA.remove_edge(e[0], e[1])
+        g_list.append(g_VeSpA)
         edge_remove_listall.append(edge_remove_list)
     return g_list
 
@@ -112,7 +112,7 @@ def BOCSGraphGenerator(table, nodes_group_list, vcofe, g):
 # All node[0] node[1] here will be totally same or different at all. If they have intersection node, they will be
 # connected by the findallConnectedNodes() function. So, we can transfer the current d to a list of tuples consists
 # of two node groups, all nodes in the group should be open or close together.
-def enumerateBOCSgraphs(g, d, vcofe):
+def enumerateVeSpAgraphs(g, d, vcofe):
     conflict = 0
     # creat node group constraint list
     conflict, ConstraintNGList, nodes_group_list = Node_NG_Constraint_translater(d)
@@ -121,11 +121,11 @@ def enumerateBOCSgraphs(g, d, vcofe):
     # create a truth table including all node groups according to the ConstraintGroupList
     conflict, table = NodeGroupTruthTableBuilder(nodes_group_list, ConstraintNGList)
     # Use the table to generate graphs which lose some edges compared with the original graph.
-    g_list = BOCSGraphGenerator(table, nodes_group_list, vcofe, g)
+    g_list = VeSpAGraphGenerator(table, nodes_group_list, vcofe, g)
     return conflict, g_list
 
 
-def BOCS_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur):
+def VeSpA_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen):
     global pos
     pos = position
     flagFalseNegative = 0
@@ -136,33 +136,33 @@ def BOCS_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur):
     # update graph with removing the edges in constraint type 1
     g, ConstraintMatrixNew = updateGraphByNGConstraint(VCO2FEdictionary, g, NGConstraintMatrix)
     # generate all graphs satisfy the constraint type 2 as a list
-    Conflict, g_list = enumerateBOCSgraphs(g, ConstraintMatrixNew, VCO2FEdictionary)
+    Conflict, g_list = enumerateVeSpAgraphs(g, ConstraintMatrixNew, VCO2FEdictionary)
     if Conflict == 1:
         print("Constraint conflict 2!", ConstraintList)
         end = time.time()
         return end - start, [], -2, -1
-    BOCSPathMin = []
+    VeSpAPathMin = []
     gb_min = nx.Graph()
     # if the list is too big, we can randomly choose 1000 graphs from the big list to speedup the procedure
-    if len(g_list) > 100:
+    if len(g_list) > listlen:
         flagFalseNegative = 1
-        g_list = random.sample(g_list, 100)
+        g_list = random.sample(g_list, listlen)
     for gb in g_list:
         try:
-            BOCSPath = nx.astar_path(gb, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
+            VeSpAPath = nx.astar_path(gb, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
         except nx.NetworkXNoPath:
-            BOCSPath = []
+            VeSpAPath = []
             continue
-        if len(BOCSPathMin) == 0 or len(BOCSPathMin) > len(BOCSPath):
-            BOCSPathMin = BOCSPath
+        if len(VeSpAPathMin) == 0 or len(VeSpAPathMin) > len(VeSpAPath):
+            VeSpAPathMin = VeSpAPath
             gb_min = gb
     end = time.time()
-    if not BOCSPathMin:
-        # print(f"No such a path from {ur[0]} to {ur[1]} using BOCS searching algorithm")
+    if not VeSpAPathMin:
+        # print(f"No such a path from {ur[0]} to {ur[1]} using VeSpA searching algorithm")
         return end - start, [], -1, flagFalseNegative
-    BOCSLength = nx.astar_path_length(gb_min, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
-    BOCSTime = end - start
-    return BOCSTime, BOCSPathMin, BOCSLength, flagFalseNegative
+    VeSpALength = nx.astar_path_length(gb_min, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
+    VeSpATime = end - start
+    return VeSpATime, VeSpAPathMin, VeSpALength, flagFalseNegative
 
 
 def control_search(path, dictionary):
@@ -214,8 +214,8 @@ def simulateControlPathway(time, path, filepath, j, graph, GraphListInfo):
     pass
 
 
-def simulate(NodeInfo, NaiveTime, NaivePath, NCP, DijkstraTime, DijkstraPath, DCP, AstarTime, AstarPath, ACP, BOCSTime,
-             BOCSPath, BCP, i, j, g, g_c, gli):
+def simulate(NodeInfo, NaiveTime, NaivePath, NCP, DijkstraTime, DijkstraPath, DCP, AstarTime, AstarPath, ACP, VeSpATime,
+             VeSpAPath, BCP, i, j, g, g_c, gli):
     # Naive simulate flow pathway
     outputfolderpath = f"TestCaseFiles/Naive_result/Section_{i}/{NodeInfo}"
     simulateFlowPathway(NaiveTime, NaivePath, outputfolderpath, j, g, gli)
@@ -228,9 +228,9 @@ def simulate(NodeInfo, NaiveTime, NaivePath, NCP, DijkstraTime, DijkstraPath, DC
     outputfolderpath = f"TestCaseFiles/A*_result/Section_{i}/{NodeInfo}"
     simulateFlowPathway(AstarTime, AstarPath, outputfolderpath, j, g, gli)
 
-    # BOCS simulate flow pathway
-    outputfolderpath = f"TestCaseFiles/BOCS_result/Section_{i}/{NodeInfo}"
-    simulateFlowPathway(BOCSTime, BOCSPath, outputfolderpath, j, g, gli)
+    # VeSpA simulate flow pathway
+    outputfolderpath = f"TestCaseFiles/VeSpA_result/Section_{i}/{NodeInfo}"
+    simulateFlowPathway(VeSpATime, VeSpAPath, outputfolderpath, j, g, gli)
 
     # Naive simulate control layer pathway
     outputfolderpath = f"TestCaseFiles/Naive_result/Section_{i}/{NodeInfo}"
@@ -244,6 +244,6 @@ def simulate(NodeInfo, NaiveTime, NaivePath, NCP, DijkstraTime, DijkstraPath, DC
     outputfolderpath = f"TestCaseFiles/A*_result/Section_{i}/{NodeInfo}"
     simulateControlPathway(AstarTime, AstarPath, outputfolderpath, j, g, gli)
 
-    # BOCS simulate control pathway
-    outputfolderpath = f"TestCaseFiles/BOCS_result/Section_{i}/{NodeInfo}"
-    simulateControlPathway(BOCSTime, BOCSPath, outputfolderpath, j, g, gli)
+    # VeSpA simulate control pathway
+    outputfolderpath = f"TestCaseFiles/VeSpA_result/Section_{i}/{NodeInfo}"
+    simulateControlPathway(VeSpATime, VeSpAPath, outputfolderpath, j, g, gli)
