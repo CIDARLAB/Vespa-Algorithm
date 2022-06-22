@@ -112,23 +112,23 @@ def VeSpAGraphGenerator(table, nodes_group_list, vcofe, g):
 # All node[0] node[1] here will be totally same or different at all. If they have intersection node, they will be
 # connected by the findallConnectedNodes() function. So, we can transfer the current d to a list of tuples consists
 # of two node groups, all nodes in the group should be open or close together.
-def enumerateVeSpAgraphs(g, d, vcofe):
+def enumerateVeSpAgraphs(g, d, vcofe, listlen):
     conflict = 0
     # creat node group constraint list
     conflict, ConstraintNGList, nodes_group_list = Node_NG_Constraint_translater(d)
     if conflict == 1:
         return 1, []
     # create a truth table including all node groups according to the ConstraintGroupList
-    conflict, table = NodeGroupTruthTableBuilder(nodes_group_list, ConstraintNGList)
+    conflict, table, fp = NodeGroupTruthTableBuilder(nodes_group_list, ConstraintNGList, listlen)
     # Use the table to generate graphs which lose some edges compared with the original graph.
     g_list = VeSpAGraphGenerator(table, nodes_group_list, vcofe, g)
-    return conflict, g_list
+    return conflict, g_list, fp
 
 
 def VeSpA_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen):
     global pos
     pos = position
-    flagFalseNegative = 0
+
     start = time.time()
 
     # Create a constraint dictionary list represents the constraint equation in matrix way
@@ -136,17 +136,18 @@ def VeSpA_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen
     # update graph with removing the edges in constraint type 1
     g, ConstraintMatrixNew = updateGraphByNGConstraint(VCO2FEdictionary, g, NGConstraintMatrix)
     # generate all graphs satisfy the constraint type 2 as a list
-    Conflict, g_list = enumerateVeSpAgraphs(g, ConstraintMatrixNew, VCO2FEdictionary)
+    Conflict, g_list, flagFalseNegative = enumerateVeSpAgraphs(g, ConstraintMatrixNew, VCO2FEdictionary, listlen)
     if Conflict == 1:
         print("Constraint conflict 2!", ConstraintList)
         end = time.time()
         return end - start, [], -2, -1
     VeSpAPathMin = []
     gb_min = nx.Graph()
-    # if the list is too big, we can randomly choose 1000 graphs from the big list to speedup the procedure
-    if len(g_list) > listlen:
-        flagFalseNegative = 1
-        g_list = random.sample(g_list, listlen)
+    # If the list is too big, we can randomly choose 1000 graphs from the big list to speedup the procedure. (random way)
+    # Here we choose graphs in order from truth table elements are all 1 to all 0. (Our way)
+    # if len(g_list) > listlen:
+    #     flagFalseNegative = 1
+    #     g_list = random.sample(g_list, listlen)
     for gb in g_list:
         try:
             VeSpAPath = nx.astar_path(gb, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")

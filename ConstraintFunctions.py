@@ -133,7 +133,9 @@ def Node_NG_Constraint_translater(d):
 
 
 # use recursion to create truth table
-def createTruthTable(t, l, i, tab, cl):
+def createTruthTable(t, l, i, tab, cl, listlen, fp):
+    if len(tab) >= listlen:
+        return t, tab, 1
     if i == len(l):
         v = list(t.values())
         conflictgraphflag = 0
@@ -144,22 +146,22 @@ def createTruthTable(t, l, i, tab, cl):
                 break
         if conflictgraphflag == 0:
             tab.append(v.copy())
-        return t, tab
-    t[l[i]] = 0
-    t, tab = createTruthTable(t, l, i+1, tab, cl)
+        return t, tab, fp
     t[l[i]] = 1
-    t, tab = createTruthTable(t, l, i+1, tab, cl)
-    return t, tab
+    t, tab, fp = createTruthTable(t, l, i+1, tab, cl, listlen, fp)
+    t[l[i]] = 0
+    t, tab, fp = createTruthTable(t, l, i+1, tab, cl, listlen, fp)
+    return t, tab, fp
 
 
-def NodeGroupTruthTableBuilder(nl, cl):
+def NodeGroupTruthTableBuilder(nl, cl, listlen):
     conflict = 0
     table_col = len(nl)
     keys = range(table_col)
     values = [-1] * table_col
     d = dict(zip(keys, values))
-    d, tab = createTruthTable(d, keys, 0, [], cl)
+    d, tab, flagFalseNegative = createTruthTable(d, keys, 0, [], cl, listlen, 0)
     if len(tab) == 0 and len(cl) != 0:
         conflict = 1
-    return conflict, tab
+    return conflict, tab, flagFalseNegative
 

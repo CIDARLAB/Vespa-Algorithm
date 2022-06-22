@@ -30,16 +30,16 @@ flow_edge_list = [("f1", "fo1", 2), ("f2", "fo2", 2), ("f3", "fo3", 2), ("f4", "
                   ("f11", "fo11", 2), ("f12", "fo12", 2), ("f13", "fo13", 2), ("f14", "fo14", 2), ("f15", "fo15", 2),
                   ("f16", "fo16", 2), ("f17", "fo17", 2), ("fo2", "fo1", 2), ("fo3", "fo2", 2), ("fo3", "fo4", 2),
                   ("fo4", "fo5", 2), ("fo5", "fo6", 2), ("fo6", "fo7", 2), ("fo7", "fo8", 2), ("fo8", "fo9", 2),
-                  ("fo1", "fo40", 20), ("fo9", "fo41", 20), ("fo40", "fo18", 20), ("fo19", "fo41", 20), ("fo18", "fo23", 2),
+                  ("fo1", "fo40", 2), ("fo9", "fo41", 2), ("fo40", "fo18", 2), ("fo19", "fo41", 2), ("fo18", "fo23", 2),
                   ("fo19", "fo25", 2), ("fo5", "fo22", 2), ("fo23", "fo32", 2), ("fo23", "fo24", 2), ("fo24", "fo33", 2),
                   ("fo25", "fo26", 2), ("fo25", "fo34", 2), ("fo26", "fo35", 2), ("fo24", "fo22", 2), ("fo26", "fo22", 2),
                   ("fo22", "fo27", 2), ("fo27", "fo28", 2), ("fo28", "fo29", 2), ("fo28", "fo36", 2), ("fo29", "fo37", 2),
                   ("fo27", "fo30", 2), ("fo30", "fo38", 2), ("fo30", "fo31", 2), ("fo31", "fo39", 2), ("fo27", "fo14", 2),
                   ("fo10", "fo11", 2), ("fo11", "fo12", 2), ("fo12", "fo13", 2), ("fo13", "fo14", 2), ("fo14", "fo15", 2),
-                  ("fo15", "fo16", 2), ("fo16", "fo17", 2), ("fo10", "fo42", 20), ("fo17", "fo43", 20), ("fo20", "fo42", 20),
-                  ("fo21", "fo43", 20), ("fo21", "fo31", 2), ("fo20", "fo29", 2), ("f18", "fo48", 2), ("f19", "fo49", 2),
+                  ("fo15", "fo16", 2), ("fo16", "fo17", 2), ("fo10", "fo42", 2), ("fo17", "fo43", 2), ("fo20", "fo42", 2),
+                  ("fo21", "fo43", 2), ("fo21", "fo31", 2), ("fo20", "fo29", 2), ("f18", "fo48", 2), ("f19", "fo49", 2),
                   ("f20", "fo45", 2), ("f21", "fo44", 2), ("f22", "fo46", 2), ("f23", "fo47", 2), ("f24", "fo51", 2), ("f25", "fo50", 2),
-                  ("fo32", "fo44", 2), ("fo33", "fo45", 2), ("fo34", "fo46", 2), ("fo35", "fo47", 2), ("fo36", "fo48", 2), ("fo37", "fo49", 2),
+                  ("fo33", "fo45", 2), ("fo34", "fo46", 2), ("fo35", "fo47", 2), ("fo36", "fo48", 2), ("fo37", "fo49", 2),
                   ("fo38", "fo50", 2), ("fo39", "fo51", 2)]
 
 control_edge_list = [("v1", "c1", 1), ("v2", "c1", 1), ("v3", "c1", 1), ("v4", "c1", 1), ("v28", "c1", 1), ("v29", "c1", 1),
@@ -91,9 +91,9 @@ g_control.add_weighted_edges_from(control_edge_list)
 
 folder_path = "../TestCaseFiles/lrb/"
 
-outpath1 = f"{folder_path}/lrb5_control.dot"
-outpath2 = f"{folder_path}/lrb5_flow.dot"
-outpath = f"{folder_path}/lrb5_ValveLocation.txt"
+outpath1 = f"{folder_path}/lrb6_control.dot"
+outpath2 = f"{folder_path}/lrb6_flow.dot"
+outpath = f"{folder_path}/lrb6_ValveLocation.txt"
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
