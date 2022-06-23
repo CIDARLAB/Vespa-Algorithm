@@ -8,13 +8,13 @@ from networkx.drawing.nx_agraph import read_dot
 pos = {}
 if __name__ == '__main__':
     # Section loop
-    Result_list_metric = ["User Requirement", "Naive estimate", "Dijkstra estimate", "A* estimate", "VeSpA 5 estimate", "VeSpA 25 estimate",
-                          "VeSpA 125 estimate", "Naive success", "Dijkstra success", "A* success", "VeSpA 5 success", "VeSpA 25 success", "VeSpA 125 success",
-                          "Constraint List", "Naive control List", "Dijkstra control list", "A star control list", "VeSpA 5 control list",
+    Result_list_metric = ["User Requirement", "Naive estimate", "Dijkstra estimate", "A* estimate", "VeSpA 2 estimate", "VeSpA 25 estimate",
+                          "VeSpA 125 estimate", "Naive success", "Dijkstra success", "A* success", "VeSpA 2 success", "VeSpA 25 success", "VeSpA 125 success",
+                          "Constraint List", "Naive control List", "Dijkstra control list", "A star control list", "VeSpA 2 control list",
                           "VeSpA 25 control list", "VeSpA 125 control list", "ConstraintNodesGroup", "Naive path", "Dijkstra path", "A* path",
-                          "VeSpA 5 path", "VeSpA 25 path", "VeSpA path", "Naive path length", "Dijkstra path length", "A* path length",
-                          "VeSpA 5 path length", "VeSpA 25 path length", "VeSpA 125 path length", "Naive runtime", "Dijkstra runtime", "A* runtime",
-                          "VeSpA 5 runtime", "VeSpA 25 runtime", "VeSpA 125 runtime"]
+                          "VeSpA 2 path", "VeSpA 25 path", "VeSpA path", "Naive path length", "Dijkstra path length", "A* path length",
+                          "VeSpA 2 path length", "VeSpA 25 path length", "VeSpA 125 path length", "Naive runtime", "Dijkstra runtime", "A* runtime",
+                          "VeSpA 2 runtime", "VeSpA 25 runtime", "VeSpA 125 runtime"]
     Result_list_cases = []
     column = []
     for i in range(5, 6):
@@ -55,7 +55,7 @@ if __name__ == '__main__':
                 # Update the flow edge info after we get RandomConstraintList and use it in VeSpA_search
                 g_VeSpA = g.copy()
                 VeSpATime5, VeSpAPath5, VeSpALength5, flagFalseNegative5 = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
-                                                                                ConstraintList, VCO2FEdictionary, uri, 5)
+                                                                                ConstraintList, VCO2FEdictionary, uri, 2)
                 g_VeSpA = g.copy()
                 VeSpATime25, VeSpAPath25, VeSpALength25, flagFalseNegative25 = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
                                                                                                     ConstraintList, VCO2FEdictionary, uri, 25)
