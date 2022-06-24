@@ -8,23 +8,23 @@ from networkx.drawing.nx_agraph import read_dot
 pos = {}
 if __name__ == '__main__':
     # Section loop
-    Result_list_metric = ["User Requirement", "Naive estimate", "Dijkstra estimate", "A* estimate", "VeSpA 2 estimate", "VeSpA 25 estimate",
-                          "VeSpA 125 estimate", "Naive success", "Dijkstra success", "A* success", "VeSpA 2 success", "VeSpA 25 success", "VeSpA 125 success",
-                          "Constraint List", "Naive control List", "Dijkstra control list", "A star control list", "VeSpA 2 control list",
-                          "VeSpA 25 control list", "VeSpA 125 control list", "ConstraintNodesGroup", "Naive path", "Dijkstra path", "A* path",
-                          "VeSpA 2 path", "VeSpA 25 path", "VeSpA path", "Naive path length", "Dijkstra path length", "A* path length",
-                          "VeSpA 2 path length", "VeSpA 25 path length", "VeSpA 125 path length", "Naive runtime", "Dijkstra runtime", "A* runtime",
-                          "VeSpA 2 runtime", "VeSpA 25 runtime", "VeSpA 125 runtime"]
+    Result_list_metric = ["User Requirement", "Netx Shortest Path (Dijkstra) estimate", "A* estimate", "VeSpA 2 estimate", "VeSpA 20 estimate",
+                          "VeSpA 200 estimate", "Netx Shortest Path (Dijkstra) success", "A* success", "VeSpA 2 success", "VeSpA 20 success", "VeSpA 200 success",
+                          "Constraint List", "Netx Shortest Path (Dijkstra) control List", "A star control list", "VeSpA 2 control list",
+                          "VeSpA 20 control list", "VeSpA 200 control list", "ConstraintNodesGroup", "Netx Shortest Path (Dijkstra) path", "A* path",
+                          "VeSpA 2 path", "VeSpA 20 path", "VeSpA 200 path", "Netx Shortest Path (Dijkstra) path length", "A* path length",
+                          "VeSpA 2 path length", "VeSpA 20 path length", "VeSpA 200 path length", "Netx Shortest Path (Dijkstra) runtime", "A* runtime",
+                          "VeSpA 2 runtime", "VeSpA 20 runtime", "VeSpA 200 runtime"]
     Result_list_cases = []
     column = []
-    for i in range(5, 6):
+    for i in range(1, 7):
         Result_list_section = []
         path = f"TestCaseFiles/lrb"
-        control_graph_path = f"{path}/lrb{i}_control.dot"
-        flow_graph_path = f"{path}/lrb{i}_flow.dot"
-        valve_co_txt = f"{path}/lrb{i}_ValveLocation.txt"
+        control_graph_path = f"{path}/graph_info/lrb{i}_control.dot"
+        flow_graph_path = f"{path}/graph_info/lrb{i}_flow.dot"
+        valve_co_txt = f"{path}/graph_info/lrb{i}_ValveLocation.txt"
         column = []
-        constraint_ur_path = f"{path}/Constraint_UR_lrb{i}.csv"
+        constraint_ur_path = f"{path}/URC/Constraint_UR_lrb{i}.csv"
         df = pd.read_csv(constraint_ur_path, index_col=None, header=0).to_dict()
         URConstraintInfoAll = []
         for j in range(len(df["User Requirement"])):
@@ -48,50 +48,47 @@ if __name__ == '__main__':
                 VCO2FEdictionary, FE2VCOdictionary = locateValveAndCOonFE(valve_co_txt)
 
                 # Algorithm comparison
-                NaiveTime, NaivePath, NaiveLength = AlgorithmComparison.naive_search(g, uri)
-                DijkstraTime, DijkstraPath, DijkstraLength = AlgorithmComparison.dijkstra_search(g, uri)
+                NetxSPTime, NetxSPPath, NetxSPLength = AlgorithmComparison.netxsp_search(g, uri)
                 AstarTime, AstarPath, AstarLength = AlgorithmComparison.astar_search(g, pos, uri)
 
                 # Update the flow edge info after we get RandomConstraintList and use it in VeSpA_search
                 g_VeSpA = g.copy()
-                VeSpATime5, VeSpAPath5, VeSpALength5, flagFalseNegative5 = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
+                VeSpATime1, VeSpAPath1, VeSpALength1, flagFalseNegative1 = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
                                                                                 ConstraintList, VCO2FEdictionary, uri, 2)
                 g_VeSpA = g.copy()
-                VeSpATime25, VeSpAPath25, VeSpALength25, flagFalseNegative25 = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
-                                                                                                    ConstraintList, VCO2FEdictionary, uri, 25)
+                VeSpATime2, VeSpAPath2, VeSpALength2, flagFalseNegative2 = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
+                                                                                                    ConstraintList, VCO2FEdictionary, uri, 20)
                 g_VeSpA = g.copy()
                 VeSpATime, VeSpAPath, VeSpALength, flagFalseNegative = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
-                                                                                                    ConstraintList, VCO2FEdictionary, uri, 125)
+                                                                                                    ConstraintList, VCO2FEdictionary, uri, 200)
 
-                # Find all valves and other control components which may be involved giving the searched path
-                NaiveVCOList = AlgorithmComparison.control_search(NaivePath, FE2VCOdictionary)
-                DijkstraVCOList = AlgorithmComparison.control_search(DijkstraPath, FE2VCOdictionary)
+                # Find all valves and other control components which are involved in the searching path
+                NetxSPVCOList = AlgorithmComparison.control_search(NetxSPPath, FE2VCOdictionary)
                 AstarVCOList = AlgorithmComparison.control_search(AstarPath, FE2VCOdictionary)
-                VeSpAVCOList5 = AlgorithmComparison.control_search(VeSpAPath5, FE2VCOdictionary)
-                VeSpAVCOList25 = AlgorithmComparison.control_search(VeSpAPath25, FE2VCOdictionary)
+                VeSpAVCOList1 = AlgorithmComparison.control_search(VeSpAPath1, FE2VCOdictionary)
+                VeSpAVCOList2 = AlgorithmComparison.control_search(VeSpAPath2, FE2VCOdictionary)
                 VeSpAVCOList = AlgorithmComparison.control_search(VeSpAPath, FE2VCOdictionary)
 
                 # Find all control edges and control ports being searched in the path
-                NaiveControlNodeList, NaiveControlEdgeList = AlgorithmComparison.findall_control_path(NaiveVCOList, g_c)
-                DijkstraControlNodeList, DijkstraControlEdgeList = AlgorithmComparison.findall_control_path(DijkstraVCOList, g_c)
+                NetxSPControlNodeList, NetxSPControlEdgeList = AlgorithmComparison.findall_control_path(NetxSPVCOList, g_c)
                 AstarControlNodeList, AstarControlEdgeList = AlgorithmComparison.findall_control_path(AstarVCOList, g_c)
-                VeSpAControlNodeList5, VeSpAControlEdgeList5 = AlgorithmComparison.findall_control_path(VeSpAVCOList5, g_c)
-                VeSpAControlNodeList25, VeSpAControlEdgeList25 = AlgorithmComparison.findall_control_path(VeSpAVCOList25, g_c)
+                VeSpAControlNodeList5, VeSpAControlEdgeList5 = AlgorithmComparison.findall_control_path(VeSpAVCOList1, g_c)
+                VeSpAControlNodeList2, VeSpAControlEdgeList2 = AlgorithmComparison.findall_control_path(VeSpAVCOList2, g_c)
                 VeSpAControlNodeList, VeSpAControlEdgeList = AlgorithmComparison.findall_control_path(VeSpAVCOList, g_c)
 
                 # Calculate the false positive rate for each algorithm
-                Nr, Dr, Ar, Br1, Br2, Br3, t1, t2, t3, t4, t5, t6, nodeslist = calculate_false_pos_rate(NaiveLength, DijkstraLength, AstarLength,
-                VeSpALength5, VeSpALength25, VeSpALength, ConstraintList, NaiveControlNodeList, DijkstraControlNodeList, AstarControlNodeList,
-                VeSpAControlNodeList5, VeSpAControlNodeList25, VeSpAControlNodeList, g_c, flagFalseNegative5, flagFalseNegative25, flagFalseNegative)
+                Nr, Ar, Br1, Br2, Br3, t1, t2, t3, t4, t5, nodeslist = calculate_false_pos_rate(NetxSPLength, AstarLength,
+                VeSpALength1, VeSpALength2, VeSpALength, ConstraintList, NetxSPControlNodeList, AstarControlNodeList,
+                VeSpAControlNodeList5, VeSpAControlNodeList2, VeSpAControlNodeList, g_c, flagFalseNegative1, flagFalseNegative2, flagFalseNegative)
 
-                l_currentcase = [uri, Nr, Dr, Ar, Br1, Br2, Br3, t1, t2, t3, t4, t5, t6, ConstraintList, NaiveControlNodeList,
-                                 DijkstraControlNodeList, AstarControlNodeList, VeSpAControlNodeList5, VeSpAControlNodeList25, VeSpAControlNodeList,
-                                 nodeslist, NaivePath, DijkstraPath, AstarPath, VeSpAPath5, VeSpAPath25, VeSpAPath, NaiveLength, DijkstraLength,
-                                 AstarLength, VeSpALength5, VeSpALength25, VeSpALength, NaiveTime, DijkstraTime, AstarTime, VeSpATime5, VeSpATime25,
+                l_currentcase = [uri, Nr, Ar, Br1, Br2, Br3, t1, t2, t3, t4, t5, ConstraintList, NetxSPControlNodeList,
+                                 AstarControlNodeList, VeSpAControlNodeList5, VeSpAControlNodeList2, VeSpAControlNodeList,
+                                 nodeslist, NetxSPPath, AstarPath, VeSpAPath1, VeSpAPath2, VeSpAPath, NetxSPLength,
+                                 AstarLength, VeSpALength1, VeSpALength2, VeSpALength, NetxSPTime, AstarTime, VeSpATime1, VeSpATime2,
                                  VeSpATime]
                 Result_list_section.append(l_currentcase)
 
-        # NaiveFPR, DijkstraFPR, AstarFPR = calculate_false_pos_rate(Result_list_section) !!!!*****@!!!
+        # NetxSPFPR, DijkstraFPR, AstarFPR = calculate_false_pos_rate(Result_list_section) !!!!*****@!!!
         # Result_list_cases.extend(Result_list_section)
 
         outcsvpath = f"TestCaseFiles/lrb{i}.csv"

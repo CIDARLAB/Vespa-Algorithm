@@ -5,39 +5,54 @@ import matplotlib.pyplot as plt
 from ConstraintFunctions import NodeGroupConstraintMatrixgenerator, updateGraphByNGConstraint, NodeGroupTruthTableBuilder, \
     Node_NG_Constraint_translater, findallConnectedNodes
 from collections import Counter
-import random
 pos = {}
 
 
-def naive_search(g, ur):
-    # Naive searching algorithm
-    start = time.time()
-    Naive_path = nx.single_source_shortest_path(g, source=ur[0])
+def multiURChecker(g, ur):
+    NetxSPPath = []
+    NetxSPLen = 0
+    if isinstance(ur[0], list) and isinstance(ur[1], list):
+        for ur0 in ur[0]:
+            for ur1 in ur[1]:
+                try:
+                    multipath = nx.shortest_path(g, source=ur0, target=ur1)
+                except nx.NetworkXNoPath:
+                    return [], -1, time.time()
+                NetxSPPath.append(multipath)
+                NetxSPLen += nx.dijkstra_path_length(g, source=ur0, target=ur1)
+    elif isinstance(ur[0], list):
+        for ur0 in ur[0]:
+            try:
+                multipath = nx.shortest_path(g, source=ur0, target=ur[1])
+            except nx.NetworkXNoPath:
+                return [], -1, time.time()
+            NetxSPPath.append(multipath)
+            NetxSPLen += nx.dijkstra_path_length(g, source=ur0, target=ur[1])
+    elif isinstance(ur[1], list):
+        for ur1 in ur[1]:
+            try:
+                multipath = nx.shortest_path(g, source=ur[0], target=ur1)
+            except nx.NetworkXNoPath:
+                return [], -1, time.time()
+            NetxSPPath.append(multipath)
+            NetxSPLen += nx.dijkstra_path_length(g, source=ur[0], target=ur1)
+    else:
+        try:
+            multipath = nx.shortest_path(g, source=ur[0], target=ur[1])
+        except nx.NetworkXNoPath:
+            return [], -1, time.time()
+        NetxSPPath.append(multipath)
+        NetxSPLen += nx.dijkstra_path_length(g, source=ur[0], target=ur[1])
     end = time.time()
-    NaiveTime = end - start
-    if ur[1] not in Naive_path:
-        print("No such a path from f1 to f2 using Naive searching algorithm")
-        return NaiveTime, [], -1
-    return NaiveTime, Naive_path[ur[1]], (len(Naive_path[ur[1]]) - 1) * 2
+    return NetxSPPath, NetxSPLen, end
 
 
-def dijkstra_search(g, ur):
-    # Dijkstra searching algorithm
+def netxsp_search(g, ur):
+    # NetxSP searching algorithm
     start = time.time()
-    try:
-        DijkstraLength, DijkstraPath = nx.single_source_dijkstra(g, source=ur[0])
-    except nx.NetworkXNoPath:
-        end = time.time()
-        print(f"No such a path from {ur[0]} to {ur[1]} using Dijkstra searching algorithm")
-        return end - start, [], -1
-
-    if ur[1] not in DijkstraLength:
-        print(f"No such a path from {ur[0]} to {ur[1]} using Dijkstra searching algorithm")
-        end = time.time()
-        return end - start, [], -1
-    end = time.time()
-    DijkstraTime = end - start
-    return DijkstraTime, DijkstraPath[ur[1]], DijkstraLength[ur[1]]
+    NetxSPPath, NetxSPLen, end = multiURChecker(g, ur)
+    NetxSPTime = end - start
+    return NetxSPTime, NetxSPPath, NetxSPLen
 
 
 def h_function(a, b):
@@ -49,15 +64,51 @@ def h_function(a, b):
 def astar_search(g, position, ur):
     global pos
     pos = position
+    AstarPath = []
+    AstarLength = 0
     start = time.time()
-    try:
-        AstarPath = nx.astar_path(g, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
-    except nx.NetworkXNoPath:
-        print(f"No such a path from {ur[0]} to {ur[1]} using A star searching algorithm")
-        end = time.time()
-        return end - start, [], -1
+    if isinstance(ur[0], list) and isinstance(ur[1], list):
+        for ur0 in ur[0]:
+            for ur1 in ur[1]:
+                try:
+                    multipath = nx.astar_path(g, source=ur0, target=ur1, heuristic=h_function, weight="weight")
+                except nx.NetworkXNoPath:
+                    end = time.time()
+                    print(f"No such a path from {ur[0]} to {ur[1]} using A Star searching algorithm")
+                    return end - start, [], -1
+                AstarPath.append(multipath)
+                AstarLength += nx.astar_path_length(g, source=ur0, target=ur1, heuristic=h_function, weight="weight")
+    elif isinstance(ur[0], list):
+        for ur0 in ur[0]:
+            try:
+                multipath = nx.astar_path(g, source=ur0, target=ur[1], heuristic=h_function, weight="weight")
+            except nx.NetworkXNoPath:
+                end = time.time()
+                print(f"No such a path from {ur[0]} to {ur[1]} using A Star searching algorithm")
+                return end - start, [], -1
+            AstarPath.append(multipath)
+            AstarLength += nx.astar_path_length(g, source=ur0, target=ur[1], heuristic=h_function, weight="weight")
+    elif isinstance(ur[1], list):
+        for ur1 in ur[1]:
+            try:
+                multipath = nx.astar_path(g, source=ur[0], target=ur1, heuristic=h_function, weight="weight")
+            except nx.NetworkXNoPath:
+                end = time.time()
+                print(f"No such a path from {ur[0]} to {ur[1]} using A Star searching algorithm")
+                return end - start, [], -1
+            AstarPath.append(multipath)
+            AstarLength += nx.astar_path_length(g, source=ur[0], target=ur1, heuristic=h_function, weight="weight")
+    else:
+        try:
+            multipath = nx.astar_path(g, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
+        except nx.NetworkXNoPath:
+            end = time.time()
+            print(f"No such a path from {ur[0]} to {ur[1]} using A Star searching algorithm")
+            return end - start, [], -1
+        AstarPath.append(multipath)
+        AstarLength += nx.astar_path_length(g, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
+
     end = time.time()
-    AstarLength = nx.astar_path_length(g, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
     AstarTime = end - start
     return AstarTime, AstarPath, AstarLength
 
@@ -128,7 +179,6 @@ def enumerateVeSpAgraphs(g, d, vcofe, listlen):
 def VeSpA_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen):
     global pos
     pos = position
-
     start = time.time()
 
     # Create a constraint dictionary list represents the constraint equation in matrix way
@@ -142,42 +192,46 @@ def VeSpA_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen
         end = time.time()
         return end - start, [], -2, -1
     VeSpAPathMin = []
-    gb_min = nx.Graph()
+    VeSpALengthMin = 0
     # If the list is too big, we can randomly choose 1000 graphs from the big list to speedup the procedure. (random way)
     # Here we choose graphs in order from truth table elements are all 1 to all 0. (Our way)
     # if len(g_list) > listlen:
     #     flagFalseNegative = 1
     #     g_list = random.sample(g_list, listlen)
     for gb in g_list:
-        try:
-            VeSpAPath = nx.astar_path(gb, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
-        except nx.NetworkXNoPath:
-            VeSpAPath = []
-            continue
-        if len(VeSpAPathMin) == 0 or len(VeSpAPathMin) > len(VeSpAPath):
+        _, VeSpAPath, VeSpALength = netxsp_search(gb, ur)
+        if len(VeSpAPathMin) == 0 or VeSpALengthMin > VeSpALength > 0:
             VeSpAPathMin = VeSpAPath
-            gb_min = gb
+            VeSpALengthMin = VeSpALength
     end = time.time()
     if not VeSpAPathMin:
-        # print(f"No such a path from {ur[0]} to {ur[1]} using VeSpA searching algorithm")
+        print(f"No such a path from {ur[0]} to {ur[1]} using VeSpA I={listlen} searching algorithm")
         return end - start, [], -1, flagFalseNegative
-    VeSpALength = nx.astar_path_length(gb_min, source=ur[0], target=ur[1], heuristic=h_function, weight="weight")
     VeSpATime = end - start
-    return VeSpATime, VeSpAPathMin, VeSpALength, flagFalseNegative
+    return VeSpATime, VeSpAPathMin, VeSpALengthMin, flagFalseNegative
 
 
 def control_search(path, dictionary):
     VCOList = []
-    for i in range(len(path)-1):
-        edge = (path[i], path[i+1])
-        if edge in dictionary.keys():
-            VCO = dictionary[edge]
-            VCOList.extend(VCO)
-        else:
-            edge = (path[i+1], path[i])
+    for pathj in path:
+        for i in range(len(pathj)-1):
+            edge = (pathj[i], pathj[i+1])
             if edge in dictionary.keys():
                 VCO = dictionary[edge]
-                VCOList.extend(VCO)
+                for vi in VCO:
+                    if vi in VCOList:
+                        continue
+                    else:
+                        VCOList.append(vi)
+            else:
+                edge = (pathj[i+1], pathj[i])
+                if edge in dictionary.keys():
+                    VCO = dictionary[edge]
+                    for vi in VCO:
+                        if vi in VCOList:
+                            continue
+                        else:
+                            VCOList.append(vi)
     return VCOList
 
 
@@ -215,11 +269,11 @@ def simulateControlPathway(time, path, filepath, j, graph, GraphListInfo):
     pass
 
 
-def simulate(NodeInfo, NaiveTime, NaivePath, NCP, DijkstraTime, DijkstraPath, DCP, AstarTime, AstarPath, ACP, VeSpATime,
+def simulate(NodeInfo, NetxSPTime, NetxSPPath, NCP, DijkstraTime, DijkstraPath, DCP, AstarTime, AstarPath, ACP, VeSpATime,
              VeSpAPath, BCP, i, j, g, g_c, gli):
-    # Naive simulate flow pathway
-    outputfolderpath = f"TestCaseFiles/Naive_result/Section_{i}/{NodeInfo}"
-    simulateFlowPathway(NaiveTime, NaivePath, outputfolderpath, j, g, gli)
+    # NetxSP simulate flow pathway
+    outputfolderpath = f"TestCaseFiles/NetxSP_result/Section_{i}/{NodeInfo}"
+    simulateFlowPathway(NetxSPTime, NetxSPPath, outputfolderpath, j, g, gli)
 
     # Dijkstra simulate flow pathway
     outputfolderpath = f"TestCaseFiles/Dijkstra_result/Section_{i}/{NodeInfo}"
@@ -233,9 +287,9 @@ def simulate(NodeInfo, NaiveTime, NaivePath, NCP, DijkstraTime, DijkstraPath, DC
     outputfolderpath = f"TestCaseFiles/VeSpA_result/Section_{i}/{NodeInfo}"
     simulateFlowPathway(VeSpATime, VeSpAPath, outputfolderpath, j, g, gli)
 
-    # Naive simulate control layer pathway
-    outputfolderpath = f"TestCaseFiles/Naive_result/Section_{i}/{NodeInfo}"
-    simulateControlPathway(NaiveTime, NaivePath, outputfolderpath, j, g, gli)
+    # NetxSP simulate control layer pathway
+    outputfolderpath = f"TestCaseFiles/NetxSP_result/Section_{i}/{NodeInfo}"
+    simulateControlPathway(NetxSPTime, NetxSPPath, outputfolderpath, j, g, gli)
 
     # Dijkstra simulate control layer pathway
     outputfolderpath = f"TestCaseFiles/Dijkstra_result/Section_{i}/{NodeInfo}"

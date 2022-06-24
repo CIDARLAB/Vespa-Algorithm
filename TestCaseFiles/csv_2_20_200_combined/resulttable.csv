@@ -1,0 +1,101 @@
+// TIME (ms)
+// rb1
+True positive	97	94	121	121	121
+False negative	0	0	5	0	0
+False positive	103	106	0	0	0
+True negative	0	0	74	79	79
+accuracy 	0.485	0.47	0.975	1	1
+Max time	0.04	0.14	0.32	0.49	0.47
+Mean time	0.01	0.04	0.08	0.07	0.07
+Avg time	0.02	0.05	0.1	0.1	0.1
+
+
+// rb2
+True positive	87	85	114	115	115
+False negative	0	0	17	0	0
+False positive	112	114	0	0	0
+True negative	1	1	69	85	85
+accuracy 	0.44	0.43	0.915	1	1
+Max time	0.03	0.17	2.85	3.48	3.46
+Mean time	0.02	0.06	0.26	0.29	0.29
+Avg time	0.02	0.07	0.45	0.51	0.51
+
+
+// rb3
+True positive	83	82	102	107	108
+False negative	0	0	45	9	2
+False positive	113	114	0	0	0
+True negative	4	4	53	84	90
+accuracy 	0.435	0.43	0.775	0.955	0.99
+Max time	0.07	0.38	8.35	24.35	173.37
+Mean time	0.03	0.14	1.35	1.8	1.8
+Avg time	0.03	0.15	1.65	3.39	5.8
+
+
+// rb4
+True positive	69	69	112	113	113
+False negative	0	0	47	8	1
+False positive	126	126	0	0	0
+True negative	5	5	41	79	86
+accuracy 	0.37	0.37	0.765	0.96	0.995
+Max time	0.27	1.73	185.83	211.24	653.48
+Mean time	0.08	0.37	14.22	21.16	23.95
+Avg time	0.08	0.45	24.52	33.02	47.46
+
+
+// lrb1
+True positive	2	2	3	3	3
+False negative	0	0	0	0	0
+False positive	3	3	0	0	0
+True negative	0	0	2	2	2
+accuracy 	0.4	0.4	1	1	1
+Max time	0.05	0.22	0.85	3.94	3.86
+Mean time	0.04	0.22	0.82	0.96	0.95
+Avg time	0.05	0.22	0.59	1.31	1.29
+
+
+// lrb2
+True positive	3	3	2	3	3
+False negative	0	0	3	0	0
+False positive	2	2	0	0	0
+True negative	0	0	0	2	2
+accuracy 	0.6	0.6	0.4	1	1
+Max time	0.05	0.16	0.43	1.41	1.39
+Mean time	0.03	0.14	0.32	1.32	1.31
+Avg time	0.04	0.13	0.33	0.97	0.95
+
+
+// lrb3
+True positive	2	2	2	2	2
+False negative	0	0	3	0	0
+False positive	3	3	0	0	0
+True negative	0	0	0	3	3
+accuracy 	0.4	0.4	0.4	1	1
+Max time	0.05	0.23	1.41	24.65	6.69
+Mean time	0.04	0.2	0.99	3.81	3.78
+Avg time	0.03	0.17	1	7.74	3.87
+
+
+// lrb4
+True positive	4	3	4	4	4
+False negative	0	0	1	0	0
+False positive	1	2	0	0	0
+True negative	0	0	0	1	1
+accuracy 	0.8	0.6	0.8	1	1
+Max time	0.1	0.57	5.88	16.14	16.03
+Mean time	0.08	0.44	3.33	3.85	3.83
+Avg time	0.07	0.42	3.55	6.61	6.57
+
+
+// lrb5
+True positive	6	4	6	8	8
+False negative	0	0	4	0	0
+False positive	4	6	0	0	0
+True negative	0	0	0	2	2
+accuracy 	0.6	0.4	0.6	1	1
+Max time	0.17	1.19	10.81	61.55	151.21
+Mean time	0.11	0.69	6.97	17.44	17.46
+Avg time	0.1	0.64	7.38	24.55	37.61
+
+
+

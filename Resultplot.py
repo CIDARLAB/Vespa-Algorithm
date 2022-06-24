@@ -7,34 +7,27 @@ barWidth = 0.08
 fig = plt.subplots(figsize=(30, 8))
 
 # set height of bar
-Naive = [0.47, 0.435, 0.46, 0.395, 0.4, 0.6, 0.4, 0.8, 0.67]
-Dijkstra = [0.47, 0.435, 0.46, 0.395, 0.4, 0.6, 0.4, 0.8, 0.67]
-Astar = [0.465, 0.44, 0.44, 0.395, 0.4, 0.6, 0.4, 0.8, 0.5]
-VeSpA10 = [1, 0.995, 0.865, 0.88, 1, 1, 0.6, 1, 1]
-VeSpA50 = [1, 1, 0.97, 0.95, 1, 1, 1, 1, 1]
-VeSpA100 = [1, 1, 0.98, 0.975, 1, 1, 1, 1, 1]
+Dijkstra = [0.48, 0.43, 0.435, 0.37, 0.4, 0.6, 0.4, 0.8, 0.6]
+Astar = [0.445, 0.43, 0.43, 0.365, 0.4, 0.6, 0.4, 0.6, 0.4]
+VeSpA10 = [0.98, 0.92, 0.78, 0.835, 1.0, 0.4, 0.4, 0.8, 0.6]
+VeSpA50 = [1.0, 1.0, 0.955, 0.98, 1.0, 1.0, 1.0, 1.0, 1.0]
+VeSpA100 = [1.0, 1.0, 1.0, 0.995, 1.0, 1.0, 1.0, 1.0, 1.0]
 
 # Set position of bar on X axis
-c1 = np.arange(len(Naive))
-c2 = [x + barWidth for x in c1]
+c2 = np.arange(len(Dijkstra))
 c3 = [x + barWidth for x in c2]
 c4 = [x + barWidth for x in c3]
 c5 = [x + barWidth for x in c4]
 c6 = [x + barWidth for x in c5]
 
 # Make the plot
-plt.bar(c1, Naive, color='#8ecfc9', width=barWidth,
-        edgecolor='grey', label='Naive')
-plt.bar(c2, Dijkstra, color='#ffbe7a', width=barWidth,
-        edgecolor='grey', label='Dijkstra')
-plt.bar(c3, Astar, color='#fa7f6f', width=barWidth,
-        edgecolor='grey', label='Astar')
-plt.bar(c4, VeSpA10, color='#82b0d2', width=barWidth,
-        edgecolor='grey', label='VeSpA10')
-plt.bar(c5, VeSpA50, color='#beb8dc', width=barWidth,
-        edgecolor='grey', label='VeSpA50')
-plt.bar(c6, VeSpA100, color='#f1d77e', width=barWidth,
-        edgecolor='grey', label='VeSpA100')
+# plt.bar(c1, Naive, color='#f1d77e', width=barWidth,
+#         edgecolor='grey', label='Naive')
+plt.bar(c2, Dijkstra, color='#9394e7', width=barWidth, edgecolor='#f1d77e', label='Dijkstra')
+plt.bar(c3, Astar, color='#ffbe7a', width=barWidth, edgecolor='#f1d77e', label='Astar')
+plt.bar(c4, VeSpA10, color='#82b0d2', width=barWidth, edgecolor='#f1d77e', label='VeSpA I=2')
+plt.bar(c5, VeSpA50, color='#beb8dc', width=barWidth, edgecolor='#f1d77e', label='VeSpA I=20')
+plt.bar(c6, VeSpA100, color='#fa7f6f', width=barWidth, edgecolor='#f1d77e', label='VeSpA I=200')
 
 # Adding Xticks
 plt.xlabel('Benchmarks', fontweight='bold', fontsize=20)
