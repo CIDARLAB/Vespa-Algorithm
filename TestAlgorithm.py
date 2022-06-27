@@ -160,7 +160,7 @@ if __name__ == '__main__':
                           "VeSpA 2 path length", "VeSpA 20 path length", "VeSpA 200 path length", "Netx Shortest Path (Dijkstra) runtime",
                           "A* runtime", "VeSpA 2 runtime", "VeSpA 20 runtime", "VeSpA 200 runtime"]
     Result_list_cases = []
-    for i in range(1, 5):
+    for i in range(2, 3):
         Result_list_section = []
         path = f"RandomCaseFiles/Section_{i}"
         # Build a dictionary saved all edge info file names as value, keys are the nodes info
