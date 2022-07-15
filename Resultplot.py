@@ -5,7 +5,7 @@ benchmarks = ['Complexity <= 40', '40 < Complexity <= 100', '100 < Complexity <=
 # set width of bar
 barWidth = 0.08
 gapWidth = 0.1
-fig = plt.subplots(figsize=(30, 8))
+fig = plt.subplots(figsize=(32, 8))
 
 # set height of bar
 Dijkstra = [0.48, 0.445, 0.355, 0.345, 0.4, 0.6, 0.4, 0.8, 0.4]
