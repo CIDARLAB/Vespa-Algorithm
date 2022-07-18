@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import networkx as nx
-import random
+import test
 from networkx.drawing.nx_pydot import write_dot
 from collections import Counter
 import os
@@ -21,15 +21,15 @@ def createVertexList(nodeinfo, typeinfo):
 
 def generateRandomNodeInfo(ComplexityUpperBound):
     # randomly choose the total number N of nodes
-    N = random.randint(4, int(ComplexityUpperBound / 2) - 1)
+    N = test.randint(4, int(ComplexityUpperBound / 2) - 1)
     # randomly choose number Nf for flow-layer components, Nv for valves and Nc for control-layer, Nv can be 0
-    Nf = random.randint(2, N-2)
+    Nf = test.randint(2, N - 2)
     Nc = N - Nf
-    Nv = random.randint(1, Nc-1)
+    Nv = test.randint(1, Nc - 1)
     # decide number for Nfp, Nfo, Ncp, Nco
-    Nfp = random.randint(2, Nf)
+    Nfp = test.randint(2, Nf)
     Nfo = Nf - Nfp
-    Ncp = random.randint(1, Nc - Nv)
+    Ncp = test.randint(1, Nc - Nv)
     Nco = Nc - Ncp - Nv
     return [N, Nf, Nc, Nfp, Nfo, Ncp, Nv, Nco]
 
@@ -57,17 +57,17 @@ def createFlowEdge(ENf):
             NodeType1 = "fo"
             NodeNum1 = FOflag + 1
         else:
-            NodeType1Num = random.randint(0, len(FlowTypeList) - 1)
+            NodeType1Num = test.randint(0, len(FlowTypeList) - 1)
             if FlowNodeInfo[NodeType1Num] < 1:
                 continue
             NodeType1 = FlowTypeList[NodeType1Num]
-            NodeNum1 = random.randint(1, FlowNodeInfo[NodeType1Num])
+            NodeNum1 = test.randint(1, FlowNodeInfo[NodeType1Num])
 
-        NodeType2Num = random.randint(0, len(FlowTypeList) - 1)
+        NodeType2Num = test.randint(0, len(FlowTypeList) - 1)
         if FlowNodeInfo[NodeType2Num] < 1:
             continue
         NodeType2 = FlowTypeList[NodeType2Num]
-        NodeNum2 = random.randint(1, FlowNodeInfo[NodeType2Num])
+        NodeNum2 = test.randint(1, FlowNodeInfo[NodeType2Num])
 
         Node1 = f"{NodeType1}{NodeNum1}"
         Node2 = f"{NodeType2}{NodeNum2}"
@@ -119,19 +119,19 @@ def createControlEdge(ENc):
             NodeType2Num = 0
 
         else:
-            NodeType1Num = random.randint(0, len(ControlTypeList) - 1)
+            NodeType1Num = test.randint(0, len(ControlTypeList) - 1)
             if ControlNodeInfo[NodeType1Num] < 1:
                 continue
             NodeType1 = ControlTypeList[NodeType1Num]
-            NodeNum1 = random.randint(1, ControlNodeInfo[NodeType1Num])
+            NodeNum1 = test.randint(1, ControlNodeInfo[NodeType1Num])
             # two control ports are not allowed to connect as an edge
             if NodeType1Num == 0:
-                NodeType2Num = random.randint(1, len(ControlTypeList) - 1)
+                NodeType2Num = test.randint(1, len(ControlTypeList) - 1)
 
         if ControlNodeInfo[NodeType2Num] < 1:
             continue
         NodeType2 = ControlTypeList[NodeType2Num]
-        NodeNum2 = random.randint(1, ControlNodeInfo[NodeType2Num])
+        NodeNum2 = test.randint(1, ControlNodeInfo[NodeType2Num])
 
         Node1 = f"{NodeType1}{NodeNum1}"
         Node2 = f"{NodeType2}{NodeNum2}"
@@ -170,7 +170,7 @@ def createNumberOfFlowAndControlEdge(EdgeNum):
         ENfUpperBound = min(int(Nf * (Nf - 1) / 2), EdgeNum - Nco - Nv)
         if Nf - 1 >= ENfUpperBound:
             continue
-        ENf = random.randint(Nf, ENfUpperBound)
+        ENf = test.randint(Nf, ENfUpperBound)
         ENc = EdgeNum - ENf
         if ENc > 0 and ENc in range(Nco + Nv, int(Nc * (Nc - 1) / 2)):
             break
@@ -204,12 +204,12 @@ def plotAndSave(SectionNum, flow_edge_list, control_edge_list, CurrentNodeInfo, 
     valve_list = control_node_list[CurrentNodeInfo[5]:CurrentNodeInfo[5]+CurrentNodeInfo[6]]
     co_list = control_node_list[CurrentNodeInfo[5]+CurrentNodeInfo[6]:]
     for i in range(CurrentNodeInfo[6]):
-        valve_location = random.randint(0, len(flow_edge_list) - 1)
+        valve_location = test.randint(0, len(flow_edge_list) - 1)
         valve_relationship = [valve_list[i]] + flow_edge_list[valve_location][0:2]
         ValveCOLocateList.append(valve_relationship)
 
     for i in range(CurrentNodeInfo[7]):
-        co_location = random.randint(0, len(flow_edge_list) - 1)
+        co_location = test.randint(0, len(flow_edge_list) - 1)
         co_relationship = [co_list[i]] + flow_edge_list[co_location][0:2]
         ValveCOLocateList.append(co_relationship)
 
@@ -280,7 +280,7 @@ if __name__ == '__main__':
                 continue
 
             # randomly choose number of flow and control edges, and create flow and control edges in detail
-            EdgeNum = random.randint(EdgeNumLowerBound, EdgeNumUpperBound)
+            EdgeNum = test.randint(EdgeNumLowerBound, EdgeNumUpperBound)
             iterate, ENf, ENc = createNumberOfFlowAndControlEdge(EdgeNum)
             if iterate > 200:
                 continue

@@ -4,9 +4,9 @@ import numpy as np
 import pandas as pd
 
 pp = []
-for i in range(1, 6):
-    path = f"TestCaseFiles/lrb/URC/Constraint_UR_lrb{i}.csv"
-    # path = f"RandomCaseFiles/Constraint_b{i}.csv"
+for i in range(1, 5):
+    # path = f"TestCaseFiles/lrb/URC/Constraint_UR_lrb{i}.csv"
+    path = f"RandomCaseFiles/Constraint_b{i}.csv"
     df = pd.read_csv(path)
     df_c = df.values
     p = []

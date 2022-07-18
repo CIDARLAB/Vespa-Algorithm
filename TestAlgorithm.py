@@ -160,7 +160,7 @@ if __name__ == '__main__':
                           "VeSpA 2 path length", "VeSpA 20 path length", "VeSpA 200 path length", "Netx Shortest Path (Dijkstra) runtime",
                           "A* runtime", "VeSpA 2 runtime", "VeSpA 20 runtime", "VeSpA 200 runtime"]
     Result_list_cases = []
-    for i in range(2, 3):
+    for i in range(3, 4):
         Result_list_section = []
         path = f"RandomCaseFiles/Section_{i}"
         # Build a dictionary saved all edge info file names as value, keys are the nodes info
@@ -207,11 +207,11 @@ if __name__ == '__main__':
                     if node[0] == 'c' and node[1] != 'o':
                         CPlength += 1
                 VandCOlength = len(ControlNodes) - CPlength
-                upboundconstraint = [10, 30, 30, 30]
+                upboundconstraint = [10, 10, 10, 10]
                 if VandCOlength < upboundconstraint[i-1]:
                     ConstraintNum = random.randint(1, VandCOlength)
                 else:
-                    ConstraintNum = random.randint(1, upboundconstraint[i-1])
+                    ConstraintNum = random.randint(1, upboundconstraint[i - 1])
 
                 if len(ConstraintInfoAll) != 0:
                     ConstraintList = ConstraintInfoAll[ColumnDetail[-1]]

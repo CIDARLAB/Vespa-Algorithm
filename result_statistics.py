@@ -18,9 +18,9 @@ for c in df:
     if len(c) < 2:
         if len(list_element) != 0:
             result_list.append(list_element)
-            print(list_element[5])
-            for ee in range(len(list_element[5])):
-                f.write(f"{list_element[5][ee]};")
+            print(list_element[4])
+            for ee in range(len(list_element[4])):
+                f.write(f"{1-list_element[4][ee]};")
             f.write('\n')
             list_element = []
             flag = 1

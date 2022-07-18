@@ -19,7 +19,7 @@ Max time	0.05	0.16	5.92	6.81	6.86
 Mean time	0.02	0.06	0.27	0.32	0.32
 Avg time	0.02	0.06	0.6	0.71	0.72
 
-// rb3
+// rb3 3x
 True positive	67	66	82	89	92
 False negative	0	0	72	33	17
 False positive	129	130	0	0	0
@@ -29,7 +29,7 @@ Max time	0.07	0.38	1146.37	1151.59	1183.74
 Mean time	0.03	0.14	2.99	5.64	6.15
 Avg time	0.03	0.15	20.17	23.64	49.56
 
-// rb4
+// rb4 3x
 True positive	64	63	106	109	110
 False negative	0	0	53	26	11
 False positive	131	132	0	0	0
@@ -92,4 +92,26 @@ accuracy 	0.4	0.3	0.5	0.8	1
 Max time	0.17	1.21	12.51	66.63	256.17
 Mean time	0.11	0.7	10.6	45.26	90.43
 Avg time	0.1	0.65	9.8	41.09	115.88
+
+
+// rb3 1x
+True positive	85	86	104	109	109
+False negative	0	0	48	8	1
+False positive	111	110	0	0	0
+True negative	4	4	48	83	90
+accuracy 	0.445	0.45	0.76	0.96	0.995
+Max time	0.07	0.39	8.82	20.64	236.3
+Mean time	0.03	0.14	1.47	2.28	2.26
+Avg time	0.03	0.15	1.87	3.99	9.49
+
+
+// rb4 1x
+True positive	73	71	116	117	119
+False negative	0	0	37	7	1
+False positive	122	124	0	0	0
+True negative	5	5	47	76	80
+accuracy 	0.39	0.38	0.815	0.965	0.995
+Max time	0.21	1.44	160.66	222.02	1478.31
+Mean time	0.07	0.35	12.22	21.02	22.81
+Avg time	0.08	0.43	22.97	33.56	50.67
 
