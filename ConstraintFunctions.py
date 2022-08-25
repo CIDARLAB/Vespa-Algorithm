@@ -31,10 +31,10 @@ def OriginalConstraintTablebuilder(type, node, t):
 # for type 1, the element looks like: "[vi]": {Type: 1, Nodes: [vi, ci, vj], TruthTable:0}
 # for type 2, the element looks like: "[vi, vj]": {Type: 2, Nodes: [[vi, ci], [vj, cj]], TruthTable: [[0, 0], [0, 1], [1, 0]]}
 # for type 2, may have errors when build the dictionary. Assume vi and vj connect to the same ci.
-# "[vi, vj]": {Type: 2, Nodes: [[vi, ci, vj], [vj, cj, vi]], TruthTable: [[0,0]]}, vi cannot open and close at the same time
+# "[vi, vj]": {Type: 2, Nodes: [[vi, ci, vj], [vj, cj, vi]], TruthTable: [[0,0]]}, vi cannot be opened and closed at the same time
 # If we cannot generate a constraint dictionary, (not type1 and type2, may some other type)
 # then that means the constraint is incorrect, show warning!!!!!
-def NodeGroupConstraintMatrixgenerator(ConstraintList, g, g_c):
+def NodeGroupConstraintDictBuilder(ConstraintList, g, g_c):
     d = []
     conflict = 0
     for c in ConstraintList:

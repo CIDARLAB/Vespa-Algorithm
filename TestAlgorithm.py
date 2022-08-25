@@ -167,7 +167,7 @@ if __name__ == '__main__':
         AllDirInOneSection = getfileList(path)
         ColumnDetail = []
         node_num = 0
-        constraint_path = f"RandomCaseFiles/Constraint_b{i}.csv"
+        constraint_path = f"RandomCaseFiles/Constraint_b{i}_3x.csv"
         ConstraintInfoAll = {}
         if os.path.isfile(constraint_path):
             df = pd.read_csv(constraint_path, index_col=0, header=None).squeeze("columns").to_dict()

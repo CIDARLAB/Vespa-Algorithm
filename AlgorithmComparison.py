@@ -2,7 +2,7 @@ import time
 import networkx as nx
 import os
 import matplotlib.pyplot as plt
-from ConstraintFunctions import NodeGroupConstraintMatrixgenerator, updateGraphByNGConstraint, NodeGroupTruthTableBuilder, \
+from ConstraintFunctions import NodeGroupConstraintDictBuilder, updateGraphByNGConstraint, NodeGroupTruthTableBuilder, \
     Node_NG_Constraint_translater, findallConnectedNodes
 from collections import Counter
 pos = {}
@@ -130,13 +130,14 @@ def VeSpAGraphGenerator(table, nodes_group_list, vcofe, g):
                     if n[0] != 'c' or n[1] == 'o':
                         edge = vcofe[n]
                         edgerepeatflag = 0
+                        # avoid repeat
                         for e in edge_remove_list:
                             if Counter(e) == Counter(edge):
                                 edgerepeatflag = 1
                                 break
                         if len(edge_remove_list) == 0 or edgerepeatflag == 0:
                             edge_remove_list.append(edge)
-
+        # avoid repeat
         repeatflag = 0
         for e in edge_remove_listall:
             e1 = e.copy()
@@ -149,6 +150,7 @@ def VeSpAGraphGenerator(table, nodes_group_list, vcofe, g):
                 repeatflag = 1
         if repeatflag == 1:
             continue
+        # remove edges involved
         for e in edge_remove_list:
             for edge in g_VeSpA.edges():
                 if Counter(e) == Counter(edge):
@@ -181,12 +183,14 @@ def VeSpA_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen
     pos = position
     start = time.time()
 
-    # Create a constraint dictionary list represents the constraint equation in matrix way
-    Conflict, NGConstraintMatrix = NodeGroupConstraintMatrixgenerator(ConstraintList, g, g_c)
+    # Create a constraint dictionary list represents the constraint equation:
+    # Data structure: {'Type': 2, 'TruthTable': [[0, 0]], 'Nodes': [['co1'...], ['co3'...]]}
+    Conflict, NGConstraintDict = NodeGroupConstraintDictBuilder(ConstraintList, g, g_c)
+
     # update graph with removing the edges in constraint type 1
-    g, ConstraintMatrixNew = updateGraphByNGConstraint(VCO2FEdictionary, g, NGConstraintMatrix)
+    g, NGConstraintDictNew = updateGraphByNGConstraint(VCO2FEdictionary, g, NGConstraintDict)
     # generate all graphs satisfy the constraint type 2 as a list
-    Conflict, g_list, flagFalseNegative = enumerateVeSpAgraphs(g, ConstraintMatrixNew, VCO2FEdictionary, listlen)
+    Conflict, g_list, flagFalseNegative = enumerateVeSpAgraphs(g, NGConstraintDictNew, VCO2FEdictionary, listlen)
     if Conflict == 1:
         print("Constraint conflict 2!", ConstraintList)
         end = time.time()
