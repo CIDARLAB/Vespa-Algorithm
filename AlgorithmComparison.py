@@ -113,7 +113,8 @@ def astar_search(g, position, ur):
     return AstarTime, AstarPath, AstarLength
 
 
-# One row in the table means one graph
+# One row in the table means one graph, but some rows are different but have same edges to remove because some different nodes may locate in the same
+# edge, so the length of final graph list may longer than the table
 def VeSpAGraphGenerator(table, nodes_group_list, vcofe, g):
     g_list = []
     edge_remove_listall = []
@@ -173,9 +174,10 @@ def enumerateVeSpAgraphs(g, d, vcofe, listlen):
         return 1, []
     # create a truth table including all node groups according to the ConstraintGroupList
     conflict, table, fp = NodeGroupTruthTableBuilder(nodes_group_list, ConstraintNGList, listlen)
+    I_best = len(table)
     # Use the table to generate graphs which lose some edges compared with the original graph.
     g_list = VeSpAGraphGenerator(table, nodes_group_list, vcofe, g)
-    return conflict, g_list, fp
+    return conflict, g_list, fp, I_best
 
 
 def VeSpA_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen):
@@ -190,11 +192,11 @@ def VeSpA_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen
     # update graph with removing the edges in constraint type 1
     g, NGConstraintDictNew = updateGraphByNGConstraint(VCO2FEdictionary, g, NGConstraintDict)
     # generate all graphs satisfy the constraint type 2 as a list
-    Conflict, g_list, flagFalseNegative = enumerateVeSpAgraphs(g, NGConstraintDictNew, VCO2FEdictionary, listlen)
+    Conflict, g_list, flagFalseNegative, I_best = enumerateVeSpAgraphs(g, NGConstraintDictNew, VCO2FEdictionary, listlen)
     if Conflict == 1:
         print("Constraint conflict 2!", ConstraintList)
         end = time.time()
-        return end - start, [], -2, -1
+        return end - start, [], -2, -1, I_best
     VeSpAPathMin = []
     VeSpALengthMin = 0
     # If the list is too big, we can randomly choose 1000 graphs from the big list to speedup the procedure. (random way)
@@ -209,10 +211,10 @@ def VeSpA_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen
             VeSpALengthMin = VeSpALength
     end = time.time()
     if not VeSpAPathMin:
-        print(f"No such a path from {ur[0]} to {ur[1]} using VeSpA I={listlen} searching algorithm")
-        return end - start, [], -1, flagFalseNegative
+        # print(f"No such a path from {ur[0]} to {ur[1]} using VeSpA I={listlen} searching algorithm")
+        return end - start, [], -1, flagFalseNegative, I_best
     VeSpATime = end - start
-    return VeSpATime, VeSpAPathMin, VeSpALengthMin, flagFalseNegative
+    return VeSpATime, VeSpAPathMin, VeSpALengthMin, flagFalseNegative, I_best
 
 
 def control_search(path, dictionary):

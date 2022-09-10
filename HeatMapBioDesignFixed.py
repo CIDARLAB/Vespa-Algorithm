@@ -4,10 +4,11 @@
 # 1. Randomly choose a valve or other control component always be closed;
 # 2. Or two valve or other control component cannot be opened together
 
-from MetricsGenerator import calculate_false_pos
 from ConstraintMaker import createRandomConstraint
-import AlgorithmComparison
+from MetricsGenerator import calculate_false_pos
+from AlgorithmComparison import VeSpA_search, control_search, netxsp_search, astar_search, findall_control_path
 import random
+import csv
 import networkx as nx
 import os
 import pandas as pd
@@ -54,16 +55,16 @@ def locateValveAndCOonFE(vco_path):
 pos = {}
 if __name__ == '__main__':
     # Section loop
-    Result_list_metric = ["User Requirement", "Netx Shortest Path (Dijkstra) estimate", "A* estimate", "VeSpA 1 estimate", "VeSpA 100 estimate",
-                          "VeSpA INF estimate", "Netx Shortest Path (Dijkstra) success", "A* success", "VeSpA 1 success", "VeSpA 100 success",
-                          "VeSpA INF success", "Constraint List", "Netx Shortest Path (Dijkstra) control List", "A star control list",
-                          "VeSpA 1 control list", "VeSpA 100 control list", "VeSpA INF control list", "ConstraintNodesGroup",
-                          "Netx Shortest Path (Dijkstra) path", "A* path", "VeSpA 1 path", "VeSpA 100 path", "VeSpA INF path",
-                          "Netx Shortest Path (Dijkstra) path length", "A* path length", "VeSpA 1 path length", "VeSpA 100 path length",
-                          "VeSpA INF path length", "Netx Shortest Path (Dijkstra) runtime", "A* runtime", "VeSpA 1 runtime", "VeSpA 100 runtime",
-                          "VeSpA INF runtime", "Best I"]
+
+    Result_list_metric = []
+    a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800]
+    for i in a:
+        Result_list_metric.append(f"I={i} flag")
+    for i in a:
+        Result_list_metric.append(f"I={i} runtime")
+
     Result_list_cases = []
-    for i in range(1, 2):
+    for i in range(3, 4):
         Result_list_section = []
         path = f"RandomCaseFiles/Section_{i}"
         # Build a dictionary saved all edge info file names as value, keys are the nodes info
@@ -91,10 +92,11 @@ if __name__ == '__main__':
             while j < jUpperBound:
                 print(f"Sec{i}, Node{node_num}, Edge{int(j/3)+1}")
                 index = NodeInfo.index('_')
-                index1 = NodeInfo.find('_', index + 1)
+                index1 = NodeInfo.find('_', index+1)
                 index2 = GraphListInfo[j].find('_')
                 index0 = GraphListInfo[j].index('|')
-                ColumnDetail.append(f"Sec{i}|{NodeInfo[:index1]}|{GraphListInfo[j][:index0]}_{GraphListInfo[j][index0 + 1:index2]}")
+                ColumnDetail.append(f"Sec{i}|{NodeInfo[:index1]}|{GraphListInfo[j][:index0]}_{GraphListInfo[j][index0+1:index2]}")
+                print(ColumnDetail[-1])
                 # remark = GraphListInfo[j][6]
                 control_graph_path = f"{path}/{NodeInfo}/{GraphListInfo[j]}"
                 flow_graph_path = f"{path}/{NodeInfo}/{GraphListInfo[j + 1]}"
@@ -114,9 +116,10 @@ if __name__ == '__main__':
                     if node[0] == 'c' and node[1] != 'o':
                         CPlength += 1
                 VandCOlength = len(ControlNodes) - CPlength
+
                 # Constraint bound for each section: [1, 5, 10, 15]
                 upboundconstraint = [1, 5, 10, 15]
-                ConstraintNum = random.randint(upboundconstraint[i - 1], upboundconstraint[i])
+                ConstraintNum = random.randint(upboundconstraint[i-1], upboundconstraint[i])
 
                 # if no constraint list given, just generate a new one
                 if ConstraintEmptyFlag != 0:
@@ -129,54 +132,48 @@ if __name__ == '__main__':
 
                 # Algorithm comparison, set ur as ['f1', 'f2']
                 ur = ['f1', 'f2']
-                NetxSPTime, NetxSPPath, NetxSPLength = AlgorithmComparison.netxsp_search(g, ur)
-                AstarTime, AstarPath, AstarLength = AlgorithmComparison.astar_search(g, pos, ur)
+
+                NetxSPTime, NetxSPPath, NetxSPLength = netxsp_search(g, ur)
+                AstarTime, AstarPath, AstarLength = astar_search(g, pos, ur)
+                NetxSPVCOList = control_search(NetxSPPath, FE2VCOdictionary)
+                AstarVCOList = control_search(AstarPath, FE2VCOdictionary)
+                NetxSPControlNodeList, NetxSPControlEdgeList = findall_control_path(NetxSPVCOList, g_c)
+                AstarControlNodeList, AstarControlEdgeList = findall_control_path(AstarVCOList, g_c)
+                PathLength = [NetxSPLength, AstarLength]
+                CtrlNodeLists = [NetxSPControlNodeList, AstarControlNodeList]
 
                 # Update the flow edge info after we get RandomConstraintList and use it in VeSpA_search
-                g_VeSpA = g.copy()
-                VeSpATime1, VeSpAPath1, VeSpALength1, flagFalseNegative1, _ = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
-                                                                                                            ConstraintList, VCO2FEdictionary, ur, 1)
-                g_VeSpA = g.copy()
-                VeSpATime2, VeSpAPath2, VeSpALength2, flagFalseNegative2, _ = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
-                                                                                                            ConstraintList, VCO2FEdictionary, ur, 100)
-                g_VeSpA = g.copy()
-                VeSpATime, VeSpAPath, VeSpALength, flagFalseNegative, I_best = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
-                                                                                                        ConstraintList, VCO2FEdictionary, ur, 0)
+                VespaTime = []
+                flagFN = []
+                for ii in a:
+                    g_VeSpA = g.copy()
+                    VeSpATimeii, VeSpAPathii, VeSpALengthii, flag, _ = VeSpA_search(g_VeSpA, g_c, pos, ConstraintList, VCO2FEdictionary, ur, ii)
+                    # Find all valves and other control components which may be involved giving the searched path
+                    VeSpAVCOList = control_search(VeSpAPathii, FE2VCOdictionary)
+                    VeSpAControlNodeList, VeSpAControlEdgeList = findall_control_path(VeSpAVCOList, g_c)
 
-                # Find all valves and other control components which may be involved giving the searched path
-                NetxSPVCOList = AlgorithmComparison.control_search(NetxSPPath, FE2VCOdictionary)
-                AstarVCOList = AlgorithmComparison.control_search(AstarPath, FE2VCOdictionary)
-                VeSpAVCOList1 = AlgorithmComparison.control_search(VeSpAPath1, FE2VCOdictionary)
-                VeSpAVCOList2 = AlgorithmComparison.control_search(VeSpAPath2, FE2VCOdictionary)
-                VeSpAVCOList = AlgorithmComparison.control_search(VeSpAPath, FE2VCOdictionary)
+                    # add middle products into list
+                    VespaTime.append(format(VeSpATimeii, '.5f'))
+                    PathLength.append(VeSpALengthii)
+                    flagFN.append(flag)
+                    CtrlNodeLists.append(VeSpAControlNodeList)
 
-                # Find all control edges and control ports being searched in the path
-                NetxSPControlNodeList, NetxSPControlEdgeList = AlgorithmComparison.findall_control_path(NetxSPVCOList, g_c)
-                AstarControlNodeList, AstarControlEdgeList = AlgorithmComparison.findall_control_path(AstarVCOList, g_c)
-                VeSpAControlNodeList1, VeSpAControlEdgeList1 = AlgorithmComparison.findall_control_path(VeSpAVCOList1, g_c)
-                VeSpAControlNodeList2, VeSpAControlEdgeList2 = AlgorithmComparison.findall_control_path(VeSpAVCOList2, g_c)
-                VeSpAControlNodeList, VeSpAControlEdgeList = AlgorithmComparison.findall_control_path(VeSpAVCOList, g_c)
-
-                # Calculate the false positive rate for each algorithm
-                l, t, nodeslist = calculate_false_pos([NetxSPLength, AstarLength, VeSpALength1, VeSpALength2, VeSpALength], ConstraintList,
-                                                      [NetxSPControlNodeList, AstarControlNodeList, VeSpAControlNodeList1, VeSpAControlNodeList2, VeSpAControlNodeList],
-                                                      g_c, [flagFalseNegative1, flagFalseNegative2, flagFalseNegative])
-
-                l_currentcase = [ur, l[0], l[1], l[2], l[3], l[4], t[0], t[1], t[2], t[3], t[4], ConstraintList, NetxSPControlNodeList,
-                                 AstarControlNodeList, VeSpAControlNodeList1, VeSpAControlNodeList2, VeSpAControlNodeList,
-                                 nodeslist, NetxSPPath, AstarPath, VeSpAPath1, VeSpAPath2, VeSpAPath, NetxSPLength,
-                                 AstarLength, VeSpALength1, VeSpALength2, VeSpALength, format(NetxSPTime, '.5f'), format(AstarTime, '.5f'),
-                                 format(VeSpATime1, '.5f'), format(VeSpATime2, '.5f'), format(VeSpATime, '.5f'), I_best]
+                # Calculate the false positive for each algorithm
+                l, t, nodeslist = calculate_false_pos(PathLength, ConstraintList, CtrlNodeLists, g_c, flagFN)
+                l_currentcase = t[2:] + VespaTime
                 Result_list_section.append(l_currentcase)
                 j += 3
                 print()
+            f = open(constraint_path, 'w', newline='')
+            z = csv.writer(f)
+            for k, v in ConstraintInfoAll.items():
+                z.writerow([k, v])
+            f.close()
 
-        # NaiveFPR, DijkstraFPR, AstarFPR = calculate_false_pos_rate(Result_list_section) !!!!*****@!!!
-        # Result_list_cases.extend(Result_list_section)
-
-        outcsvpath = f"TestCaseFiles/csv_1_100_inf/benchmark-{i}.csv"
+        outcsvpath = f"TestCaseFiles/DataCollector/benchmark-{i}.csv"
         dictionary = dict(zip(ColumnDetail, Result_list_section))
         with open(outcsvpath, 'w', newline='') as f:
             dataframe = pd.DataFrame.from_dict(dictionary, orient='index', columns=Result_list_metric)
             dataframe.to_csv(outcsvpath)
             print()
+            f.close()

@@ -1,7 +1,7 @@
 import networkx as nx
 from networkx.drawing.nx_agraph import read_dot
 from collections import Counter
-import test
+import testcode
 
 
 def findallConnectedNodes(node, edges):
@@ -134,7 +134,7 @@ def Node_NG_Constraint_translater(d):
 
 # use recursion to create truth table
 def createTruthTable(t, l, i, tab, cl, listlen, fp):
-    if len(tab) >= listlen:
+    if len(tab) >= listlen != 0:
         return t, tab, 1
     if i == len(l):
         v = list(t.values())

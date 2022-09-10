@@ -1,5 +1,5 @@
-from ConstraintFunctions import findallConnectedNodes
-from TestAlgorithm import getfileList, buildFlowGraph, locateValveAndCOonFE, fp_flag, checkandappend, calculate_false_pos_rate
+from TestAlgorithm import buildFlowGraph, locateValveAndCOonFE
+from MetricsGenerator import calculate_false_pos
 import AlgorithmComparison
 import pandas as pd
 from networkx.drawing.nx_agraph import read_dot
@@ -8,15 +8,15 @@ from networkx.drawing.nx_agraph import read_dot
 pos = {}
 if __name__ == '__main__':
     # Section loop
-    Result_list_metric = ["User Requirement", "Netx Shortest Path (Dijkstra) estimate", "A* estimate", "VeSpA 2 estimate", "VeSpA 20 estimate",
-                          "VeSpA 200 estimate", "Netx Shortest Path (Dijkstra) success", "A* success", "VeSpA 2 success", "VeSpA 20 success", "VeSpA 200 success",
-                          "Constraint List", "Netx Shortest Path (Dijkstra) control List", "A star control list", "VeSpA 2 control list",
-                          "VeSpA 20 control list", "VeSpA 200 control list", "ConstraintNodesGroup", "Netx Shortest Path (Dijkstra) path", "A* path",
-                          "VeSpA 2 path", "VeSpA 20 path", "VeSpA 200 path", "Netx Shortest Path (Dijkstra) path length", "A* path length",
-                          "VeSpA 2 path length", "VeSpA 20 path length", "VeSpA 200 path length", "Netx Shortest Path (Dijkstra) runtime", "A* runtime",
-                          "VeSpA 2 runtime", "VeSpA 20 runtime", "VeSpA 200 runtime"]
+    Result_list_metric = ["User Requirement", "Netx Shortest Path (Dijkstra) estimate", "A* estimate", "VeSpA 1 estimate", "VeSpA 100 estimate",
+                          "VeSpA INF estimate", "Netx Shortest Path (Dijkstra) success", "A* success", "VeSpA 1 success", "VeSpA 100 success",
+                          "VeSpA INF success", "Constraint List", "Netx Shortest Path (Dijkstra) control List", "A star control list",
+                          "VeSpA 1 control list", "VeSpA 100 control list", "VeSpA INF control list", "ConstraintNodesGroup",
+                          "Netx Shortest Path (Dijkstra) path", "A* path", "VeSpA 1 path", "VeSpA 100 path", "VeSpA INF path",
+                          "Netx Shortest Path (Dijkstra) path length", "A* path length", "VeSpA 1 path length", "VeSpA 100 path length",
+                          "VeSpA INF path length", "Netx Shortest Path (Dijkstra) runtime", "A* runtime", "VeSpA 1 runtime", "VeSpA 100 runtime",
+                          "VeSpA INF runtime", "Best I"]
     Result_list_cases = []
-    column = []
     for i in range(1, 7):
         Result_list_section = []
         path = f"TestCaseFiles/lrb"
@@ -53,14 +53,14 @@ if __name__ == '__main__':
 
                 # Update the flow edge info after we get RandomConstraintList and use it in VeSpA_search
                 g_VeSpA = g.copy()
-                VeSpATime1, VeSpAPath1, VeSpALength1, flagFalseNegative1 = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
-                                                                                ConstraintList, VCO2FEdictionary, uri, 2)
+                VeSpATime1, VeSpAPath1, VeSpALength1, flagFalseNegative1, _ = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
+                                                                                ConstraintList, VCO2FEdictionary, uri, 1)
                 g_VeSpA = g.copy()
-                VeSpATime2, VeSpAPath2, VeSpALength2, flagFalseNegative2 = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
-                                                                                                    ConstraintList, VCO2FEdictionary, uri, 20)
+                VeSpATime2, VeSpAPath2, VeSpALength2, flagFalseNegative2, _ = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
+                                                                                                    ConstraintList, VCO2FEdictionary, uri, 100)
                 g_VeSpA = g.copy()
-                VeSpATime, VeSpAPath, VeSpALength, flagFalseNegative = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
-                                                                                                    ConstraintList, VCO2FEdictionary, uri, 200)
+                VeSpATime, VeSpAPath, VeSpALength, flagFalseNegative, I_best = AlgorithmComparison.VeSpA_search(g_VeSpA, g_c, pos,
+                                                                                                    ConstraintList, VCO2FEdictionary, uri, 0)
 
                 # Find all valves and other control components which are involved in the searching path
                 NetxSPVCOList = AlgorithmComparison.control_search(NetxSPPath, FE2VCOdictionary)
@@ -72,26 +72,27 @@ if __name__ == '__main__':
                 # Find all control edges and control ports being searched in the path
                 NetxSPControlNodeList, NetxSPControlEdgeList = AlgorithmComparison.findall_control_path(NetxSPVCOList, g_c)
                 AstarControlNodeList, AstarControlEdgeList = AlgorithmComparison.findall_control_path(AstarVCOList, g_c)
-                VeSpAControlNodeList5, VeSpAControlEdgeList5 = AlgorithmComparison.findall_control_path(VeSpAVCOList1, g_c)
+                VeSpAControlNodeList1, VeSpAControlEdgeList1 = AlgorithmComparison.findall_control_path(VeSpAVCOList1, g_c)
                 VeSpAControlNodeList2, VeSpAControlEdgeList2 = AlgorithmComparison.findall_control_path(VeSpAVCOList2, g_c)
                 VeSpAControlNodeList, VeSpAControlEdgeList = AlgorithmComparison.findall_control_path(VeSpAVCOList, g_c)
 
                 # Calculate the false positive rate for each algorithm
-                Nr, Ar, Br1, Br2, Br3, t1, t2, t3, t4, t5, nodeslist = calculate_false_pos_rate(NetxSPLength, AstarLength,
-                VeSpALength1, VeSpALength2, VeSpALength, ConstraintList, NetxSPControlNodeList, AstarControlNodeList,
-                VeSpAControlNodeList5, VeSpAControlNodeList2, VeSpAControlNodeList, g_c, flagFalseNegative1, flagFalseNegative2, flagFalseNegative)
+                l, t, nodeslist = calculate_false_pos([NetxSPLength, AstarLength, VeSpALength1, VeSpALength2, VeSpALength], ConstraintList,
+                                                      [NetxSPControlNodeList, AstarControlNodeList, VeSpAControlNodeList1, VeSpAControlNodeList2,
+                                                       VeSpAControlNodeList],
+                                                      g_c, [flagFalseNegative1, flagFalseNegative2, flagFalseNegative])
 
-                l_currentcase = [uri, Nr, Ar, Br1, Br2, Br3, t1, t2, t3, t4, t5, ConstraintList, NetxSPControlNodeList,
-                                 AstarControlNodeList, VeSpAControlNodeList5, VeSpAControlNodeList2, VeSpAControlNodeList,
+                l_currentcase = [uri, l[0], l[1], l[2], l[3], l[4], t[0], t[1], t[2], t[3], t[4], ConstraintList, NetxSPControlNodeList,
+                                 AstarControlNodeList, VeSpAControlNodeList1, VeSpAControlNodeList2, VeSpAControlNodeList,
                                  nodeslist, NetxSPPath, AstarPath, VeSpAPath1, VeSpAPath2, VeSpAPath, NetxSPLength,
-                                 AstarLength, VeSpALength1, VeSpALength2, VeSpALength, NetxSPTime, AstarTime, VeSpATime1, VeSpATime2,
-                                 VeSpATime]
+                                 AstarLength, VeSpALength1, VeSpALength2, VeSpALength, format(NetxSPTime, '.5f'), format(AstarTime, '.5f'),
+                                 format(VeSpATime1, '.5f'), format(VeSpATime2, '.5f'), format(VeSpATime, '.5f'), I_best]
                 Result_list_section.append(l_currentcase)
 
         # NetxSPFPR, DijkstraFPR, AstarFPR = calculate_false_pos_rate(Result_list_section) !!!!*****@!!!
         # Result_list_cases.extend(Result_list_section)
 
-        outcsvpath = f"TestCaseFiles/lrb{i}.csv"
+        outcsvpath = f"TestCaseFiles/lrb/lrb{i}.csv"
         dictionary = dict(zip(column, Result_list_section))
         with open(outcsvpath, 'w', newline='') as f:
             dataframe = pd.DataFrame.from_dict(dictionary, orient='index', columns=Result_list_metric)

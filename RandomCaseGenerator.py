@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import networkx as nx
-import test
+import random
+import pydot
 from networkx.drawing.nx_pydot import write_dot
 from collections import Counter
 import os
@@ -19,17 +20,17 @@ def createVertexList(nodeinfo, typeinfo):
     return Vertexlist
 
 
-def generateRandomNodeInfo(ComplexityUpperBound):
+def generateRandomNodeInfo(ComplexityUpperBound, ConstraintLowerBound):
     # randomly choose the total number N of nodes
-    N = test.randint(4, int(ComplexityUpperBound / 2) - 1)
-    # randomly choose number Nf for flow-layer components, Nv for valves and Nc for control-layer, Nv can be 0
-    Nf = test.randint(2, N - 2)
-    Nc = N - Nf
-    Nv = test.randint(1, Nc - 1)
+    N = random.randint(2 * ConstraintLowerBound + 2, int(ComplexityUpperBound / 2) - 1)
+    # randomly choose number Nc for ctrl-layer components, Nv for valves and Nf for flow ports (at least 2), Nv can be 0
+    Nc = random.randint(2 * ConstraintLowerBound, N - 2)
+    Nf = N - Nc
+    Nv = random.randint(1, Nc - 1)
     # decide number for Nfp, Nfo, Ncp, Nco
-    Nfp = test.randint(2, Nf)
+    Nfp = random.randint(2, Nf)
     Nfo = Nf - Nfp
-    Ncp = test.randint(1, Nc - Nv)
+    Ncp = random.randint(1, Nc - Nv)
     Nco = Nc - Ncp - Nv
     return [N, Nf, Nc, Nfp, Nfo, Ncp, Nv, Nco]
 
@@ -57,17 +58,17 @@ def createFlowEdge(ENf):
             NodeType1 = "fo"
             NodeNum1 = FOflag + 1
         else:
-            NodeType1Num = test.randint(0, len(FlowTypeList) - 1)
+            NodeType1Num = random.randint(0, len(FlowTypeList) - 1)
             if FlowNodeInfo[NodeType1Num] < 1:
                 continue
             NodeType1 = FlowTypeList[NodeType1Num]
-            NodeNum1 = test.randint(1, FlowNodeInfo[NodeType1Num])
+            NodeNum1 = random.randint(1, FlowNodeInfo[NodeType1Num])
 
-        NodeType2Num = test.randint(0, len(FlowTypeList) - 1)
+        NodeType2Num = random.randint(0, len(FlowTypeList) - 1)
         if FlowNodeInfo[NodeType2Num] < 1:
             continue
         NodeType2 = FlowTypeList[NodeType2Num]
-        NodeNum2 = test.randint(1, FlowNodeInfo[NodeType2Num])
+        NodeNum2 = random.randint(1, FlowNodeInfo[NodeType2Num])
 
         Node1 = f"{NodeType1}{NodeNum1}"
         Node2 = f"{NodeType2}{NodeNum2}"
@@ -108,6 +109,7 @@ def createControlEdge(ENc):
             break
         # each control component should be one node of an edge and the other node is control port in need.
         # one co may connect to many control ports
+        NodeType2Num = 0
         if Vflag < ControlNodeInfo[1] or COflag < ControlNodeInfo[2]:
             if Vflag < ControlNodeInfo[1]:
                 NodeType1 = "v"
@@ -119,19 +121,19 @@ def createControlEdge(ENc):
             NodeType2Num = 0
 
         else:
-            NodeType1Num = test.randint(0, len(ControlTypeList) - 1)
+            NodeType1Num = random.randint(0, len(ControlTypeList) - 1)
             if ControlNodeInfo[NodeType1Num] < 1:
                 continue
             NodeType1 = ControlTypeList[NodeType1Num]
-            NodeNum1 = test.randint(1, ControlNodeInfo[NodeType1Num])
+            NodeNum1 = random.randint(1, ControlNodeInfo[NodeType1Num])
             # two control ports are not allowed to connect as an edge
             if NodeType1Num == 0:
-                NodeType2Num = test.randint(1, len(ControlTypeList) - 1)
+                NodeType2Num = random.randint(1, len(ControlTypeList) - 1)
 
         if ControlNodeInfo[NodeType2Num] < 1:
             continue
         NodeType2 = ControlTypeList[NodeType2Num]
-        NodeNum2 = test.randint(1, ControlNodeInfo[NodeType2Num])
+        NodeNum2 = random.randint(1, ControlNodeInfo[NodeType2Num])
 
         Node1 = f"{NodeType1}{NodeNum1}"
         Node2 = f"{NodeType2}{NodeNum2}"
@@ -159,7 +161,7 @@ def createControlEdge(ENc):
     return control_edge_list
 
 
-def createNumberOfFlowAndControlEdge(EdgeNum):
+def createNumberOfFlowAndControlEdge(EdgeNum, lb):
     ENf = 0
     ENc = 0
     iterate = 0
@@ -167,10 +169,10 @@ def createNumberOfFlowAndControlEdge(EdgeNum):
         iterate += 1
         if iterate > 200:
             break
-        ENfUpperBound = min(int(Nf * (Nf - 1) / 2), EdgeNum - Nco - Nv)
+        ENfUpperBound = min(Nf + 1, EdgeNum - Nco - Nv)
         if Nf - 1 >= ENfUpperBound:
             continue
-        ENf = test.randint(Nf, ENfUpperBound)
+        ENf = random.randint(Nf-1, ENfUpperBound)
         ENc = EdgeNum - ENf
         if ENc > 0 and ENc in range(Nco + Nv, int(Nc * (Nc - 1) / 2)):
             break
@@ -204,21 +206,21 @@ def plotAndSave(SectionNum, flow_edge_list, control_edge_list, CurrentNodeInfo, 
     valve_list = control_node_list[CurrentNodeInfo[5]:CurrentNodeInfo[5]+CurrentNodeInfo[6]]
     co_list = control_node_list[CurrentNodeInfo[5]+CurrentNodeInfo[6]:]
     for i in range(CurrentNodeInfo[6]):
-        valve_location = test.randint(0, len(flow_edge_list) - 1)
+        valve_location = random.randint(0, len(flow_edge_list) - 1)
         valve_relationship = [valve_list[i]] + flow_edge_list[valve_location][0:2]
         ValveCOLocateList.append(valve_relationship)
 
     for i in range(CurrentNodeInfo[7]):
-        co_location = test.randint(0, len(flow_edge_list) - 1)
+        co_location = random.randint(0, len(flow_edge_list) - 1)
         co_relationship = [co_list[i]] + flow_edge_list[co_location][0:2]
         ValveCOLocateList.append(co_relationship)
 
     str1 = '_'.join(str(v) for v in CurrentNodeInfo)
     str2 = '_'.join(str(v) for v in CurrentEdgeInfo)
-    folder_path = f"RandomCaseFiles/Section_{SectionNum}/Node{nodenum}_{str1}"
-    outpath_v = f"RandomCaseFiles/Section_{SectionNum}/Node{nodenum}_{str1}/Edge{edgenum}|{str2}_valve&co.txt"
-    outpath_c = f"RandomCaseFiles/Section_{SectionNum}/Node{nodenum}_{str1}/Edge{edgenum}|{str2}_control.dot"
-    outpath_f = f"RandomCaseFiles/Section_{SectionNum}/Node{nodenum}_{str1}/Edge{edgenum}|{str2}_flow.dot"
+    folder_path = f"RandomCaseFiles/backup/Section_{SectionNum}/Node{nodenum}_{str1}"
+    outpath_v = f"RandomCaseFiles/backup/Section_{SectionNum}/Node{nodenum}_{str1}/Edge{edgenum}|{str2}_valve&co.txt"
+    outpath_c = f"RandomCaseFiles/backup/Section_{SectionNum}/Node{nodenum}_{str1}/Edge{edgenum}|{str2}_control.dot"
+    outpath_f = f"RandomCaseFiles/backup/Section_{SectionNum}/Node{nodenum}_{str1}/Edge{edgenum}|{str2}_flow.dot"
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
     write_dot(g_flow, outpath_f)
@@ -241,18 +243,20 @@ def plotAndSave(SectionNum, flow_edge_list, control_edge_list, CurrentNodeInfo, 
     plt.show()
 
 
-# complexity bound for each section: [0, 40, 100, 500, inf]
-# for section 4, the upperbound of loop var flag and iteration is 4 times bigger than previous ones
+# complexity bound for each section: [0, 100, 500, inf]
+# Constraint bound for each section: [1, 5, 10, 15]
+# for section 3, the upperbound of loop var flag and iteration is 3 times bigger than previous ones
 if __name__ == '__main__':
 
-    SectionNum = 4
-    ComplexityLowerBound, ComplexityUpperBound = 501, 1000
+    SectionNum = 3
+    ComplexityLowerBound, ComplexityUpperBound = 500, 1000
+    ConstraintLowerBound, ConstraintUpperBound = 10, 15
     FlowTypeList = ["f", "fo"]
     ControlTypeList = ["c", "v", "co"]
     NodeGroupNum = 1
     NodeList = []
-    while NodeGroupNum <= 25:
-        [N, Nf, Nc, Nfp, Nfo, Ncp, Nv, Nco] = generateRandomNodeInfo(ComplexityUpperBound)
+    while NodeGroupNum <= 5:
+        [N, Nf, Nc, Nfp, Nfo, Ncp, Nv, Nco] = generateRandomNodeInfo(ComplexityUpperBound, ConstraintLowerBound)
         CurrentNodeInfo = [N, Nf, Nc, Nfp, Nfo, Ncp, Nv, Nco]
         if CurrentNodeInfo in NodeList:
             continue
@@ -268,7 +272,7 @@ if __name__ == '__main__':
         EdgeListAll = []
         flow_edge_listAll = []
         control_edge_listAll = []
-        while EdgeGroupNum <= 8:
+        while EdgeGroupNum <= 10:
             flag += 1
             if flag > 2000:
                 break
@@ -280,8 +284,8 @@ if __name__ == '__main__':
                 continue
 
             # randomly choose number of flow and control edges, and create flow and control edges in detail
-            EdgeNum = test.randint(EdgeNumLowerBound, EdgeNumUpperBound)
-            iterate, ENf, ENc = createNumberOfFlowAndControlEdge(EdgeNum)
+            EdgeNum = random.randint(EdgeNumLowerBound, EdgeNumUpperBound)
+            iterate, ENf, ENc = createNumberOfFlowAndControlEdge(EdgeNum, ConstraintLowerBound)
             if iterate > 200:
                 continue
             flow_edge_list = createFlowEdge(ENf)

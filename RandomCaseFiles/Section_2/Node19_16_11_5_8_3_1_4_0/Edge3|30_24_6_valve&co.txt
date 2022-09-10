@@ -1,4 +1,0 @@
-v1 fo1 f1
-v2 f6 fo1
-v3 f6 fo1
-v4 f8 fo1
