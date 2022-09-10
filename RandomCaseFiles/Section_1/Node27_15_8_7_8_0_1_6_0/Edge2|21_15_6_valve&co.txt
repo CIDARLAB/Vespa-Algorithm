@@ -1,0 +1,6 @@
+v1 f2 f3
+v2 f5 f7
+v3 f5 f4
+v4 f7 f3
+v5 f7 f6
+v6 f5 f7

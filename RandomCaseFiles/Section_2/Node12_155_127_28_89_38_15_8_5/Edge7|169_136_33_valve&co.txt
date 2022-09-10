@@ -1,0 +1,13 @@
+v1 f61 fo2
+v2 f80 f2
+v3 f22 fo24
+v4 f13 fo18
+v5 fo15 f85
+v6 fo1 f7
+v7 f76 fo1
+v8 f27 f37
+co1 fo6 f3
+co2 f53 f59
+co3 f12 fo37
+co4 f77 fo35
+co5 f81 fo10

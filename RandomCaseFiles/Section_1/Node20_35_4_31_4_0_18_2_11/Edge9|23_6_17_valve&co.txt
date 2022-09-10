@@ -1,0 +1,13 @@
+v1 f3 f1
+v2 f4 f3
+co1 f3 f2
+co2 f4 f3
+co3 f3 f1
+co4 f1 f4
+co5 f2 f4
+co6 f4 f3
+co7 f2 f1
+co8 f3 f1
+co9 f3 f1
+co10 f3 f2
+co11 f1 f4

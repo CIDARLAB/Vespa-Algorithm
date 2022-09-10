@@ -1,0 +1,15 @@
+v1 f54 f28
+v2 fo21 f68
+v3 f78 fo42
+v4 fo9 fo24
+v5 fo54 f63
+v6 fo5 f16
+v7 f1 f53
+v8 f7 f34
+v9 fo3 f53
+v10 f28 f27
+v11 f44 fo58
+v12 fo14 f37
+v13 fo30 fo43
+v14 f53 fo25
+co1 fo10 fo52

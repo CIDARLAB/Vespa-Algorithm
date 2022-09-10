@@ -1,0 +1,10 @@
+v1 fo45 f6
+v2 fo39 fo34
+v3 fo14 f6
+v4 fo29 f3
+v5 fo18 f2
+v6 fo10 fo14
+v7 fo4 fo26
+v8 fo20 f11
+v9 fo11 f11
+v10 fo23 f6
