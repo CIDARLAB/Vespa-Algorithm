@@ -23,7 +23,7 @@ for i in range(1, 4):
     for pi in p:
         count += 1
         a.append(pi)
-        if count == 10:
+        if count == 20:
             p_10.append(mean(a))
             a = []
             count = 0

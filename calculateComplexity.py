@@ -67,7 +67,7 @@ folder_path = f"RandomCaseFiles/"
 #         for ii in edge_num_e:
 #             f.writelines(f"{ii}\n")
 
-# Print 4 * 20 * 10 graph info
+# Print 3 * 20 * 15 graph info
 print()
 node_num_cluster = []
 edge_num_cluster = []
@@ -77,21 +77,21 @@ for node_num in node_num_all:
     for ii in node_num:
         count += 10
         a.append(ii)
-        if count >= 10:
+        if count >= 20:
             node_num_cluster.append(a)
-            if count != 10:
+            if count != 20:
                 k = a[-1]
                 a = [k]
             else:
                 a = []
-            count -= 10
+            count -= 20
 a = []
 count = 0
 for edge_num in edge_num_all:
     for ii in edge_num:
         count += 1
         a.append(ii)
-        if count == 10:
+        if count == 20:
             edge_num_cluster.append(a)
             count = 0
             a = []
