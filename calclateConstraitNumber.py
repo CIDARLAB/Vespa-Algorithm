@@ -6,7 +6,7 @@ import pandas as pd
 # average constraint numbers of four benchmark sections
 pp = []
 # average every 10 constraints numbers and add the avg number into one list p_10
-p_10 = []
+p_20 = []
 for i in range(1, 4):
     # path = f"TestCaseFiles/lrb/URC/Constraint_UR_lrb{i}.csv"
     path = f"RandomCaseFiles/Constraint_b{i}.csv"
@@ -24,12 +24,12 @@ for i in range(1, 4):
         count += 1
         a.append(pi)
         if count == 20:
-            p_10.append(mean(a))
+            p_20.append(mean(a))
             a = []
             count = 0
     pp.append(round(mean(p), 2))
     print(p)
-print(p_10)
+print(p_20)
 folder_path = f"RandomCaseFiles/"
 outpath = f"{folder_path}/ConstraintInfo.csv"
 if not os.path.exists(folder_path):

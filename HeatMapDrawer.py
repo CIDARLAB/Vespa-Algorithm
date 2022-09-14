@@ -34,15 +34,16 @@ df = pd.read_csv(path1, index_col=0)
 
 df = df.iloc[::-1]
 f, ax = plt.subplots(figsize=(30, 20))
-sns.set(font_scale=2)
+sns.set(font_scale=4)
 ax = sns.heatmap(df, cmap="YlGnBu_r", cbar_kws={'label': 'Error Rate'})
 # ax = sns.heatmap(df, cmap="YlGnBu_r", vmax=1000, cbar_kws={'label': 'Avg. Run Time'})
 # ax.set_title('Heatmap of the error rate between Complexity / Constraint Number and Super Parameter I', fontsize=20)
 
-ax.set_xticklabels(ax.get_xmajorticklabels(), fontsize=30)
-ax.set_yticklabels(ax.get_ymajorticklabels(), fontsize=30)
+ax.set_xticklabels(ax.get_xmajorticklabels(), fontsize=20)
+ax.set_yticklabels(ax.get_ymajorticklabels(), fontsize=20)
 ax.set_xlabel('Super Parameter: I (Small $\\rightarrow$ Large)', fontsize=35)
-ax.set_ylabel('Complexity / Constraint Number (Small $\\rightarrow$ Large)', fontsize=35)
+ax.set_ylabel('Complexity / Constraint Number (Small $\\rightarrow$ Large Complexity)', fontsize=35)
+plt.yticks(rotation=0)
 # plt.show()
 # ax.set(xlabel='Super Parameter: I', ylabel='Avg. Constraint Number')
 outputpath1 = f"TestCaseFiles/DataCollector/heatmap_erC.png"

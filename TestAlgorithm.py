@@ -61,7 +61,7 @@ if __name__ == '__main__':
                           "Netx Shortest Path (Dijkstra) path", "A* path", "VeSpA 1 path", "VeSpA 100 path", "VeSpA INF path",
                           "Netx Shortest Path (Dijkstra) path length", "A* path length", "VeSpA 1 path length", "VeSpA 100 path length",
                           "VeSpA INF path length", "Netx Shortest Path (Dijkstra) runtime", "A* runtime", "VeSpA 1 runtime", "VeSpA 100 runtime",
-                          "VeSpA INF runtime", "Best I"]
+                          "VeSpA INF runtime", "MIN I"]
     Result_list_cases = []
     for i in range(1, 2):
         Result_list_section = []
