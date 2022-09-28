@@ -17,7 +17,7 @@ if __name__ == '__main__':
                           "VeSpA INF path length", "Netx Shortest Path (Dijkstra) runtime", "A* runtime", "VeSpA 1 runtime", "VeSpA 100 runtime",
                           "VeSpA INF runtime", "Best I"]
     Result_list_cases = []
-    for i in range(1, 7):
+    for i in range(2, 3):
         Result_list_section = []
         path = f"TestCaseFiles/lrb"
         control_graph_path = f"{path}/graph_info/lrb{i}_control.dot"

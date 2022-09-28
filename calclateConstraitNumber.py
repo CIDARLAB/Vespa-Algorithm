@@ -35,5 +35,5 @@ outpath = f"{folder_path}/ConstraintInfo.csv"
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 with open(outpath, 'w') as f:
-    for ii in p_10:
+    for ii in p_20:
         f.writelines(f"{ii}\n")
