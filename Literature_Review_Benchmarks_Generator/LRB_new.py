@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import networkx as nx
 import os
 from networkx.drawing.nx_pydot import write_dot
@@ -90,9 +91,9 @@ g_control.add_weighted_edges_from(control_edge_list)
 
 folder_path = "../TestCaseFiles/lrb/"
 
-outpath1 = f"{folder_path}/lrb6_control.dot"
-outpath2 = f"{folder_path}/lrb6_flow.dot"
-outpath = f"{folder_path}/lrb6_ValveLocation.txt"
+outpath1 = f"{folder_path}/lrb_new_control.dot"
+outpath2 = f"{folder_path}/lrb_new_flow.dot"
+outpath = f"{folder_path}/lrb_new_ValveLocation.txt"
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 

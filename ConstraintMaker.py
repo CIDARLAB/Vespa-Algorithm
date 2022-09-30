@@ -1,5 +1,3 @@
-import networkx as nx
-from networkx.drawing.nx_agraph import read_dot
 from collections import Counter
 import random
 

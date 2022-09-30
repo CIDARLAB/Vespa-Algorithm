@@ -4,120 +4,97 @@
 <!--[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 -->
 
-1. Overview
-2. How to install or download the algorithm
-3. Usage
-
-
-
-We provide the code for generating random benchmarks, and 900 random generated benchmarks
-
-1. [The specification](spec.md) for how a standard README should look.
-2. A link to [a linter](https://github.com/RichardLitt/standard-readme-preset) you can use to keep your README maintained ([work in progress](https://github.com/RichardLitt/standard-readme/issues/5)).
-3. A link to [a generator](https://github.com/RichardLitt/generator-standard-readme) you can use to create standard READMEs.
-4. [A badge](#badge) to point to this spec.
-5. [Examples of standard READMEs](example-readmes/) - such as this file you are reading.
-
-Standard Readme is designed for open source libraries. Although it’s [historically](#background) made for Node and npm projects, it also applies to libraries in other languages and package managers.
-
-
 ## Table of Contents
 
-- [Background](#background)
+- [Overview](#overview)
 - [Install](#install)
 - [Usage](#usage)
-	- [Generator](#generator)
-- [Badge](#badge)
-- [Example Readmes](#example-readmes)
-- [Related Efforts](#related-efforts)
+	- [Random Benchmarks](#random)
+    - [Literature Benchmarks](#literature)
 - [Maintainers](#maintainers)
 - [Contributing](#contributing)
+    - [Contributors](#contributors)
 - [License](#license)
 
-## Background
-
-Standard Readme started with the issue originally posed by [@maxogden](https://github.com/maxogden) over at [feross/standard](https://github.com/feross/standard) in [this issue](https://github.com/feross/standard/issues/141), about whether or not a tool to standardize readmes would be useful. A lot of that discussion ended up in [zcei's standard-readme](https://github.com/zcei/standard-readme/issues/1) repository. While working on maintaining the [IPFS](https://github.com/ipfs) repositories, I needed a way to standardize Readmes across that organization. This specification started as a result of that.
-
-> Your documentation is complete when someone can use your module without ever
-having to look at its code. This is very important. This makes it possible for
-you to separate your module's documented interface from its internal
-implementation (guts). This is good because it means that you are free to
-change the module's internals as long as the interface remains the same.
-
-> Remember: the documentation, not the code, defines what a module does.
-
-~ [Ken Williams, Perl Hackers](http://mathforum.org/ken/perl_modules.html#document)
-
-Writing READMEs is way too hard, and keeping them maintained is difficult. By offloading this process - making writing easier, making editing easier, making it clear whether or not an edit is up to spec or not - you can spend less time worrying about whether or not your initial documentation is good, and spend more time writing and using code.
-
-By having a standard, users can spend less time searching for the information they want. They can also build tools to gather search terms from descriptions, to automatically run example code, to check licensing, and so on.
-
-The goals for this repository are:
-
-1. A well defined **specification**. This can be found in the [Spec document](spec.md). It is a constant work in progress; please open issues to discuss changes.
-2. **An example README**. This Readme is fully standard-readme compliant, and there are more examples in the `example-readmes` folder.
-3. A **linter** that can be used to look at errors in a given Readme. Please refer to the [tracking issue](https://github.com/RichardLitt/standard-readme/issues/5).
-4. A **generator** that can be used to quickly scaffold out new READMEs. See [generator-standard-readme](https://github.com/RichardLitt/generator-standard-readme).
-5. A **compliant badge** for users. See [the badge](#badge).
+## Overview
+Microfluidic devices, also known as biochips, are a cost-effective, 
+highly automated alternative to traditional biomolecular analysis in life science 
+applications. Recently, biochips increasingly incorporate ideas from traditional 
+electronic design paradigms like VLSI (Very Large Scale Integration) to increase 
+their complexity in multi-step biological experiments. This complexity requires a 
+carefully ordered control sequence and an optimally designed layout of microfluidic 
+components responsible for moving fluids and materials for correct operations. 
+Many design algorithms propose a solution by generating novel microfluidic architectures 
+or specializing in identifying conflicts for a limited set of design topologies. 
+However, they only identify layout conflicts, not those conflicts caused by operation 
+constraints during the design process. This limitation potentially introduces much 
+higher post-fabrication costs due to the design iterations. Thus, a framework for 
+generalizable control and fluid path verification is necessary. In this paper, we 
+present a biochip logic verification algorithm based on constrained path searches. 
+According to over 900 real-world and synthetic benchmark results, given a two-layer 
+continuous-flow biochip, liquid entries and exits, a set of transportation logic 
+constraints, our novel approach can identify the fluid path and predict the 
+corresponding valve states for execution with a 0\% error rate ignoring time 
+constraints, in contrast to an average of 62.7\% for A* and 62.5\% for Dijkstra. We 
+also provide the first generalized problem formalization, a corresponding open-source 
+software package, and a community collection of over 900 real-world, synthetic 
+benchmarks. Finally, experimental results demonstrate that our approach can give 
+the correct flow pathway and control instructions for real-world biochip experiments 
+and identify conflicts.
 
 ## Install
 
-This project uses [node](http://nodejs.org) and [npm](https://npmjs.com). Go check them out if you don't have them locally installed.
+Download the repository from GitHub, create a venv environment, and install the necessary packages. Here we use python3.8 as the python interpreter.
 
 ```sh
-$ npm install --global standard-readme-spec
+$ git clone https://github.com/zyrrron/VeSpA-Algorithm.git
+$ cd Vespa-Algorithm
+$ python3 -m venv venv/
+$ venv/bin/pip3 install -r requirements.txt
 ```
+
+After you install all the packages, you are able to run the algorithm.
 
 ## Usage
 
-This is only a documentation package. You can print out [spec.md](spec.md) to your console:
 
+### Random Benchmarks
+You can run this algorithm to test the given random benchmarks with this command:
 ```sh
-$ standard-readme-spec
-# Prints out the standard-readme spec
+$ venv/bin/python3 TestAlgorithm.py
 ```
 
-### Generator
-
-To use the generator, look at [generator-standard-readme](https://github.com/RichardLitt/generator-standard-readme). There is a global executable to run the generator in that package, aliased as `standard-readme`.
-
-## Badge
-
-If your README is compliant with Standard-Readme and you're on GitHub, it would be great if you could add the badge. This allows people to link back to this Spec, and helps adoption of the README. The badge is **not required**.
-
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
-
-To add in Markdown format, use this code:
-
-```
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+If you want to generate random benchmarks by your self, you can use this command to generate random designs:
+```sh
+$ venv/bin/python3 RandomCaseGenerator.py
 ```
 
-## Example Readmes
+If it is the first time to test the random benchmarks, this command can automatically generate Constraints by calling [ConstraintMaker.py](ConstraintMaker.py) and save it for the next time:
+```sh
+$ venv/bin/python3 TestAlgorithm.py
+```
 
-To see how the specification has been applied, see the [example-readmes](example-readmes/).
+All User Requirements for Random Constraints are set to ['F1', 'F2']. User can edit it in [TestAlgorithm.py](TestAlgorithm.py).
 
-## Related Efforts
+### Literature Benchmarks
+You can run this algorithm to test the given literature review benchmarks with this command:
+```sh
+$ venv/bin/python3 lrbtest.py
+```
 
-- [Art of Readme](https://github.com/noffle/art-of-readme) - 💌 Learn the art of writing quality READMEs.
-- [open-source-template](https://github.com/davidbgk/open-source-template/) - A README template to encourage open-source contributions.
+You can also create your own biochip design by editing [LRB_new.py](Literature_Review_Benchmarks_Generator/LRB_new.py).
+And Create Constraint and User Requirements in [Constraint_UR_lrb_new.csv](TestCaseFiles/lrb/URC/Constraint_UR_lrb_new.csv).
 
 ## Maintainers
 
-[@RichardLitt](https://github.com/RichardLitt).
+[@zyrrron](https://github.com/zyrrron).
 
 ## Contributing
 
-Feel free to dive in! [Open an issue](https://github.com/RichardLitt/standard-readme/issues/new) or submit PRs.
-
-Standard Readme follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
+Feel free to dive in! [Open an issue](https://github.com/zyrrron/VeSpA-Algorithm/issues/new) or submit PRs.
 
 ### Contributors
 
 This project exists thanks to all the people who contribute. 
-<a href="https://github.com/RichardLitt/standard-readme/graphs/contributors"><img src="https://opencollective.com/standard-readme/contributors.svg?width=890&button=false" /></a>
-
 
 ## License
-
-[MIT](LICENSE) © Richard Littauer
