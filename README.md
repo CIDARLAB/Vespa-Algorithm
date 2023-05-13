@@ -69,12 +69,12 @@ If you want to generate random benchmarks by your self, you can use this command
 $ venv/bin/python3 RandomCaseGenerator.py
 ```
 
-If it is the first time to test the random benchmarks, this command can automatically generate Constraints by calling [ConstraintMaker.py](ConstraintMaker.py) and save it for the next time:
+If it is the first time to test the random benchmarks, this command can automatically generate random Constraints by calling [ConstraintMaker.py](ConstraintMaker.py) and save it for the next time:
 ```sh
 $ venv/bin/python3 TestAlgorithm.py
 ```
 
-All User Requirements for Random Constraints are set to ['F1', 'F2']. User can edit it in [TestAlgorithm.py](TestAlgorithm.py).
+All Experiment objectives for Random Constraints are set to ['F1', 'F2']. User can edit it in [TestAlgorithm.py](TestAlgorithm.py).
 
 ### Literature Benchmarks
 You can run this algorithm to test the given literature review benchmarks with this command:
@@ -83,7 +83,7 @@ $ venv/bin/python3 lrbtest.py
 ```
 
 You can also create your own biochip design by editing [LRB_new.py](Literature_Review_Benchmarks_Generator/LRB_new.py).
-And Create Constraint and User Requirements in [Constraint_UR_lrb_new.csv](TestCaseFiles/lrb/URC/Constraint_UR_lrb_new.csv).
+And Create Constraint and Experiment objectives in [Constraint_UR_lrb_new.csv](TestCaseFiles/lrb/URC/Constraint_UR_lrb_new.csv).
 
 ## Maintainers
 
