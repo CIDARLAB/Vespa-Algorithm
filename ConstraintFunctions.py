@@ -160,6 +160,7 @@ def NodeGroupTruthTableBuilder(nl, cl, listlen):
     keys = range(table_col)
     values = [-1] * table_col
     d = dict(zip(keys, values))
+    listlen = min(listlen, 2**table_col)
     d, tab, flagFalseNegative = createTruthTable(d, keys, 0, [], cl, listlen, 0)
     if len(tab) == 0 and len(cl) != 0:
         conflict = 1
