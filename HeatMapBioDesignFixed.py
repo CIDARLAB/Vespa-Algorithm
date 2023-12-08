@@ -6,7 +6,7 @@
 
 from ConstraintMaker import createRandomConstraint
 from MetricsGenerator import calculate_false_pos
-from AlgorithmComparison import VeSpA_search, control_search, netxsp_search, astar_search, findall_control_path
+from AlgorithmComparison import Vespa_search, control_search, netxsp_search, astar_search, findall_control_path
 import random
 import csv
 import networkx as nx
@@ -142,21 +142,21 @@ if __name__ == '__main__':
                 PathLength = [NetxSPLength, AstarLength]
                 CtrlNodeLists = [NetxSPControlNodeList, AstarControlNodeList]
 
-                # Update the flow edge info after we get RandomConstraintList and use it in VeSpA_search
+                # Update the flow edge info after we get RandomConstraintList and use it in Vespa_search
                 VespaTime = []
                 flagFN = []
                 for ii in a:
-                    g_VeSpA = g.copy()
-                    VeSpATimeii, VeSpAPathii, VeSpALengthii, flag, _ = VeSpA_search(g_VeSpA, g_c, pos, ConstraintList, VCO2FEdictionary, ur, ii)
+                    g_Vespa = g.copy()
+                    VespaTimeii, VespaPathii, VespaLengthii, flag, _, _ = Vespa_search(g_Vespa, g_c, pos, ConstraintList, VCO2FEdictionary, ur, ii)
                     # Find all valves and other control components which may be involved giving the searched path
-                    VeSpAVCOList = control_search(VeSpAPathii, FE2VCOdictionary)
-                    VeSpAControlNodeList, VeSpAControlEdgeList = findall_control_path(VeSpAVCOList, g_c)
+                    VespaVCOList = control_search(VespaPathii, FE2VCOdictionary)
+                    VespaControlNodeList, VespaControlEdgeList = findall_control_path(VespaVCOList, g_c)
 
                     # add middle products into list
-                    VespaTime.append(format(VeSpATimeii, '.5f'))
-                    PathLength.append(VeSpALengthii)
+                    VespaTime.append(format(VespaTimeii, '.5f'))
+                    PathLength.append(VespaLengthii)
                     flagFN.append(flag)
-                    CtrlNodeLists.append(VeSpAControlNodeList)
+                    CtrlNodeLists.append(VespaControlNodeList)
 
                 # Calculate the false positive for each algorithm
                 l, t, nodeslist = calculate_false_pos(PathLength, ConstraintList, CtrlNodeLists, g_c, flagFN)

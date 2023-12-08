@@ -34,7 +34,7 @@ def OriginalConstraintTablebuilder(type, node, t):
 # "[vi, vj]": {Type: 2, Nodes: [[vi, ci, vj], [vj, cj, vi]], TruthTable: [[0,0]]}, vi cannot be opened and closed at the same time
 # If we cannot generate a constraint dictionary, (not type1 and type2, may some other type)
 # then that means the constraint is incorrect, show warning!!!!!
-def NodeGroupConstraintDictBuilder(ConstraintList, g, g_c):
+def NodeGroupConstraintDictBuilder(ConstraintList, g_c):
     d = []
     conflict = 0
     for c in ConstraintList:
@@ -164,8 +164,8 @@ def NodeGroupTruthTableBuilder(nl, cl, listlen):
         listlen = min(listlen, 2**table_col)
     else:
         listlen = 2**table_col
-    d, tab, flagFalseNegative = createTruthTable(d, keys, 0, [], cl, listlen, 0)
+    d, tab, NotAllGraph = createTruthTable(d, keys, 0, [], cl, listlen, 0)
     if len(tab) == 0 and len(cl) != 0:
         conflict = 1
-    return conflict, tab, flagFalseNegative
+    return conflict, tab, NotAllGraph
 

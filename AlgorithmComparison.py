@@ -115,11 +115,11 @@ def astar_search(g, position, ur):
 
 # One row in the table means one graph, but some rows are different but have same edges to remove because some different nodes may locate in the same
 # edge, so the length of final graph list may longer than the table
-def VeSpAGraphGenerator(table, nodes_group_list, vcofe, g):
+def VespaGraphGenerator(table, nodes_group_list, vcofe, g):
     g_list = []
     edge_remove_listall = []
     for row in table:
-        g_VeSpA = g.copy()
+        g_Vespa = g.copy()
         edge_remove_list = []
         # cut the edges when there are valves onside be set to 0 in a row
         for i in range(len(row)):
@@ -153,10 +153,10 @@ def VeSpAGraphGenerator(table, nodes_group_list, vcofe, g):
             continue
         # remove edges involved
         for e in edge_remove_list:
-            for edge in g_VeSpA.edges():
+            for edge in g_Vespa.edges():
                 if Counter(e) == Counter(edge):
-                    g_VeSpA.remove_edge(e[0], e[1])
-        g_list.append(g_VeSpA)
+                    g_Vespa.remove_edge(e[0], e[1])
+        g_list.append(g_Vespa)
         edge_remove_listall.append(edge_remove_list)
     return g_list
 
@@ -166,55 +166,82 @@ def VeSpAGraphGenerator(table, nodes_group_list, vcofe, g):
 # All node[0] node[1] here will be totally same or different at all. If they have intersection node, they will be
 # connected by the findallConnectedNodes() function. So, we can transfer the current d to a list of tuples consists
 # of two node groups, all nodes in the group should be open or close together.
-def enumerateVeSpAgraphs(g, d, vcofe, listlen):
-    conflict = 0
+def enumerateVespagraphs(g, d, vcofe, listlen):
+
     # creat node group constraint list
     conflict, ConstraintNGList, nodes_group_list = Node_NG_Constraint_translater(d)
     if conflict == 1:
         return 1, []
     # create a truth table including all node groups according to the ConstraintGroupList
-    conflict, table, fp = NodeGroupTruthTableBuilder(nodes_group_list, ConstraintNGList, listlen)
-    I_best = len(table)
+    conflict, table, NotAllGraph = NodeGroupTruthTableBuilder(nodes_group_list, ConstraintNGList, listlen)
+    NumOfGraph = len(table)
     # Use the table to generate graphs which lose some edges compared with the original graph.
-    g_list = VeSpAGraphGenerator(table, nodes_group_list, vcofe, g)
-    return conflict, g_list, fp, I_best
+    g_list = VespaGraphGenerator(table, nodes_group_list, vcofe, g)
+    return conflict, g_list, NotAllGraph, NumOfGraph
 
 
-def VeSpA_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen):
+def get_ports (G):
+    ports = []
+    for node in G:
+        if 'o' not in node:
+            ports.append(node)
+    return ports
+
+
+def Vespa_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen):
     global pos
     pos = position
     start = time.time()
+    ports = get_ports(g)
+    leakage_fail = 0
 
     # Create a constraint dictionary list represents the constraint equation:
     # Data structure: {'Type': 2, 'TruthTable': [[0, 0]], 'Nodes': [['co1'...], ['co3'...]]}
-    Conflict, NGConstraintDict = NodeGroupConstraintDictBuilder(ConstraintList, g, g_c)
+    Conflict, NGConstraintDict = NodeGroupConstraintDictBuilder(ConstraintList, g_c)
 
     # update graph with removing the edges in constraint type 1
     g, NGConstraintDictNew = updateGraphByNGConstraint(VCO2FEdictionary, g, NGConstraintDict)
     # generate all graphs satisfy the constraint type 2 as a list
-    Conflict, g_list, flagFalseNegative, I_best = enumerateVeSpAgraphs(g, NGConstraintDictNew, VCO2FEdictionary, listlen)
+    Conflict, g_list, NotAllGraph, NumOfGraph = enumerateVespagraphs(g, NGConstraintDictNew, VCO2FEdictionary, listlen)
     if Conflict == 1:
-        print("Constraint conflict 2!", ConstraintList)
+        print("Constraint conflict!", ConstraintList)
         end = time.time()
-        return end - start, [], -2, -1, I_best
-    VeSpAPathMin = []
-    VeSpALengthMin = 0
+        return end - start, [], -2, -1, NumOfGraph, leakage_fail
+    VespaPathMin = []
+    VespaLengthMin = 0
     # If the list is too big, we can randomly choose 1000 graphs from the big list to speedup the procedure. (random way)
     # Here we choose graphs in order from truth table elements are all 1 to all 0. (Our way)
     # if len(g_list) > listlen:
     #     flagFalseNegative = 1
     #     g_list = random.sample(g_list, listlen)
     for gb in g_list:
-        _, VeSpAPath, VeSpALength = netxsp_search(gb, ur)
-        if len(VeSpAPathMin) == 0 or VeSpALengthMin > VeSpALength > 0:
-            VeSpAPathMin = VeSpAPath
-            VeSpALengthMin = VeSpALength
+        _, VespaPath, VespaLength = netxsp_search(gb, ur)
+        if len(VespaPathMin) == 0 or VespaLengthMin > VespaLength > 0:
+            if VespaLength > 0:
+                flag_leakage = False
+                for p in ports:
+                    if p in ur[0]:
+                        continue
+                    ur_new = [ur[0], p]
+                    _, _, l = netxsp_search(gb, ur_new)
+
+                    # leakage issue arise
+                    if l > 0:
+                        if p not in ur[1]:
+                            flag_leakage = True
+                            break
+                # if current graph have leakage issue, skip it
+                if flag_leakage:
+                    leakage_fail += 1
+                    continue
+            VespaPathMin = VespaPath
+            VespaLengthMin = VespaLength
     end = time.time()
-    if not VeSpAPathMin:
-        # print(f"No such a path from {ur[0]} to {ur[1]} using VeSpA I={listlen} searching algorithm")
-        return end - start, [], -1, flagFalseNegative, I_best
-    VeSpATime = end - start
-    return VeSpATime, VeSpAPathMin, VeSpALengthMin, flagFalseNegative, I_best
+    if not VespaPathMin:
+        # print(f"No such a path from {ur[0]} to {ur[1]} using Vespa I={listlen} searching algorithm")
+        return end - start, [], -1, NotAllGraph, NumOfGraph, leakage_fail
+    VespaTime = end - start
+    return VespaTime, VespaPathMin, VespaLengthMin, NotAllGraph, NumOfGraph, leakage_fail
 
 
 def control_search(path, dictionary):
@@ -275,8 +302,8 @@ def simulateControlPathway(time, path, filepath, j, graph, GraphListInfo):
     pass
 
 
-def simulate(NodeInfo, NetxSPTime, NetxSPPath, NCP, DijkstraTime, DijkstraPath, DCP, AstarTime, AstarPath, ACP, VeSpATime,
-             VeSpAPath, BCP, i, j, g, g_c, gli):
+def simulate(NodeInfo, NetxSPTime, NetxSPPath, NCP, DijkstraTime, DijkstraPath, DCP, AstarTime, AstarPath, ACP, VespaTime,
+             VespaPath, BCP, i, j, g, g_c, gli):
     # NetxSP simulate flow pathway
     outputfolderpath = f"TestCaseFiles/NetxSP_result/Section_{i}/{NodeInfo}"
     simulateFlowPathway(NetxSPTime, NetxSPPath, outputfolderpath, j, g, gli)
@@ -289,9 +316,9 @@ def simulate(NodeInfo, NetxSPTime, NetxSPPath, NCP, DijkstraTime, DijkstraPath, 
     outputfolderpath = f"TestCaseFiles/A*_result/Section_{i}/{NodeInfo}"
     simulateFlowPathway(AstarTime, AstarPath, outputfolderpath, j, g, gli)
 
-    # VeSpA simulate flow pathway
-    outputfolderpath = f"TestCaseFiles/VeSpA_result/Section_{i}/{NodeInfo}"
-    simulateFlowPathway(VeSpATime, VeSpAPath, outputfolderpath, j, g, gli)
+    # Vespa simulate flow pathway
+    outputfolderpath = f"TestCaseFiles/Vespa_result/Section_{i}/{NodeInfo}"
+    simulateFlowPathway(VespaTime, VespaPath, outputfolderpath, j, g, gli)
 
     # NetxSP simulate control layer pathway
     outputfolderpath = f"TestCaseFiles/NetxSP_result/Section_{i}/{NodeInfo}"
@@ -305,6 +332,6 @@ def simulate(NodeInfo, NetxSPTime, NetxSPPath, NCP, DijkstraTime, DijkstraPath, 
     outputfolderpath = f"TestCaseFiles/A*_result/Section_{i}/{NodeInfo}"
     simulateControlPathway(AstarTime, AstarPath, outputfolderpath, j, g, gli)
 
-    # VeSpA simulate control pathway
-    outputfolderpath = f"TestCaseFiles/VeSpA_result/Section_{i}/{NodeInfo}"
-    simulateControlPathway(VeSpATime, VeSpAPath, outputfolderpath, j, g, gli)
+    # Vespa simulate control pathway
+    outputfolderpath = f"TestCaseFiles/Vespa_result/Section_{i}/{NodeInfo}"
+    simulateControlPathway(VespaTime, VespaPath, outputfolderpath, j, g, gli)
