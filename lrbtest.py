@@ -18,7 +18,7 @@ if __name__ == '__main__':
                           "Vespa INF runtime", "Num Of Graph", "Failure caused by Leakage Vespa 1", "Failure caused by Leakage Vespa 2",
                           "Failure caused by Leakage Vespa 3"]
     Result_list_cases = []
-    for i in range(4, 6):
+    for i in range(1, 7):
         Result_list_section = []
         path = f"TestCaseFiles/lrb"
         control_graph_path = f"{path}/graph_info/lrb{i}_control.dot"
@@ -40,6 +40,18 @@ if __name__ == '__main__':
             # divide the ur list inside one URCInfo element and check each ur respectively.
             for k in range(len(URConstraintInfoAll[j]["UR"])):
                 uri = URConstraintInfoAll[j]["UR"][k]
+
+                # if inlet is single point, change it to a list with single element
+                # if outlet is single point, change it to a list with single element
+                # uri will finally become the same format: [[inlets], [outlets]]
+                if not isinstance(uri[0], list):
+                    temp = [[uri[0]], uri[1]]
+                    uri = temp
+
+                if not isinstance(uri[1], list):
+                    temp = [uri[0], [uri[1]]]
+                    uri = temp
+
                 column.append(f"lrb{i}|benchmark{j+1}_{k+1}")
                 g, pos = buildFlowGraph(flow_graph_path)
                 g_c = read_dot(control_graph_path)
@@ -81,7 +93,8 @@ if __name__ == '__main__':
                 # Calculate the false positive rate for each algorithm
                 l, t, nodeslist = calculate_false_pos([NetxSPLength, AstarLength, VespaLength1, VespaLength2, VespaLength], ConstraintList,
                                                       [NetxSPControlNodeList, AstarControlNodeList, VespaControlNodeList1, VespaControlNodeList2,
-                                                       VespaControlNodeList], g_c, [flagFalseNegative1, flagFalseNegative2, flagFalseNegative], g, uri)
+                                                       VespaControlNodeList], g_c, [flagFalseNegative1, flagFalseNegative2, flagFalseNegative], g,
+                                                      uri,VCO2FEdictionary)
 
                 l_currentcase = [uri, l[0], l[1], l[2], l[3], l[4], t[0], t[1], t[2], t[3], t[4], ConstraintList, NetxSPControlNodeList,
                                  AstarControlNodeList, VespaControlNodeList1, VespaControlNodeList2, VespaControlNodeList,

@@ -133,7 +133,7 @@ if __name__ == '__main__':
                 VCO2FEdictionary, FE2VCOdictionary = locateValveAndCOonFE(valve_co_txt)
 
                 # Algorithm comparison, set ur as ['f1', 'f2']
-                ur = ['f1', 'f2']
+                ur = [['f1'], ['f2']]
                 NetxSPTime, NetxSPPath, NetxSPLength = AlgorithmComparison.netxsp_search(g, ur)
                 AstarTime, AstarPath, AstarLength = AlgorithmComparison.astar_search(g, pos, ur)
 
@@ -164,8 +164,9 @@ if __name__ == '__main__':
 
                 # Calculate the false positive rate for each algorithm
                 l, t, nodeslist = calculate_false_pos([NetxSPLength, AstarLength, VespaLength1, VespaLength2, VespaLength], ConstraintList,
-                                                      [NetxSPControlNodeList, AstarControlNodeList, VespaControlNodeList1, VespaControlNodeList2, VespaControlNodeList],
-                                                      g_c, [flagFalseNegative1, flagFalseNegative2, flagFalseNegative], g, ur)
+                                                      [NetxSPControlNodeList, AstarControlNodeList, VespaControlNodeList1, VespaControlNodeList2,
+                                                       VespaControlNodeList], g_c, [flagFalseNegative1, flagFalseNegative2, flagFalseNegative], g,
+                                                      ur, VCO2FEdictionary)
 
                 l_currentcase = [ur, l[0], l[1], l[2], l[3], l[4], t[0], t[1], t[2], t[3], t[4], ConstraintList, NetxSPControlNodeList,
                                  AstarControlNodeList, VespaControlNodeList1, VespaControlNodeList2, VespaControlNodeList,

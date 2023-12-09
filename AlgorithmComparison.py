@@ -216,20 +216,20 @@ def Vespa_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen
     #     g_list = random.sample(g_list, listlen)
     for gb in g_list:
         _, VespaPath, VespaLength = netxsp_search(gb, ur)
+        usedports = ur[0]+ur[1]
         if len(VespaPathMin) == 0 or VespaLengthMin > VespaLength > 0:
             if VespaLength > 0:
                 flag_leakage = False
                 for p in ports:
-                    if p in ur[0]:
+                    if p in usedports:
                         continue
                     ur_new = [ur[0], p]
                     _, _, l = netxsp_search(gb, ur_new)
 
                     # leakage issue arise
                     if l > 0:
-                        if p not in ur[1]:
-                            flag_leakage = True
-                            break
+                        flag_leakage = True
+                        break
                 # if current graph have leakage issue, skip it
                 if flag_leakage:
                     leakage_fail += 1
@@ -238,7 +238,7 @@ def Vespa_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen
             VespaLengthMin = VespaLength
     end = time.time()
     if not VespaPathMin:
-        # print(f"No such a path from {ur[0]} to {ur[1]} using Vespa I={listlen} searching algorithm")
+        print(f"No such a path from {ur[0]} to {ur[1]} using Vespa I={listlen} searching algorithm")
         return end - start, [], -1, NotAllGraph, NumOfGraph, leakage_fail
     VespaTime = end - start
     return VespaTime, VespaPathMin, VespaLengthMin, NotAllGraph, NumOfGraph, leakage_fail

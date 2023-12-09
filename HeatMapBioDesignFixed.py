@@ -159,7 +159,7 @@ if __name__ == '__main__':
                     CtrlNodeLists.append(VespaControlNodeList)
 
                 # Calculate the false positive for each algorithm
-                l, t, nodeslist = calculate_false_pos(PathLength, ConstraintList, CtrlNodeLists, g_c, flagFN)
+                l, t, nodeslist = calculate_false_pos(PathLength, ConstraintList, CtrlNodeLists, g_c, flagFN, VCO2FEdictionary)
                 l_currentcase = t[2:] + VespaTime
                 Result_list_section.append(l_currentcase)
                 j += 3

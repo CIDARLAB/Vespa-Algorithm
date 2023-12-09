@@ -1,8 +1,11 @@
 from ConstraintFunctions import findallConnectedNodes
 from collections import Counter
-from AlgorithmComparison import get_ports, NodeGroupConstraintDictBuilder, updateGraphByNGConstraint
+from AlgorithmComparison import get_ports, NodeGroupConstraintDictBuilder, updateGraphByNGConstraint, netxsp_search
 
 
+# No false negative for naive algorithms, they will not report no path when there is a physical path
+# if NOTALLGRAPH = True, it maybe true negative or false negative
+# if NOTALLGRAPH = false, it
 def fp_flag(a, b):
     # true positive
     if a == 1 and b == 1:
@@ -37,8 +40,9 @@ def Vespa_checker(t, l, flag):
 # calculate_false_pos([NetxSPLength, AstarLength, VespaLength1, VespaLength2, VespaLength], ConstraintList,
 #                                                       [NetxSPControlNodeList, AstarControlNodeList, VespaControlNodeList1, VespaControlNodeList2,
 #                                                        VespaControlNodeList], g_c, [flagFalseNegative1, flagFalseNegative2, flagFalseNegative])
-def calculate_false_pos(p, cl, c, g_c, flag, g, ur):
+def calculate_false_pos(p, cl, c, g_c, flag, g, ur, VCO2FEdictionary):
     # l means the result of predict value, t means [0-false, 1-true] in the beginning and fp value in the end.
+    # flag means NOTALLGRAPH, if true, not all graphs have been searched.
     l = [1] * len(p)
     t = [1] * len(p)
     for i in range(len(p)):
@@ -46,14 +50,36 @@ def calculate_false_pos(p, cl, c, g_c, flag, g, ur):
             l[i] = 0
     nodeslist = []
 
-    # check leakage in two naive algorithms
+    # check leakage in 5 results
     # transfer control protocol list to constraint list by labeling all un-mentioned control ports as type 1 constraint.
     # feed that to NodeGroupConstraintDictBuilder() and updateGraphByNGConstraint(), we can get a residual graph without any edges blocked by the
     # control ports not in the control protocol list.
     # remove all the edges if they are not in the control list, then search the other ports.
     # If find an "other" port can be reached, assign t[i]=0
     ports = get_ports(g)
+    usedports = ur[0]+ur[1]
+    for i in range(len(c)):
+        g1 = g.copy()
+        closeList = []
+        for components in g_c:
+            if 'c' in components and 'co' not in components:
+                if components not in c[i]:
+                    closeList.append([1,components])
 
+        Conflict, NGConstraintDict = NodeGroupConstraintDictBuilder(closeList, g_c)
+        g1, NGConstraintDictNew = updateGraphByNGConstraint(VCO2FEdictionary, g1, NGConstraintDict)
+
+        # check leakage in current result
+        for port in ports:
+            if port in usedports:
+                continue
+            ur_new = [ur[0], port]
+            _, _, resultLength = netxsp_search(g1, ur_new)
+
+            # leakage issue arise
+            if resultLength > 0:
+                t[i] = 0
+                break
 
     # check the constraints again, make sure the target path follow all constraints.
     for cc in cl:
