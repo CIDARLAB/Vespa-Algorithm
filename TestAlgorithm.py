@@ -61,10 +61,10 @@ if __name__ == '__main__':
                           "Netx Shortest Path (Dijkstra) path", "A* path", "Vespa 1 path", "Vespa 100 path", "Vespa INF path",
                           "Netx Shortest Path (Dijkstra) path length", "A* path length", "Vespa 1 path length", "Vespa 100 path length",
                           "Vespa INF path length", "Netx Shortest Path (Dijkstra) runtime", "A* runtime", "Vespa 1 runtime", "Vespa 100 runtime",
-                          "Vespa INF runtime", "Num Of Graph", "Failure caused by Leakage Vespa 1", "Failure caused by Leakage Vespa 2",
-                          "Failure caused by Leakage Vespa 3"]
+                          "Vespa INF runtime", "Num Of Graph", "Failures caused by Leakage Vespa 1", "Failures caused by Leakage Vespa 100",
+                          "Failures caused by Leakage Vespa INF", "Leakage port in Vespa 1", "Leakage port in Vespa 100", "Leakage port in Vespa INF"]
     Result_list_cases = []
-    for i in range(3, 4):
+    for i in range(1, 4):
         Result_list_section = []
         path = f"RandomCaseFiles/Section_{i}"
 
@@ -139,14 +139,17 @@ if __name__ == '__main__':
 
                 # Update the flow edge info after we get RandomConstraintList and use it in Vespa_search
                 g_Vespa = g.copy()
-                VespaTime1, VespaPath1, VespaLength1, flagFalseNegative1, _, leakage1 = AlgorithmComparison.Vespa_search(g_Vespa, g_c, pos,
-                                                                                                            ConstraintList, VCO2FEdictionary, ur, 1)
+                VespaTime1, VespaPath1, VespaLength1, flagFalseNegative1, _, leakage1, leakport1 = AlgorithmComparison.Vespa_search(g_Vespa, g_c, pos,
+                                                                                                            ConstraintList, VCO2FEdictionary,
+                                                                                                            FE2VCOdictionary, ur, 1)
                 g_Vespa = g.copy()
-                VespaTime2, VespaPath2, VespaLength2, flagFalseNegative2, _, leakage2 = AlgorithmComparison.Vespa_search(g_Vespa, g_c, pos,
-                                                                                                            ConstraintList, VCO2FEdictionary, ur, 100)
+                VespaTime2, VespaPath2, VespaLength2, flagFalseNegative2, _, leakage2, leakport2 = AlgorithmComparison.Vespa_search(g_Vespa, g_c, pos,
+                                                                                                            ConstraintList, VCO2FEdictionary,
+                                                                                                            FE2VCOdictionary, ur, 100)
                 g_Vespa = g.copy()
-                VespaTime, VespaPath, VespaLength, flagFalseNegative, I_best, leakage3 = AlgorithmComparison.Vespa_search(g_Vespa, g_c, pos,
-                                                                                                        ConstraintList, VCO2FEdictionary, ur, 0)
+                VespaTime, VespaPath, VespaLength, flagFalseNegative, I_best, leakage3, leakport3 = AlgorithmComparison.Vespa_search(g_Vespa, g_c, pos,
+                                                                                                        ConstraintList, VCO2FEdictionary,
+                                                                                                        FE2VCOdictionary, ur, 0)
 
                 # Find all valves and other control components which may be involved giving the searched path
                 NetxSPVCOList = AlgorithmComparison.control_search(NetxSPPath, FE2VCOdictionary)
@@ -172,7 +175,8 @@ if __name__ == '__main__':
                                  AstarControlNodeList, VespaControlNodeList1, VespaControlNodeList2, VespaControlNodeList,
                                  nodeslist, NetxSPPath, AstarPath, VespaPath1, VespaPath2, VespaPath, NetxSPLength,
                                  AstarLength, VespaLength1, VespaLength2, VespaLength, format(NetxSPTime, '.5f'), format(AstarTime, '.5f'),
-                                 format(VespaTime1, '.5f'), format(VespaTime2, '.5f'), format(VespaTime, '.5f'), I_best, leakage1, leakage2, leakage3]
+                                 format(VespaTime1, '.5f'), format(VespaTime2, '.5f'), format(VespaTime, '.5f'), I_best, leakage1, leakage2, leakage3,
+                                 leakport1, leakport2, leakport3]
                 Result_list_section.append(l_currentcase)
                 j += 3
                 print()

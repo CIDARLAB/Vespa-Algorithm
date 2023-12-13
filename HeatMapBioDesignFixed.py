@@ -147,7 +147,8 @@ if __name__ == '__main__':
                 flagFN = []
                 for ii in a:
                     g_Vespa = g.copy()
-                    VespaTimeii, VespaPathii, VespaLengthii, flag, _, _ = Vespa_search(g_Vespa, g_c, pos, ConstraintList, VCO2FEdictionary, ur, ii)
+                    VespaTimeii, VespaPathii, VespaLengthii, flag, _, _, _ = Vespa_search(g_Vespa, g_c, pos, ConstraintList, VCO2FEdictionary,
+                                                                                          FE2VCOdictionary, ur, ii)
                     # Find all valves and other control components which may be involved giving the searched path
                     VespaVCOList = control_search(VespaPathii, FE2VCOdictionary)
                     VespaControlNodeList, VespaControlEdgeList = findall_control_path(VespaVCOList, g_c)
@@ -159,7 +160,7 @@ if __name__ == '__main__':
                     CtrlNodeLists.append(VespaControlNodeList)
 
                 # Calculate the false positive for each algorithm
-                l, t, nodeslist = calculate_false_pos(PathLength, ConstraintList, CtrlNodeLists, g_c, flagFN, VCO2FEdictionary)
+                l, t, nodeslist = calculate_false_pos(PathLength, ConstraintList, CtrlNodeLists, g_c, flagFN, g, ur, VCO2FEdictionary)
                 l_currentcase = t[2:] + VespaTime
                 Result_list_section.append(l_currentcase)
                 j += 3

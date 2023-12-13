@@ -1,6 +1,6 @@
 from ConstraintFunctions import findallConnectedNodes
 from collections import Counter
-from AlgorithmComparison import get_ports, NodeGroupConstraintDictBuilder, updateGraphByNGConstraint, netxsp_search
+from AlgorithmComparison import get_ports, NodeGroupConstraintDictBuilder, updateGraphByNGConstraint, netxsp_search, updateGraphByProtocol
 
 
 # No false negative for naive algorithms, they will not report no path when there is a physical path
@@ -59,21 +59,15 @@ def calculate_false_pos(p, cl, c, g_c, flag, g, ur, VCO2FEdictionary):
     ports = get_ports(g)
     usedports = ur[0]+ur[1]
     for i in range(len(c)):
-        g1 = g.copy()
-        closeList = []
-        for components in g_c:
-            if 'c' in components and 'co' not in components:
-                if components not in c[i]:
-                    closeList.append([1,components])
 
-        Conflict, NGConstraintDict = NodeGroupConstraintDictBuilder(closeList, g_c)
-        g1, NGConstraintDictNew = updateGraphByNGConstraint(VCO2FEdictionary, g1, NGConstraintDict)
+        # remove never-open edges in the graph according to the control protocol
+        g1 = updateGraphByProtocol(g, g_c, c[i], VCO2FEdictionary)
 
         # check leakage in current result
         for port in ports:
             if port in usedports:
                 continue
-            ur_new = [ur[0], port]
+            ur_new = [ur[0], [port]]
             _, _, resultLength = netxsp_search(g1, ur_new)
 
             # leakage issue arise

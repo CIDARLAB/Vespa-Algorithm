@@ -188,12 +188,63 @@ def get_ports (G):
     return ports
 
 
-def Vespa_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen):
+# remove the edges that will be never opened in the current control protocol
+def updateGraphByProtocol(g, g_c, ControlNodeList, VCO2FEdictionary):
+    g1 = g.copy()
+    closeList = []
+    for components in g_c:
+        if 'c' in components and 'co' not in components:
+            if components not in ControlNodeList:
+                closeList.append([1, components])
+
+    Conflict, NGConstraintDict = NodeGroupConstraintDictBuilder(closeList, g_c)
+    g1, NGConstraintDictNew = updateGraphByNGConstraint(VCO2FEdictionary, g1, NGConstraintDict)
+    return g1
+
+
+def leakage_check(VespaPath, FE2VCOdictionary, VCO2FEdictionary, ur, VespaPathMin, VespaLengthMin, VespaLength, g_c, gb):
+
+    ports = get_ports(gb)
+    flag_leakage = False
+    leakage_port = ""
+
+    # Find control protocol
+    VespaVCOList = control_search(VespaPath, FE2VCOdictionary)
+    ControlNodeList, ControlEdgeList = findall_control_path(VespaVCOList, g_c)
+
+    # find all user-defined inlets and outlets
+    usedports = ur[0] + ur[1]
+
+    if VespaLength > 0:
+
+        # remove the edges that will be never opened in the current control protocol
+        g1 = updateGraphByProtocol(gb, g_c, ControlNodeList, VCO2FEdictionary)
+
+        for p in ports:
+            if p in usedports:
+                continue
+            ur_new = [ur[0], [p]]
+            _, _, l = netxsp_search(g1, ur_new)
+
+            # leakage issue arise
+            if l > 0:
+                flag_leakage = True
+                leakage_port = p
+                break
+
+        # if current graph have leakage issue, skip it
+        if flag_leakage:
+            return VespaPathMin, VespaLengthMin, leakage_port, ControlNodeList
+
+    return VespaPath, VespaLength, leakage_port, ControlNodeList
+
+
+def Vespa_search(g, g_c, position, ConstraintList, VCO2FEdictionary, FE2VCOdictionary, ur, listlen):
     global pos
     pos = position
     start = time.time()
-    ports = get_ports(g)
     leakage_fail = 0
+    leakage_port_list = []
 
     # Create a constraint dictionary list represents the constraint equation:
     # Data structure: {'Type': 2, 'TruthTable': [[0, 0]], 'Nodes': [['co1'...], ['co3'...]]}
@@ -206,42 +257,36 @@ def Vespa_search(g, g_c, position, ConstraintList, VCO2FEdictionary, ur, listlen
     if Conflict == 1:
         print("Constraint conflict!", ConstraintList)
         end = time.time()
-        return end - start, [], -2, -1, NumOfGraph, leakage_fail
+        return end - start, [], -2, -1, NumOfGraph, leakage_fail, ""
     VespaPathMin = []
     VespaLengthMin = 0
-    # If the list is too big, we can randomly choose 1000 graphs from the big list to speedup the procedure. (random way)
-    # Here we choose graphs in order from truth table elements are all 1 to all 0. (Our way)
-    # if len(g_list) > listlen:
-    #     flagFalseNegative = 1
-    #     g_list = random.sample(g_list, listlen)
-    for gb in g_list:
-        _, VespaPath, VespaLength = netxsp_search(gb, ur)
-        usedports = ur[0]+ur[1]
-        if len(VespaPathMin) == 0 or VespaLengthMin > VespaLength > 0:
-            if VespaLength > 0:
-                flag_leakage = False
-                for p in ports:
-                    if p in usedports:
-                        continue
-                    ur_new = [ur[0], p]
-                    _, _, l = netxsp_search(gb, ur_new)
+    ControlNodeList = []
 
-                    # leakage issue arise
-                    if l > 0:
-                        flag_leakage = True
-                        break
-                # if current graph have leakage issue, skip it
-                if flag_leakage:
+    # If the list is too big, we can randomly choose 1000 graphs from the big list to speedup the procedure. (random way)
+    # Here we choose graphs from the line in the truth table are all 1 to all 0. (Our way)
+    for gb in g_list:
+
+        # search for candidate target path
+        _, VespaPath, VespaLength = netxsp_search(gb, ur)
+
+        # check leakage if we have a candidate target path
+        if VespaLengthMin == 0 or VespaLengthMin > VespaLength > 0:
+
+            if VespaLength > 0:
+
+                # Check leakage risk in the candidate target path
+                VespaPathMin, VespaLengthMin, leakage_port, ControlNodeList = leakage_check(VespaPath, FE2VCOdictionary, VCO2FEdictionary, ur,
+                                                                                            VespaPathMin, VespaLengthMin, VespaLength, g_c, gb)
+                if leakage_port != "":
+                    leakage_port_list.append(leakage_port)
                     leakage_fail += 1
-                    continue
-            VespaPathMin = VespaPath
-            VespaLengthMin = VespaLength
+
     end = time.time()
     if not VespaPathMin:
         print(f"No such a path from {ur[0]} to {ur[1]} using Vespa I={listlen} searching algorithm")
-        return end - start, [], -1, NotAllGraph, NumOfGraph, leakage_fail
+        return end - start, [], -1, ControlNodeList, NotAllGraph, NumOfGraph, leakage_fail, leakage_port_list
     VespaTime = end - start
-    return VespaTime, VespaPathMin, VespaLengthMin, NotAllGraph, NumOfGraph, leakage_fail
+    return VespaTime, VespaPathMin, VespaLengthMin, ControlNodeList, NotAllGraph, NumOfGraph, leakage_fail, leakage_port_list
 
 
 def control_search(path, dictionary):
