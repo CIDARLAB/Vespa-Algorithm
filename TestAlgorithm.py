@@ -138,32 +138,25 @@ if __name__ == '__main__':
                 AstarTime, AstarPath, AstarLength = AlgorithmComparison.astar_search(g, pos, ur)
 
                 # Update the flow edge info after we get RandomConstraintList and use it in Vespa_search
-                g_Vespa = g.copy()
-                VespaTime1, VespaPath1, VespaLength1, flagFalseNegative1, _, leakage1, leakport1 = AlgorithmComparison.Vespa_search(g_Vespa, g_c, pos,
-                                                                                                            ConstraintList, VCO2FEdictionary,
-                                                                                                            FE2VCOdictionary, ur, 1)
-                g_Vespa = g.copy()
-                VespaTime2, VespaPath2, VespaLength2, flagFalseNegative2, _, leakage2, leakport2 = AlgorithmComparison.Vespa_search(g_Vespa, g_c, pos,
-                                                                                                            ConstraintList, VCO2FEdictionary,
-                                                                                                            FE2VCOdictionary, ur, 100)
-                g_Vespa = g.copy()
-                VespaTime, VespaPath, VespaLength, flagFalseNegative, I_best, leakage3, leakport3 = AlgorithmComparison.Vespa_search(g_Vespa, g_c, pos,
-                                                                                                        ConstraintList, VCO2FEdictionary,
-                                                                                                        FE2VCOdictionary, ur, 0)
+                g1 = g.copy()
+                VespaTime1, VespaPath1, VespaLength1, VespaControlNodeList1, flagFalseNegative1, _, leakage1, leakport1 \
+                    = AlgorithmComparison.Vespa_search(g1, g_c, pos, ConstraintList, VCO2FEdictionary, FE2VCOdictionary, ur, 1)
+
+                g2 = g.copy()
+                VespaTime2, VespaPath2, VespaLength2, VespaControlNodeList2, flagFalseNegative2, _, leakage2, leakport2 = \
+                    AlgorithmComparison.Vespa_search(g2, g_c, pos, ConstraintList, VCO2FEdictionary, FE2VCOdictionary, ur, 100)
+
+                g3 = g.copy()
+                VespaTime, VespaPath, VespaLength, VespaControlNodeList, flagFalseNegative, I_best, leakage3, leakport3 = \
+                    AlgorithmComparison.Vespa_search(g3, g_c, pos, ConstraintList, VCO2FEdictionary, FE2VCOdictionary, ur, 0)
 
                 # Find all valves and other control components which may be involved giving the searched path
                 NetxSPVCOList = AlgorithmComparison.control_search(NetxSPPath, FE2VCOdictionary)
                 AstarVCOList = AlgorithmComparison.control_search(AstarPath, FE2VCOdictionary)
-                VespaVCOList1 = AlgorithmComparison.control_search(VespaPath1, FE2VCOdictionary)
-                VespaVCOList2 = AlgorithmComparison.control_search(VespaPath2, FE2VCOdictionary)
-                VespaVCOList = AlgorithmComparison.control_search(VespaPath, FE2VCOdictionary)
 
                 # Find all control edges and control ports being searched in the path
                 NetxSPControlNodeList, NetxSPControlEdgeList = AlgorithmComparison.findall_control_path(NetxSPVCOList, g_c)
                 AstarControlNodeList, AstarControlEdgeList = AlgorithmComparison.findall_control_path(AstarVCOList, g_c)
-                VespaControlNodeList1, VespaControlEdgeList1 = AlgorithmComparison.findall_control_path(VespaVCOList1, g_c)
-                VespaControlNodeList2, VespaControlEdgeList2 = AlgorithmComparison.findall_control_path(VespaVCOList2, g_c)
-                VespaControlNodeList, VespaControlEdgeList = AlgorithmComparison.findall_control_path(VespaVCOList, g_c)
 
                 # Calculate the false positive rate for each algorithm
                 l, t, nodeslist = calculate_false_pos([NetxSPLength, AstarLength, VespaLength1, VespaLength2, VespaLength], ConstraintList,

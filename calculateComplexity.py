@@ -23,7 +23,7 @@ node_num_all = []
 edge_num_all = []
 node_num_mean = []
 edge_num_mean = []
-for i in range(3, 4):
+for i in range(1, 4):
     node_num = []
     edge_num = []
     path = f"RandomCaseFiles/Section_{i}"

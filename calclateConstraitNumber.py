@@ -6,7 +6,7 @@ import pandas as pd
 # average constraint numbers of four benchmark sections
 pp = []
 
-for i in range(3, 4):
+for i in range(1, 4):
     # path = f"TestCaseFiles/lrb/URC/Constraint_UR_lrb{i}.csv"
     path = f"RandomCaseFiles/Constraint_b{i}.csv"
     df = pd.read_csv(path, header=None)
@@ -16,7 +16,7 @@ for i in range(3, 4):
         if isinstance(c[1], str):
             countc = c[1].count('2,') + c[1].count('1,')
             countc2 = c[1].count('2,')
-            p.append(countc2)
+            p.append(countc)
     pp.append(p)
 
 folder_path = f"RandomCaseFiles/"
