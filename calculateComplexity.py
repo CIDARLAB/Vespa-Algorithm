@@ -23,6 +23,7 @@ node_num_all = []
 edge_num_all = []
 node_num_mean = []
 edge_num_mean = []
+nodeBigger100 = [0,0,0]
 for i in range(1, 4):
     node_num = []
     edge_num = []
@@ -31,8 +32,11 @@ for i in range(1, 4):
     for NodeInfo in AllFileInOneSection.keys():
         j = 0
         GraphListInfo = AllFileInOneSection[NodeInfo]
-        li = [i for i, x in enumerate(NodeInfo) if x == "_"]
-        node_num.append(int(NodeInfo[li[0]+1: li[1]]))
+        li = [ii for ii, x in enumerate(NodeInfo) if x == "_"]
+        node = int(NodeInfo[li[0]+1: li[1]])
+        node_num.append(node)
+        if node >= 100:
+            nodeBigger100[i-1] += 10
         while j < len(AllFileInOneSection[NodeInfo]):
             control_graph_path = f"RandomCaseFiles/Section_{i}/{NodeInfo}/{GraphListInfo[j]}"
             flow_graph_path = f"RandomCaseFiles/Section_{i}/{NodeInfo}/{GraphListInfo[j+1]}"
@@ -58,8 +62,6 @@ for i in range(len(edge_num_all)):
         complexity_all.append(comp)
 
 
-
-
 # average edge and node number for each cluster
 edge_num_avg = []
 for ii in edge_num_all:
@@ -71,6 +73,7 @@ for ii in node_num_all:
 
 print("Average Node number: ", node_num_mean)
 print("Average Edge number: ", edge_num_mean)
+print("Node number bigger than 100: ", nodeBigger100)
 
 complexity = []
 for i in range(len(node_num_avg)):
