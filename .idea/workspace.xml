@@ -1,0 +1,820 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7152bf29-3382-4299-9162-0926f0ca92ff" name="Default Changelist" comment="update leakage detection">
+      <change beforePath="$PROJECT_DIR$/lrbtest.py" beforeDir="false" afterPath="$PROJECT_DIR$/lrbtest.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="JupyterTrust" id="1cb8bdcd-e3eb-4e1b-a358-1fe71f31fd4a" />
+  <component name="ProjectId" id="28OhWsqWN3povAf9gjPWnCVYKjA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/RandomCaseFiles/Section_3" />
+      <recent name="$PROJECT_DIR$/TestCaseFiles" />
+      <recent name="$PROJECT_DIR$/TestCaseFiles/Section_2" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/TestCaseFiles/lrb/output" />
+      <recent name="$PROJECT_DIR$/TestCaseFiles/lrb/graph_info" />
+      <recent name="$PROJECT_DIR$/TestCaseFiles/lrb/URC" />
+      <recent name="$PROJECT_DIR$/TestCaseFiles/csv_p=50" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.lrbtest">
+    <configuration name="BOCS" type="PythonConfigurationType" factoryName="Python">
+      <module name="BOCS_alg" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TestAlgorithm.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="HeatMapDrawer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="BOCS_alg" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HeatMapDrawer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ShowFigure" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="BOCS_alg" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/RandomCaseFiles" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RandomCaseFiles/ShowFigure.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="calclateConstraitNumber" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="BOCS_alg" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/calclateConstraitNumber.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="calculateComplexity" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="BOCS_alg" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/calculateComplexity.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="lrbtest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="BOCS_alg" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lrbtest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.lrbtest" />
+        <item itemvalue="Python.calculateComplexity" />
+        <item itemvalue="Python.ShowFigure" />
+        <item itemvalue="Python.calclateConstraitNumber" />
+        <item itemvalue="Python.HeatMapDrawer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7152bf29-3382-4299-9162-0926f0ca92ff" name="Default Changelist" comment="" />
+      <created>1651093573986</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651093573986</updated>
+      <workItem from="1651093579392" duration="3859000" />
+      <workItem from="1651251173851" duration="4573000" />
+      <workItem from="1651258422814" duration="119814000" />
+      <workItem from="1652714540355" duration="50157000" />
+      <workItem from="1652845499369" duration="5374000" />
+      <workItem from="1652889647101" duration="70439000" />
+      <workItem from="1653318762699" duration="2761000" />
+      <workItem from="1653330123728" duration="137299000" />
+      <workItem from="1658414986647" duration="612000" />
+      <workItem from="1660240835269" duration="9090000" />
+      <workItem from="1661549665791" duration="50000" />
+      <workItem from="1662507409951" duration="38806000" />
+      <workItem from="1662753141440" duration="21781000" />
+      <workItem from="1662947602214" duration="118000" />
+      <workItem from="1663020426356" duration="7878000" />
+      <workItem from="1663275829350" duration="4123000" />
+      <workItem from="1664376187910" duration="16435000" />
+      <workItem from="1665437155722" duration="96000" />
+      <workItem from="1667834703401" duration="611000" />
+      <workItem from="1667835324563" duration="1219000" />
+      <workItem from="1668007639298" duration="30000" />
+      <workItem from="1668613313087" duration="4097000" />
+      <workItem from="1671488971750" duration="2235000" />
+      <workItem from="1684011146730" duration="101000" />
+      <workItem from="1701623895695" duration="57395000" />
+      <workItem from="1703435270268" duration="2193000" />
+    </task>
+    <task id="LOCAL-00001" summary="lrb changes">
+      <created>1653321730010</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1653321730010</updated>
+    </task>
+    <task id="LOCAL-00002" summary="lrb dir">
+      <created>1653321872568</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1653321872568</updated>
+    </task>
+    <task id="LOCAL-00003" summary="benchmark changed">
+      <created>1653345342196</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1653345342196</updated>
+    </task>
+    <task id="LOCAL-00004" summary="lrb test py">
+      <created>1653346718689</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1653346718689</updated>
+    </task>
+    <task id="LOCAL-00005" summary="lrb test">
+      <created>1653434274477</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1653434274477</updated>
+    </task>
+    <task id="LOCAL-00006" summary="lrb test">
+      <created>1653434362400</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1653434362400</updated>
+    </task>
+    <task id="LOCAL-00007" summary="lrb test">
+      <created>1653434460716</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1653434460716</updated>
+    </task>
+    <task id="LOCAL-00008" summary="lrb test">
+      <created>1653436161335</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1653436161335</updated>
+    </task>
+    <task id="LOCAL-00009" summary="lrb test">
+      <created>1653436164818</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1653436164818</updated>
+    </task>
+    <task id="LOCAL-00010" summary="lrb test">
+      <created>1653436455773</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1653436455773</updated>
+    </task>
+    <task id="LOCAL-00011" summary="lrb4">
+      <created>1653951838569</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1653951838569</updated>
+    </task>
+    <task id="LOCAL-00012" summary="lrb4">
+      <created>1653961908067</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1653961908067</updated>
+    </task>
+    <task id="LOCAL-00013" summary="lrb4">
+      <created>1653961944377</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1653961944377</updated>
+    </task>
+    <task id="LOCAL-00014" summary="lrb4">
+      <created>1653961960695</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1653961960695</updated>
+    </task>
+    <task id="LOCAL-00015" summary="lrb4">
+      <created>1653963124041</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1653963124041</updated>
+    </task>
+    <task id="LOCAL-00016" summary="lrb4">
+      <created>1654014256171</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1654014256171</updated>
+    </task>
+    <task id="LOCAL-00017" summary="lrb4">
+      <created>1654014262676</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1654014262676</updated>
+    </task>
+    <task id="LOCAL-00018" summary="lrb4">
+      <created>1654017527279</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1654017527279</updated>
+    </task>
+    <task id="LOCAL-00019" summary="lrb4">
+      <created>1654020887226</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1654020887226</updated>
+    </task>
+    <task id="LOCAL-00020" summary="lrb4">
+      <created>1654810112940</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1654810112940</updated>
+    </task>
+    <task id="LOCAL-00021" summary="lrb4">
+      <created>1654810168842</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1654810168842</updated>
+    </task>
+    <task id="LOCAL-00022" summary="lrb5">
+      <created>1654962375380</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1654962375380</updated>
+    </task>
+    <task id="LOCAL-00023" summary="lrb5">
+      <created>1654962477855</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1654962477855</updated>
+    </task>
+    <task id="LOCAL-00024" summary="lrb5">
+      <created>1654962621387</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1654962621387</updated>
+    </task>
+    <task id="LOCAL-00025" summary="lrb5">
+      <created>1655155680264</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1655155680264</updated>
+    </task>
+    <task id="LOCAL-00026" summary="lrb5">
+      <created>1655407740687</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1655407740687</updated>
+    </task>
+    <task id="LOCAL-00027" summary="lrb5 test and checker modified">
+      <created>1655939876578</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1655939876578</updated>
+    </task>
+    <task id="LOCAL-00028" summary="lrb5 test and checker modified">
+      <created>1655939886361</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1655939886361</updated>
+    </task>
+    <task id="LOCAL-00029" summary="lrb5 test and checker modified">
+      <created>1655954027097</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1655954027097</updated>
+    </task>
+    <task id="LOCAL-00030" summary="lrb5 test and checker modified">
+      <created>1656087821223</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1656087821223</updated>
+    </task>
+    <task id="LOCAL-00031" summary="lrb5 test and checker modified">
+      <created>1656355083200</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1656355083200</updated>
+    </task>
+    <task id="LOCAL-00032" summary="lrb5 test and checker modified">
+      <created>1656355088283</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1656355088283</updated>
+    </task>
+    <task id="LOCAL-00033" summary="lrb5 test and checker modified">
+      <created>1657925293586</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1657925293586</updated>
+    </task>
+    <task id="LOCAL-00034" summary="lrb5 test and checker modified">
+      <created>1661461849428</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1661461849429</updated>
+    </task>
+    <task id="LOCAL-00035" summary="lrb5 test and checker modified">
+      <created>1662853096205</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1662853096205</updated>
+    </task>
+    <task id="LOCAL-00036" summary="lrb5 test and checker modified">
+      <created>1662853122533</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1662853122533</updated>
+    </task>
+    <task id="LOCAL-00037" summary="lrb5 test and checker modified">
+      <created>1662863462336</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1662863462336</updated>
+    </task>
+    <task id="LOCAL-00038" summary="lrb5 test and checker modified">
+      <created>1663191914046</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1663191914046</updated>
+    </task>
+    <task id="LOCAL-00039" summary="900 benchmark changed">
+      <created>1664376218598</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1664376218598</updated>
+    </task>
+    <task id="LOCAL-00040" summary="900 benchmark changed">
+      <created>1664376243869</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1664376243869</updated>
+    </task>
+    <task id="LOCAL-00041" summary="readme">
+      <created>1664560584107</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1664560584107</updated>
+    </task>
+    <task id="LOCAL-00042" summary="readme added">
+      <created>1664572400370</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1664572400370</updated>
+    </task>
+    <task id="LOCAL-00043" summary="readme added">
+      <created>1684011242026</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1684011242026</updated>
+    </task>
+    <task id="LOCAL-00044" summary="update leakage detection">
+      <created>1702048987674</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1702048987674</updated>
+    </task>
+    <task id="LOCAL-00045" summary="update leakage detection">
+      <created>1702087723793</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1702087723793</updated>
+    </task>
+    <task id="LOCAL-00046" summary="update leakage detection">
+      <created>1702488021475</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1702488021475</updated>
+    </task>
+    <task id="LOCAL-00047" summary="update leakage detection">
+      <created>1702770558335</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1702770558335</updated>
+    </task>
+    <task id="LOCAL-00048" summary="update leakage detection">
+      <created>1703200396648</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1703200396648</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="lrb changes" />
+    <MESSAGE value="lrb dir" />
+    <MESSAGE value="benchmark changed" />
+    <MESSAGE value="lrb test py" />
+    <MESSAGE value="lrb test" />
+    <MESSAGE value="lrb4" />
+    <MESSAGE value="lrb5" />
+    <MESSAGE value="lrb5 test and checker modified" />
+    <MESSAGE value="900 benchmark changed" />
+    <MESSAGE value="readme" />
+    <MESSAGE value="readme added" />
+    <MESSAGE value="update leakage detection" />
+    <option name="LAST_COMMIT_MESSAGE" value="update leakage detection" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="418" y="251" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1702420202386">
+      <screen x="0" y="27" width="1920" height="1133" />
+    </state>
+    <state x="418" y="251" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1133/1920.0.1920.1080@0.27.1920.1133" timestamp="1702420202386" />
+    <state width="1874" height="287" key="GridCell.Tab.0.bottom" timestamp="1703200402596">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="287" key="GridCell.Tab.0.bottom/0.27.1920.1133/1920.0.1920.1080@0.27.1920.1133" timestamp="1702678603138" />
+    <state width="1874" height="287" key="GridCell.Tab.0.bottom/0.27.1920.1133/1920.0.1920.1080@1920.0.1920.1080" timestamp="1703200402596" />
+    <state width="1874" height="287" key="GridCell.Tab.0.center" timestamp="1703200402596">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="287" key="GridCell.Tab.0.center/0.27.1920.1133/1920.0.1920.1080@0.27.1920.1133" timestamp="1702678603138" />
+    <state width="1874" height="287" key="GridCell.Tab.0.center/0.27.1920.1133/1920.0.1920.1080@1920.0.1920.1080" timestamp="1703200402596" />
+    <state width="1874" height="287" key="GridCell.Tab.0.left" timestamp="1703200402596">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="287" key="GridCell.Tab.0.left/0.27.1920.1133/1920.0.1920.1080@0.27.1920.1133" timestamp="1702678603138" />
+    <state width="1874" height="287" key="GridCell.Tab.0.left/0.27.1920.1133/1920.0.1920.1080@1920.0.1920.1080" timestamp="1703200402596" />
+    <state width="1874" height="287" key="GridCell.Tab.0.right" timestamp="1703200402596">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="287" key="GridCell.Tab.0.right/0.27.1920.1133/1920.0.1920.1080@0.27.1920.1133" timestamp="1702678603138" />
+    <state width="1874" height="287" key="GridCell.Tab.0.right/0.27.1920.1133/1920.0.1920.1080@1920.0.1920.1080" timestamp="1703200402596" />
+    <state width="1874" height="349" key="GridCell.Tab.1.bottom" timestamp="1703200402593">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="349" key="GridCell.Tab.1.bottom/0.27.1920.1133/1920.0.1920.1080@0.27.1920.1133" timestamp="1702675243104" />
+    <state width="1874" height="349" key="GridCell.Tab.1.bottom/0.27.1920.1133/1920.0.1920.1080@1920.0.1920.1080" timestamp="1703200402593" />
+    <state width="1874" height="349" key="GridCell.Tab.1.center" timestamp="1703200402593">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="349" key="GridCell.Tab.1.center/0.27.1920.1133/1920.0.1920.1080@0.27.1920.1133" timestamp="1702675243104" />
+    <state width="1874" height="349" key="GridCell.Tab.1.center/0.27.1920.1133/1920.0.1920.1080@1920.0.1920.1080" timestamp="1703200402593" />
+    <state width="1874" height="349" key="GridCell.Tab.1.left" timestamp="1703200402593">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="349" key="GridCell.Tab.1.left/0.27.1920.1133/1920.0.1920.1080@0.27.1920.1133" timestamp="1702675243104" />
+    <state width="1874" height="349" key="GridCell.Tab.1.left/0.27.1920.1133/1920.0.1920.1080@1920.0.1920.1080" timestamp="1703200402593" />
+    <state width="1874" height="349" key="GridCell.Tab.1.right" timestamp="1703200402593">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1874" height="349" key="GridCell.Tab.1.right/0.27.1920.1133/1920.0.1920.1080@0.27.1920.1133" timestamp="1702675243104" />
+    <state width="1874" height="349" key="GridCell.Tab.1.right/0.27.1920.1133/1920.0.1920.1080@1920.0.1920.1080" timestamp="1703200402593" />
+    <state x="2475" y="288" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1703200399613">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="555" y="329" width="800" height="535" key="Vcs.Push.Dialog.v2/0.27.1920.1133/1920.0.1920.1080@0.27.1920.1133" timestamp="1702488024456" />
+    <state x="2475" y="288" width="800" height="535" key="Vcs.Push.Dialog.v2/0.27.1920.1133/1920.0.1920.1080@1920.0.1920.1080" timestamp="1703200399613" />
+    <state x="2593" y="270" width="564" height="573" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1703200395083">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="673" y="310" width="564" height="573" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.27.1920.1133/1920.0.1920.1080@0.27.1920.1133" timestamp="1702048956930" />
+    <state x="2593" y="270" width="564" height="573" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.27.1920.1133/1920.0.1920.1080@1920.0.1920.1080" timestamp="1703200395083" />
+    <state x="2658" y="458" width="444" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1703200383305">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="738" y="508" width="444" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.1920.1133/1920.0.1920.1080@0.27.1920.1133" timestamp="1702488016716" />
+    <state x="2658" y="458" width="444" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.1920.1133/1920.0.1920.1080@1920.0.1920.1080" timestamp="1703200383305" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/RandomCaseGenerator.py</url>
+          <line>154</line>
+          <option name="timeStamp" value="163" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/RandomCaseGenerator.py</url>
+          <line>156</line>
+          <option name="timeStamp" value="164" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/LiteratureReviewBenchmarks/LRB_2.py</url>
+          <line>51</line>
+          <option name="timeStamp" value="251" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/LiteratureReviewBenchmarks/LRB_1.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="252" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/LiteratureReviewBenchmarks/LRB_2.py</url>
+          <line>33</line>
+          <option name="timeStamp" value="253" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/LiteratureReviewBenchmarks/LRB_3.py</url>
+          <line>47</line>
+          <option name="timeStamp" value="254" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/LiteratureReviewBenchmarks/LRB_5.py</url>
+          <line>86</line>
+          <option name="timeStamp" value="345" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/result_statistics.py</url>
+          <line>20</line>
+          <option name="timeStamp" value="399" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/LiteratureReviewBenchmarks/LRB_5.py</url>
+          <line>44</line>
+          <option name="timeStamp" value="408" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/LiteratureReviewBenchmarks/LRB_6.py</url>
+          <line>83</line>
+          <option name="timeStamp" value="410" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/HeatMapBioDesignFixed.py</url>
+          <line>167</line>
+          <option name="timeStamp" value="459" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/HeatMapBioDesignFixed.py</url>
+          <line>166</line>
+          <option name="timeStamp" value="461" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/HeatMapBioDesignFixed.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="496" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/AlgorithmComparison.py</url>
+          <line>220</line>
+          <option name="timeStamp" value="519" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/AlgorithmComparison.py</url>
+          <line>222</line>
+          <option name="timeStamp" value="520" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/RandomCaseFiles/ShowFigure.py</url>
+          <line>39</line>
+          <option name="timeStamp" value="521" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="ConstraintInfoAll[ColumnDetail[-1]]" language="Python" />
+        <watch expression="df.iloc[:, 6]==0" language="Python" />
+        <watch expression="G.in_degree('f1')" language="Python" />
+        <watch expression="df[mask]" language="Python" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/BOCS_alg$AlgorithmComparison.coverage" NAME="AlgorithmComparison Coverage Results" MODIFIED="1662764758101" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$TestCaseGenerator.coverage" NAME="TestCaseGenerator Coverage Results" MODIFIED="1652305234822" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$RandomCaseGenerator.coverage" NAME="RandomCaseGenerator Coverage Results" MODIFIED="1662744571584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$LRB_3.coverage" NAME="LRB_3 Coverage Results" MODIFIED="1653435485371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LiteratureReviewBenchmarks" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$find_I_Best.coverage" NAME="find_I_Best Coverage Results" MODIFIED="1663191777618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$Benchmarkplot.coverage" NAME="Benchmarkplot Coverage Results" MODIFIED="1656190444243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$ConstraintMaker.coverage" NAME="ConstraintMaker Coverage Results" MODIFIED="1658165359569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$LRB_6.coverage" NAME="LRB_6 Coverage Results" MODIFIED="1660771444328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LiteratureReviewBenchmarks" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$ConstraintBuilder.coverage" NAME="ConstraintBuilder Coverage Results" MODIFIED="1652887887430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$randomtest.coverage" NAME="randomtest Coverage Results" MODIFIED="1653069411676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1652897222009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$LRB_1.coverage" NAME="LRB_1 Coverage Results" MODIFIED="1653428956930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LiteratureReviewBenchmarks" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$testfilename.coverage" NAME="calculateComplexity Coverage Results" MODIFIED="1662648068901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$calclateConstraitNumber.coverage" NAME="calclateConstraitNumber Coverage Results" MODIFIED="1702678392114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$LRB_4.coverage" NAME="LRB_4 Coverage Results" MODIFIED="1654008382703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LiteratureReviewBenchmarks" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$result_statistics.coverage" NAME="result_statistics Coverage Results" MODIFIED="1658167883203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$testcode.coverage" NAME="testcode Coverage Results" MODIFIED="1662768258215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$BOCS.coverage" NAME="BOCS Coverage Results" MODIFIED="1702488308126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$calculateComplexity.coverage" NAME="calculateComplexity Coverage Results" MODIFIED="1703032823695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$ShowFigure.coverage" NAME="ShowFigure Coverage Results" MODIFIED="1703029871776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/RandomCaseFiles" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$lrbtest.coverage" NAME="lrbtest Coverage Results" MODIFIED="1708012361746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$CaseGenerator.coverage" NAME="CaseGenerator Coverage Results" MODIFIED="1652287292037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$ThresholdGenerator.coverage" NAME="ThresholdGenerator Coverage Results" MODIFIED="1652402328821" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$LRB_2.coverage" NAME="LRB_2 Coverage Results" MODIFIED="1653429796298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LiteratureReviewBenchmarks" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$HeatMapBioDesignFixed.coverage" NAME="HeatMapBioDesignFixed Coverage Results" MODIFIED="1662753891465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$Resultplot.coverage" NAME="Resultplot Coverage Results" MODIFIED="1658166702483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$colorConvert.coverage" NAME="colorConvert Coverage Results" MODIFIED="1655046667685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$LRB_5.coverage" NAME="LRB_5 Coverage Results" MODIFIED="1660771298153" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/LiteratureReviewBenchmarks" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$HotValueDataCollector.coverage" NAME="HotValueDataCollector Coverage Results" MODIFIED="1662603201394" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BOCS_alg$HeatMapDrawer.coverage" NAME="HeatMapDrawer Coverage Results" MODIFIED="1663532471819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
