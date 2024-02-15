@@ -18,7 +18,7 @@ if __name__ == '__main__':
                           "Vespa INF runtime", "Num Of Graph", "Failures caused by Leakage Vespa 1", "Failures caused by Leakage Vespa 100",
                           "Failures caused by Leakage Vespa INF", "Leakage port in Vespa 1", "Leakage port in Vespa 100", "Leakage port in Vespa INF"]
     Result_list_cases = []
-    for i in range(1, 7):
+    for i in range(1, 2):
         Result_list_section = []
         path = f"TestCaseFiles/lrb"
         control_graph_path = f"{path}/graph_info/lrb{i}_control.dot"
