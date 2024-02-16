@@ -17,30 +17,7 @@
 - [License](#license)
 
 ## Overview
-Microfluidic devices, also known as biochips, are a cost-effective, 
-highly automated alternative to traditional biomolecular analysis in life science 
-applications. Recently, biochips increasingly incorporate ideas from traditional 
-electronic design paradigms like VLSI (Very Large Scale Integration) to increase 
-their complexity in multi-step biological experiments. This complexity requires a 
-carefully ordered control sequence and an optimally designed layout of microfluidic 
-components responsible for moving fluids and materials for correct operations. 
-Many design algorithms propose a solution by generating novel microfluidic architectures 
-or specializing in identifying conflicts for a limited set of design topologies. 
-However, they only identify layout conflicts, not those conflicts caused by operation 
-constraints during the design process. This limitation potentially introduces much 
-higher post-fabrication costs due to the design iterations. Thus, a framework for 
-generalizable control and fluid path verification is necessary. In this paper, we 
-present a biochip logic verification algorithm based on constrained path searches. 
-According to over 900 real-world and synthetic benchmark results, given a two-layer 
-continuous-flow biochip, liquid entries and exits, a set of transportation logic 
-constraints, our novel approach can identify the fluid path and predict the 
-corresponding valve states for execution with a 0\% error rate ignoring time 
-constraints, in contrast to an average of 62.7\% for A* and 62.5\% for Dijkstra. We 
-also provide the first generalized problem formalization, a corresponding open-source 
-software package, and a community collection of over 900 real-world, synthetic 
-benchmarks. Finally, experimental results demonstrate that our approach can give 
-the correct flow pathway and control instructions for real-world biochip experiments 
-and identify conflicts.
+Continuous-Flow Microfluidic Devices (CFMDs), also known as biochips, provide automated and cost-effective solutions for biomolecular analysis in life science applications. Multi-step biochemical reactions have required incorporating microfluidic components into CFMDs, which may raise their design complexity and lead to Design-Objective-Constraint Compatibility (DOCC) conflicts. Existing validation methods excel in optimizing Control-Layer Pressurization Protocol (CLPP) for small networks. However, they face challenges in describing operation constraints for microfluidic large-scale integration (mLSI) experiments and addressing the leakage risk. For that, we developed Vespa, an open-source validation framework using logic expressions to describe operation constraints on a lower human labor cost. For each operation, taking an objective list, a constraint list, a design netlist, and a super-parameter as inputs, Vespa validates the DOCC by constructing a target fluid transportation path. In addition, it introduces a leakage risk mitigation mechanism, issuing warnings for incorrect constraints and potential fluid leakage risks. The work includes over 900 real-world and synthetic benchmarks in three complexity ranges to support researchers in the field. As a result, more than 85\% of benchmark experiments yield correct results within 0.3 seconds, enabling Vespa for real-time validation and integration into interactive CFMD design tools. Finally, to show Vespa's practical efficacy and real-world impact, we created case studies using a real-world CFMD. We demonstrated that Vespa eliminates over 90\% of DOCC-related wet lab tests by detecting issues and making updates before fabrication.
 
 ## Install
 
