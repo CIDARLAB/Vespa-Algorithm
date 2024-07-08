@@ -24,7 +24,7 @@ Continuous-Flow Microfluidic Devices (CFMDs), also known as biochips, provide au
 Download the repository from GitHub, create a venv environment, and install the necessary packages. Here we use python3.8 as the python interpreter.
 
 ```sh
-$ git clone https://github.com/zyrrron/VeSpA-Algorithm.git
+$ git clone https://github.com/CIDARLAB/VeSpA-Algorithm.git
 $ cd Vespa-Algorithm
 $ python3 -m venv venv/
 $ venv/bin/pip3 install -r requirements.txt
