@@ -68,7 +68,7 @@ And Create Constraint and Experiment objectives in [Constraint_UR_lrb_new.csv](T
 
 ## Contributing
 
-Feel free to dive in! [Open an issue](https://github.com/zyrrron/VeSpA-Algorithm/issues/new) or submit PRs.
+Feel free to dive in! [Open an issue](https://github.com/CIDARLAB/VeSpA-Algorithm/issues/new) or submit PRs.
 
 ### Contributors
 
