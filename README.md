@@ -75,3 +75,10 @@ Feel free to dive in! [Open an issue](https://github.com/CIDARLAB/VeSpA-Algorith
 This project exists thanks to all the people who contribute. 
 
 ## License
+
+BSD 2-Clause License
+
+Copyright (c) 2023, CIDAR LAB
+All rights reserved.
+
+See [LICENSE](/LICENSE) for more information.
