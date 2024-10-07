@@ -18,6 +18,9 @@ def getfileList(targetfolderpath):
     Allfile = {}
     NodeList = os.listdir(targetfolderpath)
     for node in NodeList:
+        # For MAC OS, this folder is automatically generated which should not be included in the loop.
+        if str(node) == ".DS_store":
+            continue
         new_path = targetfolderpath + "/" + str(node)
         edgelist = os.listdir(new_path)
         edgelist.sort()
@@ -64,7 +67,7 @@ if __name__ == '__main__':
                           "Vespa INF runtime", "Num Of Graph", "Failures caused by Leakage Vespa 1", "Failures caused by Leakage Vespa 100",
                           "Failures caused by Leakage Vespa INF", "Leakage port in Vespa 1", "Leakage port in Vespa 100", "Leakage port in Vespa INF"]
     Result_list_cases = []
-    for i in range(1, 4):
+    for i in range(1, 2):
         Result_list_section = []
         path = f"RandomCaseFiles/Section_{i}"
 
@@ -177,7 +180,7 @@ if __name__ == '__main__':
         # NaiveFPR, DijkstraFPR, AstarFPR = calculate_false_pos_rate(Result_list_section) !!!!*****@!!!
         # Result_list_cases.extend(Result_list_section)
 
-        outcsvpath = f"TestCaseFiles/csv_1_100_inf/benchmark-{i}.csv"
+        outcsvpath = f"Results/csv_1_100_inf/benchmark-{i}.csv"
         dictionary = dict(zip(ColumnDetail, Result_list_section))
         with open(outcsvpath, 'w', newline='') as f:
             dataframe = pd.DataFrame.from_dict(dictionary, orient='index', columns=Result_list_metric)
